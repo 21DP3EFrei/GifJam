@@ -1,4 +1,3 @@
-# 1. Jautājums
-abc
-# 2. Jautājums
-def
+open XAMP
+http://localhost/phpmyadmin/index.php?route=/database/structure&server=1&db=webpro&table=
+cd api
