@@ -19,6 +19,7 @@ class CreateLietotajiTable extends Migration
             $table->string('E_pasts')->unique(); // Assuming E-pasts is for email
             $table->string('Parole');
             $table->boolean('Adminastrators')->default(false);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

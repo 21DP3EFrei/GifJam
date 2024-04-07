@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="images/stupid-logo.png">
+  <link rel="stylesheet" href="css/real-style.css">
+  <link rel="stylesheet" href="css/style.css" />
+  <title>😏</title>
+</head>
+
+<body>
+
+    <header class="header_section">
+      <div class="container-fluid">
+            <a href="Home.html">
+            <img src="images/lugu.png" alt="Logo">
+            </a>
+            <div class="header-buttons">
+              <button class="header-button"><a href="Home.html">Home</a></button>
+              <button class="header-button"><a href="Gallery.html">Gallery</a></button>
+              <button class="header-button"><a href="https://youtu.be/oJDtiuBX1XY">Investor video</a></button>
+              <button class="header-button"><a href="http://127.0.0.1:8000/login">Login</a></button>        
+            </a>
+        </div>
+    </header>
+    <section class="color_button">
+      <div class="color-generator">
+        <button id="generateButton" aria-label="Generate New Color">Change color</button>
+      </div>   
+    </section>
+<!-- Description section -->
+<section class="description_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Description</h2>
+          <p>
+            Our company provides memes for free use and enjoyment of others, we value our friends, family and comunnity and try to spread joy and laughther to millions. We want to thank everyone that helped us grow our comunnity and 
+            got us to where we are.
+          </p>
+          <h3>Where we started</h3>
+          <p>
+           In 2014 our founder M.Moon made his first meme and with the help of his friends made this crappy site.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End of Description section -->
+  
+
+  <!-- info section -->
+  <section class="info_section ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="info_contact">
+            <h5>
+              Contact info
+            </h5>
+            <div>
+              <div class="img-box">
+                <img src="images/location-white.png" width="18px" alt="">
+              </div>
+              <p>
+                Quandale Dingle street 6
+              </p>
+            </div>
+            <div>
+              <div class="img-box">
+                <img src="images/telephone-white.png" width="12px" alt="">
+              </div>
+              <p>
+                +360 21 069 420
+              </p>
+            </div>
+            <div>
+              <div class="img-box">
+                <img src="images/envelope-white.png" width="18px" alt="">
+              </div>
+              <p>
+                freeRobux4fun@gmail.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_info">
+            <h5>
+              Information
+            </h5>
+            <p>
+              If you need information or context on some of our memes, you can ask on the right with you gmail and a picture of the meme in question.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <p>
+          </p>
+        </div>
+        <div class="col-md-3">
+          <div class="info_form">
+            <h5>
+              Context
+            </h5>
+            <form id="contextForm">
+              <input type="email" id="emailInput" placeholder="Enter your email">
+              <input type="file" id="imageInput" accept="image/png, image/jpeg">
+              <button type="button" onclick="sendContext()">Send</button>
+            </form>
+            <div class="social_box">
+              <a href="https://www.instagram.com/the_epic_brawler_gaming/">
+                  <img src="images/fb.png" alt="Instagram">
+              </a>
+              <a href="https://twitter.com/EpicbrawlerGam1">
+                  <img src="images/twitter.png" alt="Twitter">
+              </a>
+              <a href="https://www.youtube.com/channel/UCTwymeqH_XxxLNPP0mQxw-A">
+                  <img src="images/youtube.png" alt="YouTube">
+              </a>
+              <a href="https://www.tiktok.com/@epic.brawler.gami?lang=en">
+                <img src="images/tik.png" alt="TikTok">
+            </a>
+           </div>            
+  <section class="container-fluid footer_section">
+    <p>
+      &copy; 2023 All Rights Reserved By
+      <a href="https://youtu.be/dQw4w9WgXcQ">Rick</a>
+    </p>
+  </section>
+  <script src="js/smtp.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var subject = document.getElementById('subject').value;
+        var message = document.getElementById('message').value;
+
+        var body = 'Name: ' + name + '<br/>Email: ' + email + '<br/>Subject: ' + subject + '<br/>Message: ' + message;
+
+        Email.send({
+            Host : "smtp.elasticemail.com",
+            SecureToken: "7e9c8781-def2-4b55-9501-59fa8789d6d8",
+            To: 'verified-edgarsfreimanis12@gmail.com',
+            From: "verified-edgarsfreimanis1234@gmail.com",
+            Subject: "contact message",
+            Body: body,
+        }).then(function (message) {
+            alert('Email sent successfully');
+        }).catch(function (error) {
+            console.error('Email not sent: ', error);
+        });
+    });
+</script>
+</body>
+</html>

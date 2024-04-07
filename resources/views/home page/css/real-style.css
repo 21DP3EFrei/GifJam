@@ -1,0 +1,149 @@
+
+body {
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+  }
+  
+  .hero-section {
+	position: relative;
+	text-align: center;
+  }
+  
+  .hero-bg {
+	width: 100%; /* Adjust width as needed */
+  }
+  
+  .header-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: transparent;
+  }
+  
+  .header-content h2 {
+	margin-top: 0;
+	color: rgb(0, 255, 247);
+	font-size: 90px;
+  }
+  
+  .header-content h1 {
+	color: rgb(238, 255, 0);
+	margin-bottom: 1rem;
+	font-size: 50px;
+  }
+  
+  .header-content p {
+	margin: 0;
+  }
+
+
+  
+  header {
+	background-color: #000000;
+	height: 10vh;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 2rem;
+  }
+  
+
+.second-header {
+	background-color: rgb(18, 255, 18);
+	height: 6vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 2rem;
+}
+
+/* Style the buttons */
+.color-generator button{
+	display: inline-block;
+	padding: 8px 16px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #fff;
+	background-color: #ff0000;
+	border: none;
+	border-radius: 4px;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+/* Enlarge the button on hover */
+.color-generator:hover {
+	transform: scale(1.0);
+}
+
+main {
+	padding: 2rem;
+}
+
+h1 {
+	color: rgb(238, 255, 0);
+	margin-bottom: 1rem;
+	font-size: 50px;
+}
+
+h2 {
+	margin-top: 0;
+	color:rgb(0, 255, 247);
+	font-size: 40px;
+}
+
+h3 {
+	color: rgb(238, 255, 0);
+	margin-bottom: 1rem;
+	font-size: 20px;
+}
+
+h4 {
+	color: #000000;
+	margin-bottom: 1rem;
+	font-size: 40px;
+}
+
+p {
+	margin: 0;
+	font-size: 21px;
+}
+
+a {
+	text-decoration: none;
+	font-size: 23px;
+}
+
+a:hover {
+	text-decoration: none;
+	 
+}
+
+/* Position the button in the top right corner */ 
+.color-generator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px; /* Add some padding to make it clickable */
+  }
+  
+/* Style the button */
+.color_button button#generateButton {
+    width: 150px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    padding: 10; /* Remove padding */
+    background-color: rgb(255, 0, 0);
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 10; /* Hide text by setting font size to 0 */
+    overflow: hidden; /* Hide any potential overflow (text) */
+    white-space: nowrap; /* Prevent line breaks */
+  }
+  
+  /* Add a hover effect to the button */
+ .color_button button#generateButton:hover {
+    transform: scale(1.2);
+  }
