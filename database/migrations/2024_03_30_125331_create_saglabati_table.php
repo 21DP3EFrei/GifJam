@@ -12,7 +12,7 @@ class CreateSaglabatiTable extends Migration
             $table->id('S_ID');
             $table->unsignedBigInteger('Lietotaja_ID');
             $table->unsignedBigInteger('Me_ID');
-            $table->foreign('Lietotaja_ID')->references('L_ID')->on('lietotaji')->onDelete('cascade');
+            $table->foreign('Lietotaja_ID')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('Me_ID')->references('M_ID')->on('mems')->onDelete('cascade');
             $table->timestamps();
         });

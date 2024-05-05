@@ -11,7 +11,7 @@ class CreateKategorijaTable extends Migration
         Schema::create('kategorija', function (Blueprint $table) {
             $table->id('K_ID');
             $table->string('Nosaukums');
-            $table->string('Apraksts');
+            $table->string('Apraksts')->unique();
             $table->timestamps();
         });
     }
@@ -20,4 +20,4 @@ class CreateKategorijaTable extends Migration
     {
         Schema::dropIfExists('kategorija');
     }
-};
+}

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use app\Models\User;
 
 class Noblokets extends Model
 {
@@ -12,6 +13,6 @@ class Noblokets extends Model
 
     public function lietotajs()
     {
-        return $this->belongsTo(Lietotajs::class, 'L_ID');
+        return $this->belongsTo(User::class, 'L_ID');
     }
 }

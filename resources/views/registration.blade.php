@@ -23,17 +23,18 @@
     @csrf
     <div class="mb-3">
         <label class="form-label">Username</label>
-        <input type="text" class="form-control" name="name">
+        <input type="text" class="form-control" name="name"> <!-- Use 'name' for username -->
     </div>
-  <div class="mb-3">
-    <label  class="form-label">Email address</label>
-    <input type="email" class="form-control" name="email">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Password</label>
-    <input type="password" class="form-control" name="password">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="mb-3">
+        <label class="form-label">Email address</label>
+        <input type="email" class="form-control" name="email"> <!-- Use 'email' for email -->
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" name="password"> <!-- Use 'password' for password -->
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
 </div>
 @endsection
