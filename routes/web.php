@@ -12,7 +12,6 @@ use app\http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 
 //upload routes
-Route::get('/subcategories/{categoryId}', [MemController::class, 'getSubcategories'])->name('subcategories');
 Route::get('/upload', [MemController::class, 'upload'])->name('upload');
 Route::post('/upload', [MemController::class, 'uploadPost'])->name('upload.post');
 
@@ -47,6 +46,7 @@ Route::get('/subcategories/{subcategory}', [SubCategoryController::class, 'show'
 Route::get('/subcategories/{subcategory}/edit', [SubCategoryController::class, 'edit'])->name('subcategories.edit');
 Route::put('/subcategories/{subcategory}', [SubCategoryController::class, 'update'])->name('subcategories.update');
 Route::delete('/subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('subcategories.destroy');
+Route::get('/fetch-subcategories/{categoryId}', [SubcategoryController::class, 'getSubcategories'])->name('fetch.subcategories');
 
 
 //upload

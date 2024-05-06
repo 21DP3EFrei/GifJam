@@ -53,13 +53,13 @@
                     <!-- Populate subcategories dynamically based on the selected category -->
                 </select>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+                <script>
     $(document).ready(function() {
         $('#category_id').on('change', function() {
             var categoryId = $(this).val();
             if(categoryId) {
                 $.ajax({
-                    url: '/subcategories/' + categoryId,
+                    url: '/fetch-subcategories/' + categoryId, // Change the route name
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -76,6 +76,7 @@
         });
     });
 </script>
+
 
             </div>
             <div class="mb-3">

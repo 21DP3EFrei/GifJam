@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <h2>Edit Category</h2>
-        <form action="{{ route('categories.update', $kategorija->id) }}" method="POST">
+        <form action="{{ route('categories.update', ['kategorija' => $kategorija->K_ID]) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-group">

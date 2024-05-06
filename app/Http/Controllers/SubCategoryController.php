@@ -97,4 +97,16 @@ class SubcategoryController extends Controller
         $subcategory->delete(); // Delete the subcategory
         return redirect()->route('subcategories.index')->with('success', 'Subcategory deleted successfully.');
     }
+    public function getSubcategories($categoryId)
+{
+    $category = Kategorija::find($categoryId);
+    
+    if (!$category) {
+        return response()->json(['error' => 'Category not found'], 404);
+    }
+
+    $subcategories = $category->subcategories()->get(['id', 'Nosaukums as name']);
+    
+    return response()->json($subcategories);
+}
 }

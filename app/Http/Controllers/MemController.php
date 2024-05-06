@@ -32,7 +32,7 @@ class MemController extends Controller
             'subcategory_id' => 'required|exists:apakskategorija,id', // Ensure the selected subcategory exists
             'uploadFile' => 'required|image|max:2048', // Validate uploaded image
         ]);
-    
+
         // Store the uploaded image file
         $image = $request->file('uploadFile');
         $fileName = $image->getClientOriginalName(); // Get the original filename
@@ -69,18 +69,6 @@ public function verify(Request $request, Mem $mem)
 
     // Redirect back to the verification index page with a success message
     return Redirect::route('verification.index')->with('success', 'File verification status updated successfully.');
-}
-public function getSubcategories($categoryId)
-{
-    $category = Kategorija::find($categoryId);
-    
-    if (!$category) {
-        return response()->json(['error' => 'Category not found'], 404);
-    }
-
-    $subcategories = $category->subcategories()->get(['id', 'Nosaukums as name']);
-    
-    return response()->json($subcategories);
 }
 
 }
