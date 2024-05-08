@@ -8,9 +8,9 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <form action="{{ route('verification.index') }}" method="GET">
-    @csrf
-    <button type="submit">Show Pending</button>
-</form>
+        @csrf
+        <button type="submit">Show Pending</button>
+    </form>
 
     <table class="table">
         <thead>
@@ -20,8 +20,8 @@
                 <th>Status</th>
                 <th>Actions</th>
                 <th>Download</th>
-                <th>Category</th> <!-- Changed column header -->
-                <th>Image</th> <!-- Added column -->
+                <th>Category</th>
+                <th>Image</th>
             </tr>
         </thead>
         <tbody>
@@ -29,13 +29,12 @@
                 <tr>
                     <td>{{ $mem->Nosaukums }}</td>
                     <td>{{ $mem->Apraksts }}</td>
-                    <td>{{ $mem->Status == 0 ? 'Pending' : ($mem->Status == 1 ? 'Approved' : 'Rejected') }}</td>
+                    <td>{{ $mem->Status == 0 ? 'Pending' : ($mem->Status == 1 ? '' : 'Rejected') }}</td>
                     <td>
-                        <form action="{{ route('verification.index', $mem) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="_method" value="PATCH">
+                        <form action="{{ route('unverification.unverify', $mem) }}" method="POST">
+                            @csrf                            
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="status" id="unapprove{{ $mem->id }}" value="0">
+                                <input class="form-check-input" type="radio" name="status" id="unapprove{{ $mem->id }}" value="1">
                                 <label class="form-check-label" for="unapprove{{ $mem->id }}">Unapprove</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -54,5 +53,4 @@
             @endforeach
         </tbody>
     </table>
-    
 @endsection

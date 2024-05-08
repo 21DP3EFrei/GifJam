@@ -25,11 +25,13 @@ Route::put('/categories/{kategorija}', [KategorijaController::class, 'update'])-
 Route::delete('/categories/{kategorija}', [KategorijaController::class, 'destroy'])->name('categories.destroy');
 
 //verify
+
 Route::get('/verify', [VerificationController::class, 'index'])->name('verification.index');
 Route::post('/verify/{mem}', [VerificationController::class, 'verify'])->name('verification.verify');
 
 Route::get('/unverify', [UnverificationController::class, 'index'])->name('unverification.index');
-Route::patch('/unverify/{mem}', [UnverificationController::class, 'unverify'])->name('unverification.unverify');
+Route::post('/unverify/{mem}', [UnverificationController::class, 'unverify'])->name('unverification.unverify');
+
 
 //picture
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
@@ -61,9 +63,8 @@ Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.ind
 //mem
 // Default route redirects to the home page
 Route::get('/', function () {
-    return view('auth.login');
+    return Redirect::to('http://127.0.0.1:5500/api/resources/views/home%20page/Home.html');
 });
-
 
 // Registration page
 Route::get('/register', function () {
