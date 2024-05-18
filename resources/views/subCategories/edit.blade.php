@@ -1,11 +1,10 @@
-@extends('categories.layoutCategory')
+@extends('layout')
 
-@section('title', 'Categories')
-
-
+@section('title', 'Edit subcategory')
+@section('header', 'Categories')
 @section('content')
     <div class="container">
-        <h2>Edit Subcategory</h2>
+        <h1>Edit Subcategory</h1>
         <form action="{{ route('subcategories.update', $subcategory->id) }}" method="POST">
             @csrf
             @method('PUT')
@@ -28,4 +27,10 @@
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+</html>
 @endsection

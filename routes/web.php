@@ -36,8 +36,9 @@ Route::post('/unverify/{mem}', [UnverificationController::class, 'unverify'])->n
 //picture
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
 Route::get('/pictures/{mem}', [PictureController::class, 'show'])->name('pictures.show');
-Route::get('/pictures/{mem}/download', [PictureController::class, 'download'])->name('pictures.download');
+Route::get('/pictures/download/{mem}', [PictureController::class, 'download'])->name('pictures.download');
 Route::post('/download/save', [DownloadController::class, 'saveDownload'])->name('download.save');
+Route::get('/pictures/search', [PictureController::class, 'search'])->name('pictures.search');
 
 
 //subcategories

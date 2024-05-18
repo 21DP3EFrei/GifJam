@@ -5,15 +5,40 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-mark class="block h-9 w-auto" />
-                    </a>
+                <a class="navbar-brand" href="http://127.0.0.1:5500/api/resources/views/home%20page/Home.html">
+            <img src="http://127.0.0.1:5500/api/resources/views/home%20page/images/lugu.png" alt="Logo">
+        </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('welcome') }}" :active="request()->routeIs('welcome')">
+                        {{ __('Welcome') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('upload') }}" :active="request()->routeIs('upload')">
+                        {{ __('Upload') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('verification.index') }}" :active="request()->routeIs('verification.index')">
+                        {{ __('Verify') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('pictures.index') }}" :active="request()->routeIs('pictures.index')">
+                        {{ __('Gallery') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -136,13 +161,43 @@
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div>
+   <!-- Responsive Navigation Menu -->
+<div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div class="pt-2 pb-3 space-y-1">
+        <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            {{ __('Dashboard') }}
+        </x-responsive-nav-link>
+    </div>
+    <div class="pt-2 pb-3 space-y-1">
+        <x-responsive-nav-link href="{{ route('welcome') }}" :active="request()->routeIs('welcome')">
+            {{ __('Welcome') }}
+        </x-responsive-nav-link>
+    </div>
+    <div class="pt-2 pb-3 space-y-1">
+        <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            {{ __('Dashboard') }}
+        </x-responsive-nav-link>
+    </div>
+    <div class="pt-2 pb-3 space-y-1">
+        <x-responsive-nav-link href="{{ route('upload') }}" :active="request()->routeIs('upload')">
+            {{ __('Upload') }}
+        </x-responsive-nav-link>
+    </div>
+    <div class="pt-2 pb-3 space-y-1">
+        <x-responsive-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
+            {{ __('Categories') }}
+        </x-responsive-nav-link>
+    </div>
+    <div class="pt-2 pb-3 space-y-1">
+        <x-responsive-nav-link href="{{ route('verification.index') }}" :active="request()->routeIs('verification.index')">
+            {{ __('Verify') }}
+        </x-responsive-nav-link>
+    </div>
+    <div class="pt-2 pb-3 space-y-1">
+        <x-responsive-nav-link href="{{ route('pictures.index') }}" :active="request()->routeIs('pictures.index')">
+            {{ __('Gallery') }}
+        </x-responsive-nav-link>
+</div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

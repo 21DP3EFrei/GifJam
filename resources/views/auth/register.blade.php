@@ -1,8 +1,10 @@
 <x-guest-layout>
     <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+    <x-slot name="logo">
+    <a class="navbar-brand" href="http://127.0.0.1:5500/api/resources/views/home%20page/Home.html">
+        <img src="http://127.0.0.1:5500/api/resources/views/home%20page/images/lugu.png" alt="Logo">
+    </a>
+</x-slot>
 
         <x-validation-errors class="mb-4" />
 

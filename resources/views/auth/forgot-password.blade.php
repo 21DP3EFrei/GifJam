@@ -1,8 +1,11 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            <a class="navbar-brand" href="http://127.0.0.1:5500/api/resources/views/home%20page/Home.html">
+                <img src="http://127.0.0.1:5500/api/resources/views/home%20page/images/emoji-thinking.gif" alt="Logo" style="width: 100px; height: auto;">
+            </a>
         </x-slot>
+
 
         <div class="mb-4 text-sm text-gray-600">
             {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
