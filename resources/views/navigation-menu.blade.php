@@ -17,23 +17,8 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('upload') }}" :active="request()->routeIs('upload')">
                         {{ __('Upload') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
-                        {{ __('Categories') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('verification.index') }}" :active="request()->routeIs('verification.index')">
-                        {{ __('Verify') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -41,6 +26,20 @@
                         {{ __('Gallery') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @can('access-categories')
+        <x-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
+            {{ __('Categories') }}
+        </x-nav-link>
+    @endcan
+</div>
+<div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+    @can('access-verification')
+        <x-nav-link href="{{ route('verification.index') }}" :active="request()->routeIs('verification.index')">
+            {{ __('Verify') }}
+        </x-nav-link>
+    @endcan
+</div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -164,11 +163,6 @@
    <!-- Responsive Navigation Menu -->
 <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
     <div class="pt-2 pb-3 space-y-1">
-        <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-            {{ __('Dashboard') }}
-        </x-responsive-nav-link>
-    </div>
-    <div class="pt-2 pb-3 space-y-1">
         <x-responsive-nav-link href="{{ route('welcome') }}" :active="request()->routeIs('welcome')">
             {{ __('Welcome') }}
         </x-responsive-nav-link>
@@ -184,20 +178,25 @@
         </x-responsive-nav-link>
     </div>
     <div class="pt-2 pb-3 space-y-1">
-        <x-responsive-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
-            {{ __('Categories') }}
-        </x-responsive-nav-link>
-    </div>
-    <div class="pt-2 pb-3 space-y-1">
-        <x-responsive-nav-link href="{{ route('verification.index') }}" :active="request()->routeIs('verification.index')">
-            {{ __('Verify') }}
-        </x-responsive-nav-link>
-    </div>
-    <div class="pt-2 pb-3 space-y-1">
         <x-responsive-nav-link href="{{ route('pictures.index') }}" :active="request()->routeIs('pictures.index')">
             {{ __('Gallery') }}
         </x-responsive-nav-link>
 </div>
+    <div class="pt-2 pb-3 space-y-1">
+    @can('access-categories')
+        <x-responsive-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
+            {{ __('Categories') }}
+        </x-responsive-nav-link>
+    @endcan
+</div>
+<div class="pt-2 pb-3 space-y-1">
+    @can('access-verification')
+        <x-responsive-nav-link href="{{ route('verification.index') }}" :active="request()->routeIs('verification.index')">
+            {{ __('Verify') }}
+        </x-responsive-nav-link>
+    @endcan
+</div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

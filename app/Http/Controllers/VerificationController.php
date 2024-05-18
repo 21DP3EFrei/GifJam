@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/VerificationController.php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -25,14 +23,19 @@ class VerificationController extends Controller
             'status' => 'required|boolean', // Status should be either true (approved) or false (rejected)
             'subcategory_id' => 'nullable|exists:subcategories,id', // Validate the selected subcategory exists
         ]);
-    
-        // Update the status and subcategory of the specified file
-        $mem->update([
-            'Status' => $request->status ? 1 : 0, // Convert boolean value to integer (1 for approved, 0 for rejected)
-            'subcategory_id' => $request->subcategory_id, // Assign the selected subcategory to the picture
-        ]);
-    
+
+        if ($request->status) {
+            // Approve the meme
+            $mem->update([
+                'Status' => 1, // Set status to approved
+                'subcategory_id' => $request->subcategory_id, // Assign the selected subcategory
+            ]);
+        } else {
+            // Delete the meme if rejected
+            $mem->delete();
+        }
+
         // Redirect back to the verification index page with a success message
         return redirect()->route('verification.index')->with('success', 'File verification status updated successfully.');
     }
- }
+}

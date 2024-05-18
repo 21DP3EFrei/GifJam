@@ -33,6 +33,7 @@
                 <td>
                     <form action="{{ route('verification.verify', $mem) }}" method="POST" class="d-flex align-items-center me-3">
                         @csrf
+                        @method('POST') 
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="status" id="approve{{ $mem->id }}" value="1">
                             <label class="form-check-label" for="approve{{ $mem->id }}">

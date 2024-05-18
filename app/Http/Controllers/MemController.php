@@ -7,6 +7,7 @@ use App\Models\Mem;
 use Illuminate\Http\Response;
 use App\Models\Kategorija;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 
 class MemController extends Controller
 {
@@ -30,9 +31,9 @@ class MemController extends Controller
             'copyright' => 'required|string|in:Yes,No',
             'category_id' => 'required|exists:kategorija,K_ID', // Ensure the selected category exists
             'subcategory_id' => 'required|exists:apakskategorija,id', // Ensure the selected subcategory exists
-            'uploadFile' => 'required|image|max:2048', // Validate uploaded image
+            'uploadFile' => 'required|image|mimes:png,jpeg,webp,gif|max:100000', // Validate uploaded image with specific formats
         ]);
-
+    
         // Store the uploaded image file
         $image = $request->file('uploadFile');
         $fileName = $image->getClientOriginalName(); // Get the original filename
@@ -53,9 +54,7 @@ class MemController extends Controller
         // Return a success message
         return back()->with('success', 'File uploaded successfully and awaiting review.');
     }
-    
-    
-public function verify(Request $request, Mem $mem)
+    public function verify(Request $request, Mem $mem)
 {
     // Validate the request
     $request->validate([

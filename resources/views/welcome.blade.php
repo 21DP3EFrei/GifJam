@@ -1,23 +1,23 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Welcome') }}
-        </h2>
-    </x-slot>
+@extends('layout')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    @if (auth()->check())
-                        <p>Hello, {{ auth()->user()->name }}!</p>
-                    @else
-                        <p>Please log in to access this area.</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+@section('title', 'Welcome')
+@section('header', 'Welcome')
+@section('content')
+<div class="container">
+    <h1>Welcome</h1>
+    @if (auth()->check())
+        <p>Hello, {{ auth()->user()->name }}!</p>
+        <p>You are logged in as a {{ auth()->user()->usertype }}.</p> <!-- Display user type -->
+    @else
+        <p>Please log in to access this area.</p>
+    @endif
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+</html>
+@endsection
 
 

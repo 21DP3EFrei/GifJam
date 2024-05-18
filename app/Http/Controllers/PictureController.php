@@ -61,4 +61,9 @@ public function index(Request $request)
     // Return the view with the categories, subcategories, and pictures
     return view('pictures.index', compact('categories', 'subcategories', 'pictures'));
 }
+public function show(Mem $mem)
+{
+    return view('pictures.show', compact('mem'));
+}
+
 }
