@@ -1,5 +1,5 @@
 # About
-Šis ir mans RVT 3.kursa noslēguma darbs, gan datu bāzes un WEB (tīmekļa vietnes) programēšanā. Šis projekts ir vietne kas ļauj lietotājiem izveidot kontus un augšupielādēt mēmus vietnē, kurus apstiprina administrators.
+Šis ir mans RVT 3.kursa noslēguma darbs, tagad 4.kursa. Šis projekts ir vietne kas ļauj lietotājiem izveidot kontus un augšupielādēt resursus vietnē, kurus apstiprina administrators. Saite būs domāta primāri cilvēkiem kas veido video vai mēmus uz sociālajiem tīkliem. Lietotāji varēs augšiplādēt mūziku, mēmus, skaņas un gifus. Cilvēki varēs viegli atrast ko vajag pēc kategorijām, kas sakārtotas ļoti specifiski un izmantot saviem video (ja nav autortiesības kas aizliedz).
 
 ## Instalēšana
 
