@@ -1,11 +1,10 @@
 <x-guest-layout>
     <x-authentication-card>
-    <x-slot name="logo">
-    <a class="navbar-brand" href="http://127.0.0.1:5500/api/resources/views/home%20page/Home.html">
-        <img src="http://127.0.0.1:5500/api/resources/views/home%20page/images/lugu.png" alt="Logo">
-    </a>
-</x-slot>
-
+        <x-slot name="logo">
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ asset('images/lugu.png') }}" alt="Logo">
+            </a>
+        </x-slot>
 
         <x-validation-errors class="mb-4" />
 
@@ -35,24 +34,16 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-    @if (Route::has('password.request'))
-        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-            {{ __('Forgot your password?') }}
-        </a>
-    @endif
+            <div class="mt-4 flex justify-between items-center">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+                    {{ __("Don't have an account?") }}
+                </a>
 
-    {{-- Add a space --}}
-    &nbsp;
-
-    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
-        {{ __("Don't have an account?") }}
-    </a>
-
-    <x-button class="ms-4">
-        {{ __('Log in') }}
-    </x-button>
-</div>
+                <!-- Login button aligned to the right -->
+                <x-button class="ms-auto">
+                    {{ __('Log in') }}
+                </x-button>
+            </div>
         </form>
     </x-authentication-card>
 </x-guest-layout>

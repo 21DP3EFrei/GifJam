@@ -5,8 +5,8 @@
                 <div class="flex">
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
-                        <a class="navbar-brand" href="http://127.0.0.1:5500/api/resources/views/home%20page/Home.html">
-                            <img src="http://127.0.0.1:5500/api/resources/views/home%20page/images/lugu.png" alt="Logo">
+                        <a class="navbar-brand" href="{{ route('home') }}">
+                        <img src="{{ asset('images/lugu.png') }}" alt="Logo">
                         </a>
                     </div>
 

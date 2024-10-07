@@ -62,10 +62,10 @@ Route::get('/test', function () {
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
 
 //mem
-// Default route redirects to the home page
-Route::get('/', function () {
-    return Redirect::to('http://127.0.0.1:5500/api/resources/views/home%20page/Home.html');
-});
+route::get('/', function () {    
+    return Redirect::to('http://127.0.0.1:5500/resources/html5up-spectral/index.html');
+} )->name('home');
+
 
 // Registration page
 Route::get('/register', function () {

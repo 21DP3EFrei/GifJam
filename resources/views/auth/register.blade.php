@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-authentication-card>
     <x-slot name="logo">
-    <a class="navbar-brand" href="http://127.0.0.1:5500/api/resources/views/home%20page/Home.html">
-        <img src="http://127.0.0.1:5500/api/resources/views/home%20page/images/lugu.png" alt="Logo">
+    <a class="navbar-brand" href="{{ route('home') }}">
+    <img src="{{ asset('images/lugu.png') }}" alt="Logo">
     </a>
 </x-slot>
 
@@ -27,9 +27,10 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
+    <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+    <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+             </div>
+
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
