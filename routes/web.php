@@ -10,6 +10,7 @@ use App\Http\Controllers\PictureController;
 use app\http\Controllers\DownloadController;
 use app\http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 
 //upload routes
 Route::get('/upload', [MemController::class, 'upload'])->name('upload');
@@ -63,7 +64,7 @@ Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.ind
 
 //mem
 route::get('/', function () {    
-    return Redirect::to('http://127.0.0.1:5500/resources/html5up-spectral/index.html');
+    return view('home');
 } )->name('home');
 
 
@@ -82,7 +83,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
-// Access to the home page is restricted to admin users
+
+
 Route::get('/home', [AdminController::class, 'index']);
 Route::get('/welcome', function () {
     return view('welcome');

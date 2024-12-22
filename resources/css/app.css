@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+/*all this is for auto complete*/
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #D3D3D3 inset; 
+    box-shadow: 0 0 0 30px #D3D3D3 inset;
+    color: black; 
+}
+
+input:-webkit-autofill::first-line {
+    color: black; 
+}
+
