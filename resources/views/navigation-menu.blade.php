@@ -5,7 +5,7 @@
                 <div class="flex">
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
-                        <a class="navbar-brand" href="{{ route('home') }}">
+                        <a class="navbar-brand" href="{{ route('welcome') }}">
                         <img src="{{ asset('images/lugu.png') }}" alt="Logo">
                         </a>
                     </div>
