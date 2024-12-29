@@ -19,11 +19,33 @@ input:-webkit-autofill::first-line {
 /* app.css */
 .navbar {
     @apply bg-white border-b border-gray-100;
-    
+
 }
 
 @media (prefers-color-scheme: dark) {
     .navbar {
         @apply bg-gray-800 border-gray-700;
+    }
+}
+
+.header {
+    @apply bg-white border-b border-gray-100;
+    
+}
+
+@media (prefers-color-scheme: dark) {
+    .header {
+        @apply dark:bg-blue-950 border-gray-700;
+    }
+}
+
+.background {
+    @apply bg-white border-b;
+    
+}
+
+@media (prefers-color-scheme: dark) {
+    .background {
+        @apply dark:bg-blue-800;
     }
 }
