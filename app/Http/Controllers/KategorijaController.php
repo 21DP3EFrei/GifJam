@@ -71,4 +71,8 @@ class KategorijaController extends Controller
     {
         return view('categories.show', compact('kategorija'));
     }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 }

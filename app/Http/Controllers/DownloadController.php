@@ -32,4 +32,8 @@ class DownloadController extends Controller
         // Return a success response
         return response()->json(['message' => 'Download instance saved successfully'], 200);
     }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 }

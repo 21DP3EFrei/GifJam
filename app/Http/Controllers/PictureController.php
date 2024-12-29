@@ -68,4 +68,8 @@ class PictureController extends Controller
     {
         return response()->download(storage_path('app/public/' . $mem->Attels));
     }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 }

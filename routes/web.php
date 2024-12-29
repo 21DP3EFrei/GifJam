@@ -11,6 +11,9 @@ use app\http\Controllers\DownloadController;
 use app\http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WelcomeController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 //upload routes
 Route::get('/upload', [MemController::class, 'upload'])->name('upload');
@@ -75,20 +78,13 @@ Route::get('/register', function () {
 
 // After login, users are redirected to the welcome page
 Route::middleware(['auth'])->group(function () {
-    Route::get('/welcome', function () {
-        return view('welcome');
-    });
+    Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
     
-    // Access to the dashboard is restricted to authenticated users
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
-
-
 Route::get('/home', [AdminController::class, 'index']);
-Route::get('/welcome', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
+
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Subcategory; // Import the Subcategory model
 use App\Models\Kategorija;
 use App\Models\Mem;
-class SubcategoryController extends Controller
+class SubCategoryController extends Controller
 {
     public function index()
 {
@@ -109,4 +109,8 @@ class SubcategoryController extends Controller
     
     return response()->json($subcategories);
 }
+public function __construct()
+    {
+        $this->middleware('auth');
+    }
 }

@@ -23,5 +23,4 @@ class UserController extends Controller
         return redirect()->route('user.profile')->with('success', 'Profile updated successfully.');
     }
 
-    // Other user-related methods can be added here
 }

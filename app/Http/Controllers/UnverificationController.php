@@ -28,4 +28,8 @@ class UnverificationController extends Controller
         // Redirect back to the unverification index page with a success message
         return redirect()->route('unverification.index')->with('success', 'File unverification status updated successfully.');
     }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 }
