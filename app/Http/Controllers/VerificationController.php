@@ -38,4 +38,9 @@ class VerificationController extends Controller
         // Redirect back to the verification index page with a success message
         return redirect()->route('verification.index')->with('success', 'File verification status updated successfully.');
     }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 }

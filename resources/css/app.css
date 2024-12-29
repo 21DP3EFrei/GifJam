@@ -16,3 +16,14 @@ input:-webkit-autofill::first-line {
     color: black; 
 }
 
+/* app.css */
+.navbar {
+    @apply bg-white border-b border-gray-100;
+    
+}
+
+@media (prefers-color-scheme: dark) {
+    .navbar {
+        @apply bg-gray-800 border-gray-700;
+    }
+}
