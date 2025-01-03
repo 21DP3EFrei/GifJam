@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
             {{ __('Profile') }}
         </h2>
     </x-slot>
 
-    <div>
+    <div class="dynamic-background">
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                 @livewire('profile.update-profile-information-form')
@@ -42,4 +42,18 @@
             @endif
         </div>
     </div>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            .dynamic-background {
+                background-color: #02315f; /* Dark mode background */
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .dynamic-background {
+                background-color: rgb(220, 219, 219); /* Light mode background */
+            }
+        }
+</style>
 </x-app-layout>
+    

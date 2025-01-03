@@ -16,7 +16,7 @@
         </x-slot>
 
         <!-- Content -->
-        <div class="py-12 background flex-grow display-block min-h-screen" style="background-color: #02315f;"">
+        <div class="py-12 background flex-grow display-block min-h-screen dynamic-background" >
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="header overflow-hidden shadow-xl sm:rounded-lg dark:text-white">
                     @yield('content')
@@ -36,4 +36,16 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+        @media (prefers-color-scheme: dark) {
+            .dynamic-background {
+                background-color: #02315f; /* Dark mode background */
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .dynamic-background {
+                background-color: rgb(195, 193, 193); /* Light mode background */
+            }
+        }
 </style>
