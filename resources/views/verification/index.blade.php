@@ -25,34 +25,34 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($unverifiedMems as $mem)
+            @foreach ($unverifiedMems as $media)
             <tr>
-                <td>{{ $mem->Nosaukums }}</td>
-                <td>{{ $mem->Apraksts }}</td>
-                <td>{{ $mem->Status == 0 ? 'Pending' : ($mem->Status == 1 ? 'Approved' : 'Rejected') }}</td>
+                <td>{{ $media->Nosaukums }}</td>
+                <td>{{ $media->Apraksts }}</td>
+                <td>{{ $media->Status == 0 ? 'Pending' : ($media->Status == 1 ? 'Approved' : 'Rejected') }}</td>
                 <td>
-                    <form action="{{ route('verification.verify', $mem) }}" method="POST" class="d-flex align-items-center me-3">
+                    <form action="{{ route('verification.verify', $media) }}" method="POST" class="d-flex align-items-center me-3">
                         @csrf
                         @method('POST') 
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="approve{{ $mem->id }}" value="1">
-                            <label class="form-check-label" for="approve{{ $mem->id }}">
-                                {{ $mem->Status == 0 ? 'Approve' : 'Re-Approve' }}
+                            <input class="form-check-input" type="radio" name="status" id="approve{{ $media->id }}" value="1">
+                            <label class="form-check-label" for="approve{{ $media->id }}">
+                                {{ $media->Status == 0 ? 'Approve' : 'Re-Approve' }}
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="reject{{ $mem->id }}" value="0">
-                            <label class="form-check-label" for="reject{{ $mem->id }}">Reject</label>
+                            <input class="form-check-input" type="radio" name="status" id="reject{{ $media->id }}" value="0">
+                            <label class="form-check-label" for="reject{{ $media->id }}">Reject</label>
                         </div>
                         <button type="submit" class="btn btn-primary" style="margin-left: 10px;">Submit</button>
                     </form>
                 </td>
                 <td>
-                    <a href="{{ asset('storage/' . $mem->Attels) }}" download="{{ $mem->Attels }}" class="btn btn-primary">Download</a>
+                    <a href="{{ asset('storage/' . $media->Fails) }}" download="{{ $media->Fails }}" class="btn btn-primary">Download</a>
                 </td>
-                <td>{{ $mem->kategorija->Nosaukums }}</td>
+                <td>{{ $media->kategorija->Nosaukums }}</td>
                 <td>
-                    <img src="{{ asset('storage/' . $mem->Attels) }}" alt="{{ $mem->Nosaukums }}" width="100" height="100">
+                    <img src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}" width="100" height="100">
                 </td>
             </tr>
             @endforeach

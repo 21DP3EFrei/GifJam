@@ -10,13 +10,13 @@
                 <div class="card-header">Show Images</div>
                 <div class="card-body">
                     <div class="row">
-                        @foreach($mems as $mem)
+                        @foreach($medias as $media)
                         <div class="col-md-3 mb-4">
                             <div class="card">
-                                <img src="{{ Storage::url($mem->Attels) }}" class="card-img-top" alt="{{ $mem->Nosaukums }}">
+                                <img src="{{ Storage::url($media->Fails) }}" class="card-img-top" alt="{{ $media->Nosaukums }}">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $mem->Nosaukums }}</h5>
-                                    <p class="card-text">{{ $mem->Apraksts }}</p>
+                                    <h5 class="card-title">{{ $media->Nosaukums }}</h5>
+                                    <p class="card-text">{{ $media->Apraksts }}</p>
                                 </div>
                             </div>
                         </div>

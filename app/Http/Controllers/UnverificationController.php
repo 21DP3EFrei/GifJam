@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Mem;
+use App\Models\Media;
 
 class UnverificationController extends Controller
 {
     public function index()
     {
-        $approvedMems = Mem::where('Status', 1)->get();
+        $approvedMedia = Media::where('Status', 1)->get();
         return view('unverification.index', compact('approvedMems'));
     }
     
-    public function unverify(Request $request, Mem $mem)
+    public function unverify(Request $request, Media $media)
     {
         // Validate the request
         $request->validate([
@@ -21,7 +21,7 @@ class UnverificationController extends Controller
         ]);
 
         // Update the status of the specified file
-        $mem->update([
+        $media->update([
             'Status' => $request->status ? 0 : 1, // Convert boolean value to integer (0 for unapproved, 1 for remain approved)
         ]);
 

@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Media;
 use Illuminate\Http\Request;
-use App\Models\Mem;
 use Illuminate\Http\Response;
 use App\Models\Kategorija;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
-class MemController extends Controller
+class MediaController extends Controller
 {
     public function index()
     {
-        $mems = Mem::all();
+        $medias = Media::all();
         return view('mem.index', compact('mems'));
     }
     public function upload()
@@ -30,7 +30,6 @@ class MemController extends Controller
             'author' => 'required|string',
             'copyright' => 'required|string|in:Yes,No',
             'category_id' => 'required|exists:kategorija,K_ID', // Ensure the selected category exists
-            'subcategory_id' => 'required|exists:apakskategorija,id', // Ensure the selected subcategory exists
             'uploadFile' => 'required|image|mimes:png,jpeg,webp,gif|max:100000', // Validate uploaded image with specific formats
         ]);
     
@@ -39,22 +38,21 @@ class MemController extends Controller
         $fileName = $image->getClientOriginalName(); // Get the original filename
         $filePath = $request->file('uploadFile')->storeAs('uploads', $fileName, 'public');
     
-        // Create a new Mem instance and save it to the database
-        $mem = new Mem();
-        $mem->Nosaukums = $request->fileName;
-        $mem->Apraksts = $request->fileDescription;
-        $mem->Attels = $filePath; // Store the file path in the database instead of the actual file content
-        $mem->Autors = $request->author;
-        $mem->Autortiesibas = ($request->copyright == 'Yes') ? 1 : 0;
-        $mem->Status = 0; // Set the default status to unpublished
-        $mem->Kategorija_ID = $request->category_id;
-        $mem->Apakskategorija_ID = $request->subcategory_id; // Assign the selected subcategory
-        $mem->save();
+        // Create a new media instance and save it to the database
+        $media = new Media();
+        $media->Nosaukums = $request->fileName;
+        $media->Apraksts = $request->fileDescription;
+        $media->Fails = $filePath; // Store the file path in the database instead of the actual file content
+        $media->Autors = $request->author;
+        $media->Autortiesibas = ($request->copyright == 'Yes') ? 1 : 0;
+        $media->Status = 0; // Set the default status to unpublished
+        $media->K_ID = $request->category_id;
+        $media->save();
     
         // Return a success message
         return back()->with('success', 'File uploaded successfully and awaiting review.');
     }
-    public function verify(Request $request, Mem $mem)
+    public function verify(Request $request, Media $media)
 {
     // Validate the request
     $request->validate([
@@ -62,7 +60,7 @@ class MemController extends Controller
     ]);
 
     // Update the status of the specified file
-    $mem->update([
+    $media->update([
         'Status' => $request->status ? 1 : 0, // Convert boolean value to integer (1 for approved, 0 for rejected)
     ]);
 
@@ -74,4 +72,12 @@ public function __construct()
         $this->middleware('auth');
     }
 
+    public function skanas()
+    {
+        return $this->hasOne(SkanasController::class);
+    }
+    public function muzika()
+    {
+        return $this->hasOne(MuzikaController::class);
+    }
 }

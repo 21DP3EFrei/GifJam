@@ -39,7 +39,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="subcategory_id" class="form-label">Subcategory</label>
             <select class="form-select" name="subcategory_id" id="subcategory_id" required aria-required="true">
                 <!-- Populate subcategories dynamically based on the selected category -->
@@ -68,7 +68,7 @@
                     });
                 });
             </script>
-        </div>
+        </div> --}}
         <div class="mb-3">
             <label for="uploadFile" class="form-label">Upload File</label>
             <input class="form-control" type="file" name="uploadFile" id="uploadFile" required aria-required="true">
