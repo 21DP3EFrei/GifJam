@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Mem;
+use App\Models\Media;
 use App\Models\Kategorija;
 use App\Models\Subcategory;
 
@@ -11,12 +11,12 @@ class VerificationController extends Controller
 {
     public function index()
     {
-        $unverifiedMems = Mem::where('Status', 0)->get();
+        $unverifiedMems = Media::where('Status', 0)->get();
         $subcategories = Subcategory::all(); // Fetch all subcategories
         return view('verification.index', compact('unverifiedMems', 'subcategories')); // Pass subcategories to the view
     }
     
-    public function verify(Request $request, Mem $mem)
+    public function verify(Request $request, Media $media)
     {
         // Validate the request
         $request->validate([
@@ -25,14 +25,14 @@ class VerificationController extends Controller
         ]);
 
         if ($request->status) {
-            // Approve the meme
-            $mem->update([
+            // Approve the media
+            $media->update([
                 'Status' => 1, // Set status to approved
                 'subcategory_id' => $request->subcategory_id, // Assign the selected subcategory
             ]);
         } else {
             // Delete the meme if rejected
-            $mem->delete();
+            $media->delete();
         }
 
         // Redirect back to the verification index page with a success message

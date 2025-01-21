@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MemController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\KategorijaController; 
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\VerificationController;
@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 //upload routes
-Route::get('/upload', [MemController::class, 'upload'])->name('upload');
-Route::post('/upload', [MemController::class, 'uploadPost'])->name('upload.post');
+Route::get('/upload', [MediaController::class, 'upload'])->name('upload');
+Route::post('/upload', [MediaController::class, 'uploadPost'])->name('upload.post');
 
 //category routes
 Route::get('/categories', [KategorijaController::class, 'index'])->name('categories.index');
@@ -56,8 +56,7 @@ Route::delete('/subcategories/{subcategory}', [SubCategoryController::class, 'de
 Route::get('/fetch-subcategories/{categoryId}', [SubcategoryController::class, 'getSubcategories'])->name('fetch.subcategories');
 
 
-//upload
-Route::post('/upload', [MemController::class, 'uploadPost'])->name('upload.post');
+//test
 Route::get('/test', function () {
     return 'This is a test route!';
 });

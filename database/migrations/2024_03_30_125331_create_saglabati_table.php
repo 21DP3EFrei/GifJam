@@ -11,9 +11,9 @@ class CreateSaglabatiTable extends Migration
         Schema::create('saglabati', function (Blueprint $table) {
             $table->id('S_ID');
             $table->unsignedBigInteger('Lietotaja_ID');
-            $table->unsignedBigInteger('Me_ID');
+            $table->unsignedBigInteger('Medija_ID');
             $table->foreign('Lietotaja_ID')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('Me_ID')->references('M_ID')->on('mems')->onDelete('cascade');
+            $table->foreign('Medija_ID')->references('Me_ID')->on('medija')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -17,16 +17,16 @@ class DownloadController extends Controller
     {
         // Validate the request data
         $request->validate([
-            'meme_id' => 'required|exists:mem,id', // Ensure the meme ID exists in the database
+            'media' => 'required|exists:Me_ID,id', 
         ]);
 
         // Get the meme ID from the request
-        $memeId = $request->meme_id;
+        $mediaId = $request->media;
 
         // Create a new instance of Saglabati
         $download = new Saglabati();
         $download->Lietotaja_ID = auth()->id(); // Get the authenticated user's ID
-        $download->Me_ID = $memeId;
+        $download->Me_ID = $mediaId;
         $download->save();
 
         // Return a success response

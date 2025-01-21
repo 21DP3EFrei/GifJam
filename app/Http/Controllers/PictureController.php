@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kategorija;
-use App\Models\Subcategory;
-use App\Models\Mem; // Corrected this line
+use App\Models\Media; 
 use Illuminate\Support\Facades\Storage; // This line is already correct
 
 class PictureController extends Controller
@@ -14,20 +13,19 @@ class PictureController extends Controller
     {
         // Fetch all categories and subcategories
         $categories = Kategorija::all();
-        $subcategories = Subcategory::all();
 
         // Initialize query for pictures
-        $query = Mem::where('Status', 1); // Ensure only verified pictures are fetched
+        $query = Media::where('Status', 1); // Ensure only verified pictures are fetched
 
         // Apply category filter if selected
         if ($request->filled('category_id')) {
             $query->where('Kategorija_ID', $request->category_id);
         }
 
-        // Apply subcategory filter if selected
-        if ($request->filled('subcategory_id')) {
-            $query->where('Apakskategorija_ID', $request->subcategory_id);
-        }
+        // // Apply subcategory filter if selected
+        // if ($request->filled('subcategory_id')) {
+        //     $query->where('Apakskategorija_ID', $request->subcategory_id);
+        // }
 
         // Apply search filter if search term is provided
         if ($request->filled('search')) {
@@ -38,7 +36,7 @@ class PictureController extends Controller
         // Apply sorting based on the selected option
         switch ($request->sort_by) {
             case 'newest':
-                $query->orderByDesc('M_ID');
+                $query->orderByDesc('Me_ID');
                 break;
             case 'name_az':
                 $query->orderBy('Nosaukums');
@@ -48,7 +46,7 @@ class PictureController extends Controller
                 break;
             case 'oldest':
             default:
-                $query->orderBy('M_ID');
+                $query->orderBy('Me_ID');
                 break;
         }
 
@@ -56,17 +54,17 @@ class PictureController extends Controller
         $pictures = $query->get();
 
         // Return the view with the categories, subcategories, and pictures
-        return view('pictures.index', compact('categories', 'subcategories', 'pictures'));
+        return view('pictures.index', compact('categories', 'pictures'));
     }
 
-    public function show(Mem $mem)
+    public function show(Media $media)
     {
-        return view('pictures.show', compact('mem'));
+        return view('pictures.show', compact('Media'));
     }
 
-    public function download(Mem $mem)
+    public function download(Media $media)
     {
-        return response()->download(storage_path('app/public/' . $mem->Attels));
+        return response()->download(storage_path('app/public/' . $media->Fails));
     }
     public function __construct()
     {

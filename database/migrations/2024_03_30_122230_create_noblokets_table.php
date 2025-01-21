@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('L_ID');
             $table->foreign('L_ID')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('Blokets_lietotajs')->default(false);
-            $table->string('Iemesls')->nullable();
+            $table->string('Iemesls', 100)->nullable();
             $table->timestamps();
         });
     }

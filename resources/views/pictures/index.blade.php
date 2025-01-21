@@ -18,12 +18,12 @@
             </div>
             <div class="col-md-3">
                 <label for="subcategory_id" class="form-label">Subcategory</label>
-                <select class="form-select form-select-sm" id="subcategory_id" name="subcategory_id" onchange="document.getElementById('filterForm').submit()">
+                {{-- <select class="form-select form-select-sm" id="subcategory_id" name="subcategory_id" onchange="document.getElementById('filterForm').submit()">
                     <option value="">All Subcategories</option>
                     @foreach($subcategories as $subcategory)
                         <option value="{{ $subcategory->id }}" {{ request('subcategory_id') == $subcategory->id ? 'selected' : '' }}>{{ $subcategory->Nosaukums }}</option>
-                    @endforeach
-                </select>
+                    @endforeach 
+                </select>  --}}
             </div>
             <div class="col-md-3">
                 <label for="sort_by" class="form-label">Sort By</label>
@@ -48,7 +48,7 @@
             <div class="col-md-3 mb-3">
                 <div class="card">
                     <a href="{{ route('pictures.show', $picture) }}"> <!-- Link to preview page -->
-                        <img src="{{ asset('storage/' . $picture->Attels) }}" class="card-img-top" alt="{{ $picture->Nosaukums }}">
+                        <img src="{{ asset('storage/' . $picture->Fails) }}" class="card-img-top" alt="{{ $picture->Nosaukums }}">
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">{{ $picture->Nosaukums }}</h5>
