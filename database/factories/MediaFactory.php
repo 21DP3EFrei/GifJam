@@ -23,8 +23,8 @@ class MediaFactory extends Factory
             'Nosaukums' => fake()->text(50),
             'Apraksts' => fake()->text( 50),
             'Fails' => fake()->text(50),
-            'Failu tips' => fake()->randomElement(array_column(FileType::cases(), 'value')),
-            'Augsupielades tips' => fake()->randomElement(array_column(UploadType::cases(), 'value')),
+            'Failu_tips' => fake()->randomElement(array_column(FileType::cases(), 'value')),
+            'Augsupielades_tips' => fake()->randomElement(array_column(UploadType::cases(), 'value')),
             'Autors' => fake()->text(30),
             'Autortiesibas' => fake()->boolean(),
         ];

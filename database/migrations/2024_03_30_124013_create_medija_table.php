@@ -19,10 +19,12 @@ return new class extends Migration
             $table->string('Apraksts', 200)->nullable();
             $table->boolean('Status')->default(0);
             $table->string('Fails', 300)->nullable();
-            $table->enum('Failu tips', ['.png', '.jpg', '.gif', '.jpeg','.mp3', '.FLAC', '.WAV']);
-            $table->enum('Augsupielades tips', ['medija', 'skana', 'muzika']);
+            $table->enum('Failu_tips', ['.png', '.jpg', '.gif', '.jpeg','.mp3', '.FLAC', '.WAV']);
+            $table->enum('Augsupielades_tips', ['meme', 'skana', 'muzika']);
             $table->string('Autors', 100);
             $table->boolean('Autortiesibas');
+            $table->unsignedBigInteger('Lietotajs')->nullable();
+            $table->foreign('Lietotajs')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
