@@ -15,18 +15,24 @@ class Media extends Model
     protected $primaryKey = 'Me_ID';
     protected $fillable = ['Nosaukums', 'Apraksts', 'Status', 'Fails', 'Failu tips', 'Augsupielades tips' , 'Autors', 'Autortiesibas'];
 
+
     public function kategorijas()
     {
         return $this->belongsToMany(Kategorija::class, 'medija_kategorija', 'Medija_id', 'Kategorija_id');
     }
     public function skana()
     {
-        return $this->hasOne(Skana::class, 'Medija', 'Sk_ID');
-    }
-    public function music()
-    {
-        return $this->hasOne(Music::class, 'Medija', 'Mu_ID');
+        return $this->hasOne(Skana::class, 'Medija', 'Me_ID'); 
     }
 
+    public function music()
+    {
+        return $this->hasOne(Music::class, 'Medija', 'Me_ID'); 
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
 

@@ -22,4 +22,5 @@ class MusicFactory extends Factory
             'Bitrate' => fake()->randomDigitNot(0),
         ];
     }
+    
 }

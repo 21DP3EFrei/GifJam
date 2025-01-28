@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('noblokets', function (Blueprint $table) {
             $table->id('B_ID');
-            $table->unsignedBigInteger('L_ID');
+            $table->unsignedBigInteger('L_ID')->unique();
             $table->foreign('L_ID')->references('id')->on('users')->onDelete('cascade');
-            $table->boolean('Blokets_lietotajs')->default(false);
+            $table->boolean('Blokets')->default(false);
             $table->string('Iemesls', 100)->nullable();
             $table->timestamps();
         });
