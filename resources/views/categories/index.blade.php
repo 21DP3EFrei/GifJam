@@ -13,6 +13,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
+                    <th>Subcategory</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -21,6 +22,11 @@
                     <tr>
                         <td>{{ $category->Nosaukums }}</td>
                         <td>{{ $category->Apraksts }}</td>
+                        @if ($category->parent)
+                        <td>{{ $category->parent->Nosaukums }}</td>
+                        @else
+                        <td>-</td>
+                        @endif
                         <td>
                             <a href="{{ route('categories.edit', $category->K_ID) }}" class="btn btn-sm btn-primary">Edit</a>
                             <form action="{{ route('categories.destroy', $category->K_ID) }}" method="POST" style="display: inline;">

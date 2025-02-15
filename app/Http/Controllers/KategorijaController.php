@@ -6,10 +6,19 @@ use App\Models\Kategorija;
 
 class KategorijaController extends Controller
 {
+        // Method to list all categories MAIN DISPLAY
+        public function index()
+        {
+            $categories = Kategorija::all();
+            $categories = Kategorija::with('parent')->get();
+        
+            return view('categories.index', compact('categories'));
+        }
     // Method to display the form for creating a new category
     public function create()
     {
-        return view('categories.create');
+        $categories = Kategorija::all();
+        return view('categories.create', compact('categories'));
     }
 
     // Method to store the newly created category
@@ -18,58 +27,52 @@ class KategorijaController extends Controller
         $request->validate([
             'Nosaukums' => 'required|string',
             'Apraksts' => 'nullable|string',
+            'Apakskategorija' => 'nullable|exists:kategorija,K_ID'
         ]);
 
         Kategorija::create([
             'Nosaukums' => $request->Nosaukums,
-            'Apraksts' => $request->Apraksts,
+            'Apraksts' => $request->Apraksts, 
+            'Apakskategorija' => $request->Apakskategorija,
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     // Method to display a form for editing a category
-    public function edit(Kategorija $kategorija)
+    public function edit(Kategorija $categories)
     {
-        return view('categories.edit', compact('kategorija'));
+        $allCategories = Kategorija::all(); 
+        return view('categories.edit', compact('categories', 'allCategories'));
     }
+    
 
     // Method to update the edited category
-    public function update(Request $request, Kategorija $kategorija)
+    public function update(Request $request, Kategorija $categories)
     {
         $request->validate([
             'Nosaukums' => 'required|string',
             'Apraksts' => 'nullable|string',
+            'Apakskategorija' => 'nullable|exists:kategorija,K_ID'
         ]);
 
-        $kategorija->update([
+        $categories->update([
             'Nosaukums' => $request->Nosaukums,
             'Apraksts' => $request->Apraksts,
+            'Apakskategorija' => $request->Apakskategorija,
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     // Method to delete a category
-    public function destroy(Kategorija $kategorija)
+    public function destroy(Kategorija $categories)
     {
-        $kategorija->delete();
+        $categories->delete();
 
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 
-    // Method to list all categories
-    public function index()
-{
-    $categories = Kategorija::all();
-    return view('categories.index', compact('categories'));
-}
-
-    // Method to display details of a specific category
-    public function show(Kategorija $kategorija)
-    {
-        return view('categories.show', compact('kategorija'));
-    }
     public function __construct()
     {
         $this->middleware('auth');

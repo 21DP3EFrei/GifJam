@@ -10,12 +10,12 @@ class SubCategoryController extends Controller
 {
     public function index()
 {
-    $unverifiedMems = Mem::where('Status', 0)->get(); // Retrieve unverified mems
+    //$unverifiedMems = Mem::where('Status', 0)->get(); // Retrieve unverified mems
 
     // Fetch all subcategories with their related categories
     $subcategories = Subcategory::with('kategorija')->get();
 
-    return view('subcategories.index', compact('unverifiedMems', 'subcategories'));
+    return view('subcategories.index', compact( 'subcategories')); //compact('unverifiedMems', 'subcategories'))
 }
 
     
