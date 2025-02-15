@@ -16,6 +16,16 @@
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" name="Apraksts"></textarea>
             </div>
+            <div class="mb-3">
+                <label for="apakskategorija" class="form-label">Subcategory of: </label>
+                <select class="form-control" id="apakskategorija" name="Apakskategorija">
+                    <option value=""></option>
+                    @foreach($categories as $category)
+                   <option value="{{ $category->K_ID }}">{{ $category->Nosaukums }}</option>
+                   @endforeach
+                </select>
+                <h4 class= 'text-gray-500 text-xs'>*Only choose this if you are making this a subcategory</h4>
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>

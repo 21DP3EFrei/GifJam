@@ -13,7 +13,7 @@
     <form method="POST" action="{{ route('upload.post') }}" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="fileName" class="form-label">File Name</label>
+            <label for="fileName" class="form-label">Name</label>
             <input type="text" class="form-control" name="fileName" id="fileName" required aria-required="true">
         </div>
         <div class="mb-3">
@@ -39,41 +39,11 @@
                 @endforeach
             </select>
         </div>
-        {{-- <div class="mb-3">
-            <label for="subcategory_id" class="form-label">Subcategory</label>
-            <select class="form-select" name="subcategory_id" id="subcategory_id" required aria-required="true">
-                <!-- Populate subcategories dynamically based on the selected category -->
-            </select>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    $('#category_id').on('change', function() {
-                        var categoryId = $(this).val();
-                        if (categoryId) {
-                            $.ajax({
-                                url: '/fetch-subcategories/' + categoryId,
-                                type: 'GET',
-                                dataType: 'json',
-                                success: function(data) {
-                                    $('#subcategory_id').empty();
-                                    $('#subcategory_id').append('<option value="">Select Subcategory</option>');
-                                    $.each(data, function(key, value) {
-                                        $('#subcategory_id').append('<option value="' + value.id + '">' + value.name + '</option>');
-                                    });
-                                }
-                            });
-                        } else {
-                            $('#subcategory_id').empty();
-                        }
-                    });
-                });
-            </script>
-        </div> --}}
         <div class="mb-3">
             <label for="uploadFile" class="form-label">Upload File</label>
             <input class="form-control" type="file" name="uploadFile" id="uploadFile" required aria-required="true">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
     </form>
 </div>
 <!DOCTYPE html>

@@ -23,10 +23,9 @@ Route::post('/upload', [MediaController::class, 'uploadPost'])->name('upload.pos
 Route::get('/categories', [KategorijaController::class, 'index'])->name('categories.index');
 Route::get('/categories/create', [KategorijaController::class, 'create'])->name('categories.create');
 Route::post('/categories', [KategorijaController::class, 'store'])->name('categories.store');
-Route::get('/categories/{kategorija}', [KategorijaController::class, 'show'])->name('categories.show');
-Route::get('categories/{kategorija}/edit', [KategorijaController::class, 'edit'])->name('categories.edit');
-Route::put('/categories/{kategorija}', [KategorijaController::class, 'update'])->name('categories.update');
-Route::delete('/categories/{kategorija}', [KategorijaController::class, 'destroy'])->name('categories.destroy');
+Route::get('categories/{categories}/edit', [KategorijaController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/{categories}', [KategorijaController::class, 'update'])->name('categories.update');
+Route::delete('/categories/{categories}', [KategorijaController::class, 'destroy'])->name('categories.destroy');
 
 //verify
 
