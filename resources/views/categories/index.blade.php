@@ -10,7 +10,7 @@
         <a href="{{ route('subcategories.index') }}" class="btn btn-primary mb-3">Switch to Subcategories</a>
         <table class="table">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>Name</th>
                     <th>Description</th>
                     <th>Subcategory</th>
@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 @foreach($categories as $category)
-                    <tr>
+                    <tr class="text-center items-center">
                         <td>{{ $category->Nosaukums }}</td>
                         <td>{{ $category->Apraksts }}</td>
                         @if ($category->parent)

@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Kategorija;
 use Illuminate\Http\Request;
 
 //upload routes
@@ -30,16 +31,16 @@ Route::delete('/categories/{categories}', [KategorijaController::class, 'destroy
 //verify
 
 Route::get('/verify', [VerificationController::class, 'index'])->name('verification.index');
-Route::post('/verify/{mem}', [VerificationController::class, 'verify'])->name('verification.verify');
+Route::post('/verify/{media}', [VerificationController::class, 'verify'])->name('verification.verify');
 
 Route::get('/unverify', [UnverificationController::class, 'index'])->name('unverification.index');
-Route::post('/unverify/{mem}', [UnverificationController::class, 'unverify'])->name('unverification.unverify');
+Route::post('/unverify/{media}', [UnverificationController::class, 'unverify'])->name('unverification.unverify');
 
 
 //picture
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
-Route::get('/pictures/{mem}', [PictureController::class, 'show'])->name('pictures.show');
-Route::get('/pictures/download/{mem}', [PictureController::class, 'download'])->name('pictures.download');
+Route::get('/pictures/{media}', [PictureController::class, 'show'])->name('pictures.show');
+Route::get('/pictures/download/{media}', [PictureController::class, 'download'])->name('pictures.download');
 Route::post('/download/save', [DownloadController::class, 'saveDownload'])->name('download.save');
 Route::get('/pictures/search', [PictureController::class, 'search'])->name('pictures.search');
 
@@ -63,7 +64,8 @@ Route::get('/test', function () {
 //gallery
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
 
-//mem
+
+//home
 route::get('/', function () {    
     return view('home');
 } )->name('home');

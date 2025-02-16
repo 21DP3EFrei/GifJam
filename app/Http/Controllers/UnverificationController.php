@@ -10,7 +10,7 @@ class UnverificationController extends Controller
     public function index()
     {
         $approvedMedia = Media::where('Status', 1)->get();
-        return view('unverification.index', compact('approvedMems'));
+        return view('unverification.index', compact('approvedMedia'));
     }
     
     public function unverify(Request $request, Media $media)

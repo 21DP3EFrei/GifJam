@@ -1,27 +1,28 @@
 @extends('layout')
+
 @section('title', $media->Nosaukums . ' Preview')
-@section('header', 'Upload')
+
+@section('header')
+    <button class="border rounded w-24 h-10 text-lg transition ease-in hover:bg-blue-500" onclick="history.back()">← Go Back</button>
+@endsection
+
 @section('content')
+
 <div class="container">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <h1>{{ $media->Nosaukums }} Info</h1>
+            <div class="col-md-6 mt-2">
+                <h1>{{ $media->Nosaukums }} info</h1>
                 <form>
                     <div class="mb-3">
-                        <label for="name" class="form-label"><u>Name</u></label>
-                        <p class="form-control">{{ $media->Nosaukums }}</p>
+                        <p>{{ $media->Apraksts }}</p>
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label"><u>Description</u></label>
-                        <p class="form-control">{{ $media->Apraksts }}</p>
-                    </div>
-                    <div class="mb-3">
-                        <label for="author" class="form-label"><u>Author</u></label>
+                        <label for="author" class="form-label">Author</label>
                         <p class="form-control">{{ $media->Autors }}</p>
                     </div>
                     <div class="mb-3">
-                        <label for="copyright" class="form-label"><u>Copyright</u></label>
+                        <label for="copyright" class="form-label">Copyright</label>
                         <p class="form-control">{{ $media->Autortiesibas ? 'Yes' : 'No' }}</p>
                     </div>
                 </form>
@@ -30,8 +31,8 @@
                     <button type="submit" class="btn btn-primary" style="margin-bottom: 50px;">Download</button>
                 </form>
             </div>
-            <div class="col-md-6">
-                <img src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}" class="img-fluid">
+            <div class="col-md-6 align-middle items-center flex object-cover">
+                <img src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}"  class="cursor-pointer" onclick="this.classList.toggle('fixed'); this.classList.toggle('inset-0'); this.classList.toggle('w-full'); this.classList.toggle('h-full'); this.classList.toggle('object-contain'); this.classList.toggle('z-50'); this.classList.toggle('bg-black');"/>
             </div>
         </div>
     </div>
