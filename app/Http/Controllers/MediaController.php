@@ -8,13 +8,15 @@ use Illuminate\Http\Response;
 use App\Models\Kategorija;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use app\Models\User;
+use Auth;
 
 class MediaController extends Controller
 {
     public function index()
     {
         $medias = Media::all();
-        return view('mem.index', compact('mems'));
+        return view('media.index', compact('media'));
     }
     public function upload()
     {
@@ -30,7 +32,7 @@ class MediaController extends Controller
             'author' => 'required|string',
             'copyright' => 'required|string|in:Yes,No',
             'category_id' => 'required|exists:kategorija,K_ID', // Ensure the selected category exists
-            'uploadFile' => 'required|image|mimes:png,jpeg,webp,gif|max:100000', // Validate uploaded image with specific formats
+            'uploadFile' => 'required|image|mimes:png,jpeg,webp,gif|max:1000000', // Validate uploaded image with specific formats
         ]);
     
         // Store the uploaded image file
@@ -46,14 +48,20 @@ class MediaController extends Controller
         $media->Autors = $request->author;
         $media->Autortiesibas = ($request->copyright == 'Yes') ? 1 : 0;
         $media->Status = 0; // Set the default status to unpublished
-        $media->K_ID = $request->category_id;
+        $media->Lietotajs = Auth::id();
         $media->save();
+
+        $categories = $request->category_id;
+        $media->kategorijas()->attach($categories);
     
         // Return a success message
         return back()->with('success', 'File uploaded successfully and awaiting review.');
     }
     public function verify(Request $request, Media $media)
 {
+    $categories = Kategorija::all();
+    
+
     // Validate the request
     $request->validate([
         'status' => 'required|boolean', // Status should be either true (approved) or false (rejected)
@@ -64,20 +72,12 @@ class MediaController extends Controller
         'Status' => $request->status ? 1 : 0, // Convert boolean value to integer (1 for approved, 0 for rejected)
     ]);
 
+    
     // Redirect back to the verification index page with a success message
     return Redirect::route('verification.index')->with('success', 'File verification status updated successfully.');
 }
 public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    public function skanas()
-    {
-        return $this->hasOne(SkanasController::class);
-    }
-    public function muzika()
-    {
-        return $this->hasOne(MuzikaController::class);
     }
 }

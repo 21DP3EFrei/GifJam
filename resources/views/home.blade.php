@@ -71,9 +71,17 @@
     <!-- Footer -->
     <footer class="bg-gray-900 mt-16 py-4 text-center text-gray-400">
         <div class="container mx-auto">
-            © 2024 GifJam
+            © <?php echo date("Y"); ?> GifJam
         </div>
     </footer>
 </body>
+<style>
+    .btn-outline{
+        color: blue !important;
+    }
+    .btn-outline:hover{
+        background-color: #005081 !important;
+        color:azure !important; 
+    }
+</style>
 </html>
-
