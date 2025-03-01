@@ -7,7 +7,6 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UnverificationController;
 use App\Http\Controllers\PictureController;
-use app\http\Controllers\DownloadController;
 use app\http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
@@ -41,7 +40,6 @@ Route::post('/unverify/{media}', [UnverificationController::class, 'unverify'])-
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
 Route::get('/pictures/{media}', [PictureController::class, 'show'])->name('pictures.show');
 Route::get('/pictures/download/{media}', [PictureController::class, 'download'])->name('pictures.download');
-Route::post('/download/save', [DownloadController::class, 'saveDownload'])->name('download.save');
 Route::get('/pictures/search', [PictureController::class, 'search'])->name('pictures.search');
 
 
@@ -63,7 +61,6 @@ Route::get('/test', function () {
 
 //gallery
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
-
 
 //home
 route::get('/', function () {    
