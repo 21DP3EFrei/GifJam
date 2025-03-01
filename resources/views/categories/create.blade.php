@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('title', 'Create Categories')
-@section('header', 'Categories')
 @section('content')
 <div class="container">
         <h1>Create Category</h1>

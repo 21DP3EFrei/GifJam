@@ -1,15 +1,14 @@
 @extends('layout')
 @section('title', 'Gallery')
-@section('header', 'Gallery')
-
 @section('content')
 <div class="container">
     <!-- Filter Form -->
-    <form method="GET" id="filterForm">
+    <form method="POST" id="filterForm">
+        @csrf
         <div class="row mb-2">
             <div class="col-md-3">
-                <label for="category_id">Category</label>
-                <select name="category_id" class="form-select" onchange="document.getElementById('filterForm').submit()">
+                <label for="category">Category</label>
+                <select name="category" class="form-select" id="category">
                     <option value="">All Categories</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->K_ID }}" {{ request('category_id') == $category->K_ID ? 'selected' : '' }}>
@@ -20,9 +19,9 @@
             </div>
             
             <div class="col-md-3">
-                <label for="subcategory_id">Subcategory</label>
-                <select name="subcategory_id" class="form-select" onchange="document.getElementById('filterForm').submit()">
-                    <option value="">All Subcategories</option>
+                <label for="subcategory">Subcategory</label>
+                <select name="subcategory" class="form-select" id="subcategory">
+                    <option value="">All Subcategories</option> <!-- Default option -->
                     @foreach ($subcategories as $subcategory)
                         <option value="{{ $subcategory->K_ID }}" {{ request('subcategory_id') == $subcategory->K_ID ? 'selected' : '' }}>
                             {{ $subcategory->Nosaukums }}
@@ -30,6 +29,7 @@
                     @endforeach
                 </select>
             </div>
+            
             <div class="col-md-3">
                 <label for="sort_by">Sort By</label>
                 <select class="form-select form-select-sm" id="sort_by" name="sort_by" onchange="document.getElementById('filterForm').submit()">
@@ -53,47 +53,87 @@
 
     <!-- Display Pictures -->
     <div class="row mt-3">
-        @foreach($pictures as $picture)
-            <div class="col-md-3 mb-3">
-                <div class="card h-full">
-                    <a href="{{ route('pictures.show', $picture) }}">
-                        <img src="{{ asset('storage/' . $picture->Fails) }}" class="card-img-top object-contain w-full h-60" alt="{{ $picture->Nosaukums }}">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $picture->Nosaukums }}</h5>
-                        <p class="card-text text-gray-500">{{ $picture->Apraksts }}</p>
+        @if ($pictures->isEmpty())
+        <div class="col-md-3 mb-3 flex items-center justify-center">
+            <h1 class="text-white text-4xl font-bold">No media here yet...</h1>
+        </div>        
+        @else
+            @foreach($pictures as $picture)
+                <div class="col-md-3 mb-3">
+                    <div class="card h-80">
+                        <a href="{{ route('pictures.show', $picture) }}">
+                            <img src="{{ asset('storage/' . $picture->Fails) }}" class="card-img-top object-contain w-full h-60" alt="{{ $picture->Nosaukums }}">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $picture->Nosaukums }}</h5>
+                            <p class="card-text text-gray-500">{{ $picture->Apraksts }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
-    </div>    
-    
+            @endforeach
+        @endif
+    </div>
+       
 @endsection
 
-@push('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-/* document.getElementById('searchInput').addEventListener('input', function() {
-    let searchValue = this.value.trim();
-    if (searchValue === '') {
-        document.getElementById('autosuggestDropdown').innerHTML = '';
-        return;
-    }
+$(document).ready(function() {
+    // Handle category change
+    $('#category').on('change', function(){
+        var category_id = $('#category').val();
 
-    // Make AJAX request to fetch autosuggestions
-    fetch('{{ route("pictures.search") }}?search=' + searchValue)
-        .then(response => response.json())
-        .then(data => {
-            let suggestionsHTML = '';
-            data.forEach(suggestion => {
-                suggestionsHTML += `<a class="dropdown-item" href="#">${suggestion.Nosaukums}</a>`;
+        if (category_id) {
+            var url = "{{ route('getSubcategories', ['category_id' => ':category_id']) }}";
+            url = url.replace(':category_id', category_id);
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function(data) {
+                    if (data.success) {
+                        var subcategory_data = data.data;
+                        $('#subcategory').html('<option value="">All Subcategories</option>'); // Reset to default
+                        $.each(subcategory_data, function(key, value) {
+                            $('#subcategory').append('<option value="'+value.K_ID+'">'+value.Nosaukums+'</option>');
+                        });
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function() {
+                    alert('Failed to load subcategories.');
+                }
             });
-            document.getElementById('autosuggestDropdown').innerHTML = suggestionsHTML;
-        })
-        .catch(error => {
-            console.error('Error fetching autosuggestions:', error);
-        });
-}); */
-    // Fetch subcategories for the selected category
+        } else {
+            // Reset subcategory dropdown if no category selected
+            $('#subcategory').html('<option value="">All Subcategories</option>');
+        }
+    });
 
+    // Handle changes in filters to apply filtering via AJAX
+    $('#category, #subcategory, #searchInput, #sort_by').on('change keyup', function() {
+        var category_id = $('#category').val();
+        var subcategory_id = $('#subcategory').val();
+        var search = $('#searchInput').val();
+        var sort_by = $('#sort_by').val();
+
+        $.ajax({
+            url: "{{ route('pictures.index') }}",
+            type: "GET",
+            data: {
+                category_id: category_id,
+                subcategory_id: subcategory_id,
+                search: search,
+                sort_by: sort_by
+            },
+            success: function(data) {
+                $('.row.mt-3').html(data.data); // Update the media content dynamically
+            },
+            error: function() {
+                alert('Error loading media.');
+            }
+        });
+    });
+});
 </script>
-@endpush

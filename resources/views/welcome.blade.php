@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title', 'Welcome')
-@section('header', 'Welcome')
+{{-- @section('header', 'Welcome') --}}
 @section('content')
 <div class="container">
     <h1>Welcome</h1>

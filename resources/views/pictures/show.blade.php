@@ -1,15 +1,14 @@
 @extends('layout')
 
 @section('title', $media->Nosaukums . ' Preview')
-
-@section('header')
-    <button class="border rounded w-24 h-10 text-lg transition ease-in hover:bg-blue-500" onclick="history.back()">← Go Back</button>
-@endsection
-
 @section('content')
-
+<x-custom-header name="custom-header">
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-white dark:bg-blue-900 leading-tight">
+        <button class="hover:border rounded w-24 h-10 text-lg transition ease-in hover:bg-blue-500" onclick="history.back()">← Go Back</button>
+    </h2>
+</x-custom-header>
 <div class="container">
-    <div class="container">
+       <div class="container">
         <div class="row">
             <div class="col-md-6 mt-2">
                 <h1>{{ $media->Nosaukums }} info</h1>

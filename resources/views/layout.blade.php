@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body class="min-h-screen flex flex-col">
-    <!-- Header -->
+   <!-- old header -->
     <x-app-layout class="flex-grow">
-        <x-slot name="header">
+{{--         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-white dark:bg-blue-900 leading-tight">
                 @yield('header')
             </h2>
-        </x-slot>
+        </x-slot> --}}
+
 
         <!-- Content -->
         <div class="py-12 background flex-grow display-block min-h-screen dynamic-background" >
@@ -24,6 +25,8 @@
             </div>
         </div>
     </x-app-layout>
+    <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+    @stack('scripts') 
 </body>
 </html>
 

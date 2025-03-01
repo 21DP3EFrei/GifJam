@@ -4,13 +4,13 @@
 @section('header', 'Verify')
 @section('content')
 <div class="container">
-    <h1>Verify</h1>
+
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <form action="{{ route('unverification.index') }}" method="GET">
         @csrf
-        <button type="submit" class="btn btn-primary mb-2">Show Approved</button>
+        <button type="submit" class="btn btn-primary mt-2 mb-2">Show Approved</button>
     </form>
     <table class="table">
         <thead>
@@ -59,7 +59,9 @@
                     <img class="cursor-pointer" src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}" width="100" height="100" onclick="this.classList.toggle('fixed'); this.classList.toggle('inset-0'); this.classList.toggle('w-full'); this.classList.toggle('h-full'); this.classList.toggle('object-contain'); this.classList.toggle('z-50'); this.classList.toggle('bg-black');"/>               
                 </td>
                 <td>
-                    <a href="{{ asset('storage/' . $media->Fails) }}" download="{{ $media->Fails }}" class=" mt-2 underline decoration-slate-700"> ↓</a>
+                    <div class="border rounded-full w-9 h-9 flex justify-center items-center transition ease-in-out duration-300  hover:bg-yellow-500">
+                        <a href="{{ asset('storage/' . $media->Fails) }}" download="{{ $media->Fails }}" class="w-full h-full text-xl text-center hover:text-blue-200">↓</a>
+                    </div>
                 </td>
                     @if ($media->user)
                     <td class="text-center">{{ $media->user->name}}<br>(id: {{$media->user->id}})</td>

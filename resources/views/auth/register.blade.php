@@ -7,7 +7,7 @@
     <x-authentication-card>
     <x-slot name="logo">
     <a class="navbar-brand" href="{{ route('home') }}">
-    <img src="{{ asset('images/lugu.png') }}" alt="Logo">
+    <img class="h-10 w-14" src="{{ asset('images/gifjam.png') }}" alt="Logo">
     </a>
 </x-slot>
 

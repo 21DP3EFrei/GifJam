@@ -61,6 +61,8 @@ Route::get('/test', function () {
 
 //gallery
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
+Route::post('/pictures', [PictureController::class, 'index'])->name('pictures.index');
+Route::get('/get/subcategories/{category_id}', [PictureController::class, 'getSubcategories'])->name('getSubcategories');
 
 //home
 route::get('/', function () {    

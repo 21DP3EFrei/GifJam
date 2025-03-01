@@ -4,7 +4,6 @@
 @section('header', 'Unverify Memes')
 @section('content')
 <div class="container">
-    <h1>Unverify</h1>
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -12,16 +11,16 @@
     <table class="table">
         <form action="{{ route('verification.index') }}" method="GET">
             @csrf
-            <button type="submit" class="btn btn-primary mb-2">Show Pending</button>
+            <button type="submit" class="btn btn-primary mt-2 mb-2">Show Pending</button>
         </form>
         <thead>
             <tr class="text-center align-middle items-center">
                 <th>File Name</th>
                 <th>Description</th>
                 <th>Actions</th>
-                <th>Download</th>
                 <th>Category</th>
                 <th>Image</th>
+                <th></th> {{-- this is for donwload --}}
             </tr>
         </thead>
         <tbody>
@@ -39,9 +38,6 @@
                         <button type="submit"  class="bg-red-500 text-black px-4 py-2 rounded">Update</button>
                     </form>
                 </td>
-                <td class="items-center text-center">
-                    <a href="{{ asset('storage/' . $media->Fails) }}" download="{{ $media->Fails }}" class="btn btn-primary">Download</a>
-                </td>
                 <td>
                     @foreach($media->kategorijas as $category)
                         {{ $category->Nosaukums }}{{ !$loop->last ? ', ' : '' }}
@@ -49,6 +45,11 @@
                 </td>
                 <td>
                     <img class="cursor-pointer" src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}" width="100" height="100" onclick="this.classList.toggle('fixed'); this.classList.toggle('inset-0'); this.classList.toggle('w-full'); this.classList.toggle('h-full'); this.classList.toggle('object-contain'); this.classList.toggle('z-50'); this.classList.toggle('bg-black');"/>
+                </td>
+                <td>
+                    <div class="border rounded-full w-9 h-9 flex justify-center items-center transition ease-in-out duration-300  hover:bg-yellow-500">
+                        <a href="{{ asset('storage/' . $media->Fails) }}" download="{{ $media->Fails }}" class="w-full h-full text-xl text-center hover:text-blue-200">↓</a>
+                    </div>
                 </td>
             </tr>
             @endforeach

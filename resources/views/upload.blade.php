@@ -1,16 +1,15 @@
 @extends('layout')
 @section('title', 'Meme Upload')
-@section('header', 'Upload')
 @section('content')
 <div class="container">
-    <h1>Upload</h1>
+ 
     @if(session('success'))
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
         </div>
     @endif
 
-    <form method="POST" action="{{ route('upload.post') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('upload.post') }}" enctype="multipart/form-data" class="mt-2">
         @csrf
         <div class="mb-3">
             <label for="fileName" class="form-label">Name</label>
