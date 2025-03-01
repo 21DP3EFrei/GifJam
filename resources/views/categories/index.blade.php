@@ -1,11 +1,8 @@
 @extends('layout')
 
 @section('title', 'Categories')
-@section('header', 'Categories')
 @section('content')
 <div class="container">
-        <h1>Categories</h1>
-
         <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Create New Category</a>
         <a href="{{ route('subcategories.index') }}" class="btn btn-primary mb-3">Switch to Subcategories</a>
         <table class="table">

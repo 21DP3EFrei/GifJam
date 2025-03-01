@@ -1,6 +1,5 @@
 @extends('layout')
 @section('title', 'Image')
-@section('header', 'Gallery')
 @section('content')
 <div class="container">
     <h1>Info</h1>

@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <a class="navbar-brand" href="http://127.0.0.1:5500/api/resources/views/home%20page/Home.html">
-                <img src="http://127.0.0.1:5500/api/resources/views/home%20page/images/emoji-thinking.gif" alt="Logo" style="width: 100px; height: auto;">
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img class="h-10 w-14" src="{{ asset('images/gifjam.png') }}" alt="Logo">
             </a>
         </x-slot>
 

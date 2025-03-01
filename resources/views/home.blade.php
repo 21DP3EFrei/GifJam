@@ -12,12 +12,15 @@
     <nav class="navbar bg-gray-900 shadow-lg">
         <div class="container mx-auto flex items-center justify-between px-4 py-2">
             <a href="" class="flex items-center space-x-3 text-primary">
-                <img src="{{ asset('images/lugu.png') }}" alt="Logo" class="h-12">
-                <span class="text-2xl font-bold">GifJam</span>
+                <img class="h-10 w-14" src="{{ asset('images/gifjam.png') }}" alt="Logo" class="h-12">
             </a>
             <div>
+            @if (auth()->check()) 
+                <a href="/welcome" class="btn btn-primary mr-2">Welcome</a>
+            @else
                 <a href="/login" class="btn btn-primary mr-2">Log in</a>
                 <a href="/register" class="btn btn-outline">Register</a>
+            @endif
             </div>
         </div>
     </nav>
@@ -61,10 +64,6 @@
             <h2 class="text-2xl text-primary font-semibold">What are you waiting for?</h2>
             <p class="mt-2">Join GifJam now to create, share, and enjoy a world of content with your community!</p>
             <a href="/register" class="btn btn-lg btn-success mt-4">Join Now</a>
-            <div class="tenor-gif-embed mx-auto mt-2" data-postid="8836389" data-share-method="host" data-aspect-ratio="1" data-width="20%">
-                <a href="https://tenor.com/view/mario-gif-8836389">Mario GIF</a>
-            </div>
-            <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
         </div>
     </div>
 

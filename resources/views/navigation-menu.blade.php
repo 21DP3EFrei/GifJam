@@ -1,12 +1,12 @@
 <!-- Navigation -->
-<nav x-data="{ open: false }" class="navbar border-b border-gray-300 outline-black border-2" style="display: block;" aria-label="Main Navigation">
+<nav x-data="{ open: false }" class="navbar border-b border-gray-300 outline-black border-2 dark:bg-gray-800" style="display: block;" aria-label="Main Navigation">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
                         <a class="navbar-brand" href="{{ route('welcome')}}">
-                        <img src="{{ asset('images/lugu.png') }}" alt="Logo">
+                        <img class="h-10 w-14" src="{{ asset('images/gifjam.png') }}" alt="Logo">
                         </a>
                     </div>
 
