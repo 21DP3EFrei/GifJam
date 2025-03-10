@@ -36,7 +36,7 @@
         <p class="text-lg mt-4">Explore and share your favorite memes, gifs, music, and sound effects.</p>
 
         <!-- Info Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-1 mt-12">
             <!-- Memes + Gifs Card -->
             <div class="card bg-gray-700 shadow-xl p-6 mx-4">
                 <img src="{{ asset('lol.png') }}" class="w-12 h-12 mx-auto mb-4" alt="Memes Icon">

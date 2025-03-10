@@ -52,7 +52,7 @@
     </form>
 
     <!-- Display Pictures -->
-    <div class="row mt-3">
+    <div class="row mt-3 ">
         @if ($pictures->isEmpty())
         <div class="col-md-3 mb-3 flex items-center justify-center">
             <h1 class="text-white text-4xl font-bold">No media here yet...</h1>
