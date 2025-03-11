@@ -1,8 +1,12 @@
 @extends('layout')
 
 @section('title', 'Unverify')
-@section('header', 'Unverify Memes')
 @section('content')
+<x-custom-header name="custom-header">
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-white dark:bg-blue-900 leading-tight">
+       Unverify
+    </h2>
+</x-custom-header>
 <div class="container">
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -29,7 +33,7 @@
                 <td>{{ $media->Nosaukums }}</td>
                 <td>{{ $media->Apraksts }}</td>
                 <td>
-                    <form action="{{ route('unverification.unverify', $media) }}" method="POST">
+                    <form action="{{ route('unverification.mediaunverify', $media) }}" method="POST">
                         @csrf
                         <div class="form-check form-check-inline">
                             <input class="form-check-input cursor-pointer" type="radio" name="status" id="unapprove{{ $media->id }}" value="1">

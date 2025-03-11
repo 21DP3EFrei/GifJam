@@ -19,7 +19,7 @@
         <!-- Content -->
         <div class="py-12 background flex-grow display-block min-h-screen dynamic-background" >
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="header overflow-hidden shadow-xl sm:rounded-lg dark:text-white">
+                <div class="header overflow-hidden shadow-xl sm:rounded-lg dark:text-white dark:bg-blue-950">
                     @yield('content')
                 </div>
             </div>
@@ -42,7 +42,7 @@ body {
 
         @media (prefers-color-scheme: dark) {
             .dynamic-background {
-                background-color: #02315f; /* Dark mode background */
+                background-color: #001729; /* Dark mode background */
             }
         }
 

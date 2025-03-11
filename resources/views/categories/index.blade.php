@@ -3,8 +3,8 @@
 @section('title', 'Categories')
 @section('content')
 <div class="container">
-        <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Create New Category</a>
-        <a href="{{ route('subcategories.index') }}" class="btn btn-primary mb-3">Switch to Subcategories</a>
+        <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3 mt-3">Create New Category</a>
+        <a href="{{ route('subcategories.index') }}" class="btn btn-primary mb-3 mt-3">Switch to Subcategories</a>
         <table class="table">
             <thead>
                 <tr class="text-center">

@@ -16,7 +16,7 @@ class VerificationController extends Controller
         return view('verification.index', compact('unverifiedMems', 'subcategories')); // Pass subcategories to the view
     }
     
-    public function verify(Request $request, Media $media)
+    public function mediaverify(Request $request, Media $media)
     {
         // Validate the request
         $request->validate([

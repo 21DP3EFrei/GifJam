@@ -1,10 +1,13 @@
 @extends('layout')
 
 @section('title', 'Verification')
-@section('header', 'Verify')
 @section('content')
+<x-custom-header name="custom-header">
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-white dark:bg-blue-900 leading-tight">
+       Verify
+    </h2>
+</x-custom-header>
 <div class="container">
-
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -32,8 +35,7 @@
                 <td>{{ $media->Apraksts }}</td>
                 {{-- <td>{{ $media->Status == 0 ? 'Pending' : ($media->Status == 1 ? 'Approved' : 'Rejected') }}</td> --}}
                 <td>
-                    <form action="{{ route('verification.verify', $media) }}" method="POST" class="d-flex align-items-center me-3">
-                        @csrf
+                    <form action="{{ route('verification.mediaverify', $media) }}" method="POST" class="d-flex align-items-center me-3">                        @csrf
                         @method('POST') 
                         <div class="border border-black border-spacing-5"> 
                         <div class="form-check form-check-inline ">

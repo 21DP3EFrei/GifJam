@@ -1,10 +1,8 @@
-<div class="flex items-center justify-center text-center">
 @if ($pictures->isEmpty())
-<div class="col-md-3 mb-3 flex items-center justify-center text-center">
-    <h1 class="text-white text-4xl font-bold">No media here yet...</h1>
-</div>  
+<div class="mb-3">
+    <h1 class="text-white text-4xl font-bold text-center">No media here yet...</h1>
+</div>
 @else
-<div>
 <div class="row mt-3">
         @foreach($pictures as $picture)
             <div class="col-md-3 mb-3">

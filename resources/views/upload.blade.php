@@ -2,13 +2,11 @@
 @section('title', 'Meme Upload')
 @section('content')
 <div class="container">
- 
     @if(session('success'))
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
         </div>
     @endif
-
     <form method="POST" action="{{ route('upload.post') }}" enctype="multipart/form-data" class="mt-2">
         @csrf
         <div class="mb-3">
