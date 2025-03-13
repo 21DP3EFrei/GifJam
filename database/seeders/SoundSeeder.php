@@ -13,6 +13,6 @@ class SoundSeeder extends Seeder
      */
     public function run(): void
     {
-        Skana::factory(3)->create();
+        Skana::factory(2)->create();
     }
 }

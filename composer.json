@@ -10,8 +10,10 @@
         "laravel/framework": "^11.0",
         "laravel/jetstream": "^5.0",
         "laravel/sanctum": "^4.0",
+        "laravel/socialite": "^5.18",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4",
+        "socialiteproviders/google": "^4.1",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {

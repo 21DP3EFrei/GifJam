@@ -13,6 +13,6 @@ class MusicSeeder extends Seeder
      */
     public function run(): void
     {
-        Music::factory(3)->create();
+        Music::factory(2)->create();
     }
 }

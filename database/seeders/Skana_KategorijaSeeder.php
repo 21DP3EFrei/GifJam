@@ -13,6 +13,6 @@ class Skana_kategorijaSeeder extends Seeder
      */
     public function run(): void
     {
-        Skana_kategorija::factory(3)->create();
+        Skana_kategorija::factory(2)->create();
     }
 }

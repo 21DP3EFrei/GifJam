@@ -35,9 +35,9 @@
                 <td>
                     <form action="{{ route('unverification.mediaunverify', $media) }}" method="POST">
                         @csrf
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input cursor-pointer" type="radio" name="status" id="unapprove{{ $media->id }}" value="1">
-                            <label class="form-check-label" for="unapprove{{ $media->id }}">Unapprove</label>
+                        <div class="flex items-center">
+                            <input class="radio bg-red-100 border-red-700 checked:bg-red-700 checked:text-red-600 checked:border-red-600 cursor-pointer" type="radio" name="status" id="unapprove{{ $media->id }}" value="1">
+                            <label class="ml-1" for="unapprove{{ $media->id }}">Unapprove</label>
                         </div>
                         <button type="submit"  class="bg-red-500 text-black px-4 py-2 rounded">Update</button>
                     </form>

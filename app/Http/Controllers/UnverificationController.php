@@ -13,7 +13,7 @@ class UnverificationController extends Controller
         return view('unverification.index', compact('approvedMedia'));
     }
     
-    public function unverify(Request $request, Media $media)
+    public function mediaunverify(Request $request, Media $media)
     {
         // Validate the request
         $request->validate([

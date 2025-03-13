@@ -63,5 +63,15 @@
                 </x-button>
             </div>
         </form>
+        <h1 class="text-gray-400 opacity-45">or sign up with:</h1>
+        <a href="{{ route('auth.google.redirect') }}" class="flex justify-center items-center space-x-4 text-center">
+            <div class=" py-1 border-black border-2 bg-transparent  dark:bg-gray-700  flex items-center rounded-full">
+                <img class="h-auto w-auto max-h-10 max-w-12 rounded ml-1 mr-1" src="{{ asset('images/Google.png') }}" alt="google login">
+                <h1 class="ml-1 mr-2 dark:text-gray-300 font-bold">Sign up with Google</h1>
+            </div>
+        </a>
+        
+        
+        
     </x-authentication-card>
 </x-guest-layout>

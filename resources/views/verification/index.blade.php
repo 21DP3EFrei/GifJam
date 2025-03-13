@@ -35,19 +35,18 @@
                 <td>{{ $media->Apraksts }}</td>
                 {{-- <td>{{ $media->Status == 0 ? 'Pending' : ($media->Status == 1 ? 'Approved' : 'Rejected') }}</td> --}}
                 <td>
-                    <form action="{{ route('verification.mediaverify', $media) }}" method="POST" class="d-flex align-items-center me-3">                        @csrf
+                    <form action="{{ route('verification.mediaverify', $media) }}" method="POST" class="d-flex align-items-center me-3">
+                        @csrf
                         @method('POST') 
-                        <div class="border border-black border-spacing-5"> 
-                        <div class="form-check form-check-inline ">
-                            <input class="form-check-input cursor-pointer" type="radio" name="status" id="approve{{ $media->id }}" value="1">
-                            <label class="form-check-label text-green-400 " for="approve{{ $media->id }}">
-                                {{ $media->Status == 0 ? 'Approve' : 'Re-Approve' }}
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input cursor-pointer" type="radio" name="status" id="reject{{ $media->id }}" value="0">
-                            <label class="form-check-label text-red-400 " for="reject{{ $media->id }}">Reject</label>
-                        </div>
+                        <div class="flex flex-wrap">
+                            <div class="flex items-center">
+                                <input class="radio bg-green-100 border-green-700 checked:bg-green-700 checked:text-green-600 checked:border-green-600 cursor-pointer" type="radio" name="status" id="approve{{ $media->id }}" value="1">
+                                <label class="ml-1 text-green-400 cursor-pointer" for="approve{{ $media->id }}">Approve</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input class="radio bg-red-100 border-red-700 checked:bg-red-700 checked:text-red-600 checked:border-red-600 cursor-pointer" type="radio" name="status" id="reject{{ $media->id }}" value="0">
+                                <label class="ml-1 text-red-400 cursor-pointer" for="reject{{ $media->id }}"> Reject</label>
+                            </div>
                         </div>
                         <button type="submit" class="bg-green-400 text-black px-4 py-2 rounded" style="margin-left: 10px; align-top ">Submit</button>
                     </form>
