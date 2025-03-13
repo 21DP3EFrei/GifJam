@@ -63,7 +63,8 @@
         <div class="card bg-base-200 shadow-lg mt-12 p-8 text-center">
             <h2 class="text-2xl text-primary font-semibold">What are you waiting for?</h2>
             <p class="mt-2">Join GifJam now to create, share, and enjoy a world of content with your community!</p>
-            <a href="/register" class="btn btn-lg btn-success mt-4">Join Now</a>
+            <img src="{{ asset('banan.gif') }}" class="w-12 h-12 mx-auto" alt="Banana">
+            <a href="/register" class="btn btn-lg btn-success">Join Now</a>
         </div>
     </div>
 

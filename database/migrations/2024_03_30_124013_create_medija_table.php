@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enum\UploadType;
 
 return new class extends Migration
 {
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->boolean('Status')->default(0);
             $table->string('Fails', 300)->nullable();
             $table->enum('Failu_tips', ['.png', '.jpg', '.gif', '.jpeg','.mp3', '.FLAC', '.WAV']);
-            $table->enum('Augsupielades_tips', ['meme', 'skana', 'muzika']);
+            $table->enum('Augsupielades_tips', array_column(UploadType::cases(), 'value'));
             $table->string('Autors', 100);
             $table->boolean('Autortiesibas');
             $table->unsignedBigInteger('Lietotajs')->nullable();
