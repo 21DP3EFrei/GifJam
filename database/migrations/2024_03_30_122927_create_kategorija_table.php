@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('kategorija', function (Blueprint $table) {
             $table->id('K_ID');
             $table->string('Nosaukums', 100);
-            $table->string('Apraksts', 100)->nullable();
+            $table->string('Apraksts', 300)->nullable();
             $table->unsignedBigInteger('Apakskategorija')->nullable();
             $table->foreign('Apakskategorija')->references('K_ID')->on('kategorija')->onDelete('cascade');
             $table->timestamps();

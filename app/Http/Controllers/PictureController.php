@@ -11,13 +11,14 @@ class PictureController extends Controller
 {
     public function index(Request $request)
     {
+        // Fetch categories and subcategories
         $categories = Kategorija::whereNull('Apakskategorija')->get();
         $subcategories = Kategorija::whereNotNull('Apakskategorija')->get();
-        
+    
         // Initialize query for media
         $query = Media::where('Status', 1); // Ensure only verified media is fetched
     
-        // Handle category and subcategory filters
+        // Apply filters (category, subcategory, search, sort_by)
         if ($request->filled('category_id')) {
             $categoryId = $request->category_id;
             $allSubCategoryIds = $this->getSubcategoryIds($categoryId);
@@ -34,12 +35,10 @@ class PictureController extends Controller
             });
         }
     
-        // Apply search filter if search term is provided
         if ($request->filled('search')) {
             $query->where('Nosaukums', 'like', '%' . $request->input('search') . '%');
         }
     
-        // Apply sorting based on the selected option
         switch ($request->sort_by) {
             case 'newest':
                 $query->orderByDesc('Me_ID');
@@ -51,23 +50,26 @@ class PictureController extends Controller
                 $query->orderBy('Autors');
                 break;
             case 'oldest':
+                $query->orderBy('Me_ID');
+                break;
             default:
                 $query->orderBy('Me_ID');
                 break;
         }
     
-        // Fetch the filtered and sorted media
         $pictures = $query->get();
     
-        // If the request is via AJAX, return only the media section (partial view)
+        // Check if the request is via AJAX
         if ($request->ajax()) {
-            return response()->json(['success' => true, 'data' => view('pictures.media', compact('pictures'))->render()]);
+            return response()->json(['success' => true, 'data' => view('pictures.media', compact('pictures'))->render()])
+                ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+                ->header('Pragma', 'no-cache')
+                ->header('Expires', '0');
         }
     
-        // Return the full view
+        // Return the full view for non-AJAX requests
         return view('pictures.index', compact('categories', 'subcategories', 'pictures'));
     }
-    
     // Recursive method to get all subcategory IDs, including nested subcategories
     public function getSubcategoryIds($categoryId)
     {

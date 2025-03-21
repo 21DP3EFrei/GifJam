@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('zanrs', function (Blueprint $table) {
             $table->id('Z_ID');
-            $table->string('Nosaukums');
-            $table->string('Apraksts');
+            $table->string('Nosaukums', 100);
+            $table->string('Apraksts', 300)->nullable();
             $table->unsignedBigInteger('Apakszanrs')->nullable();
             $table->foreign('Apakszanrs')->references('Z_ID')->on('zanrs')->onDelete('cascade');
             $table->timestamps();

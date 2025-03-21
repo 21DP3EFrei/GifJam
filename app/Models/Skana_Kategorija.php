@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Skana_kategorija extends Model
 {
-    use HasFactory;
-
     protected $table = 'skanas_kategorija';
     protected $primaryKey = 'SKat_ID';
-    protected $fillable = ['Nosaukums', 'Apraksts'];
+    protected $fillable = ['Nosaukums', 'Apraksts', 'Apakskategorija'];
     public function subcategory()
     {
         return $this->hasMany(Skana_kategorija::class, 'Apakskategorija', 'SKat_ID');
@@ -25,4 +23,6 @@ class Skana_kategorija extends Model
     {
         return $this->belongsToMany(Skana::class, 'skana_un_kategorija', 'Kategorija', 'Skana');
     }
-    }
+
+use HasFactory;
+}

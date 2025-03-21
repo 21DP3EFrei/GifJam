@@ -3,21 +3,48 @@
 @section('title', 'Welcome')
 {{-- @section('header', 'Welcome') --}}
 @section('content')
-<div class="container">
-    <h1>Welcome</h1>
+<div class="container ml-8">
+    <h1 class="h1">Welcome</h1>
     @if (auth()->check())
         <p>Hello, {{ auth()->user()->name }}!</p>
         <p>You are logged in as a {{ auth()->user()->usertype }}.</p> <!-- Display user type -->
     @else
         <p>Please log in to access this area.</p>
     @endif
+    <h1 class="h1">Time left:</h1>
+<h2 class="h2" id="demo"></h2>
 </div>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-</head>
-</html>
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("May 25, 2025 23:59:99").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
 @endsection
 
 

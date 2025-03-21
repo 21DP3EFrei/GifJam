@@ -7,14 +7,11 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UnverificationController;
 use App\Http\Controllers\PictureController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Kategorija;
-use Illuminate\Http\Request;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\SoundCategoryController;
 
 Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
@@ -22,6 +19,7 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->
 Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['admin'])->group(function () {
 //Admin routes
+
 // Category routes
 Route::get('/categories', [KategorijaController::class, 'index'])->name('categories.index');
 Route::get('/categories/create', [KategorijaController::class, 'create'])->name('categories.create');
@@ -29,6 +27,22 @@ Route::post('/categories', [KategorijaController::class, 'store'])->name('catego
 Route::get('categories/{categories}/edit', [KategorijaController::class, 'edit'])->name('categories.edit');
 Route::put('/categories/{categories}', [KategorijaController::class, 'update'])->name('categories.update');
 Route::delete('/categories/{categories}', [KategorijaController::class, 'destroy'])->name('categories.destroy');
+
+//Sound category routes
+Route::get('/sound-categories', [SoundCategoryController::class, 'index'])->name('sound-categories.index');
+Route::get('/sound-categories/create', [SoundCategoryController::class, 'create'])->name('sound-categories.create');
+Route::post('/sound-categories', [SoundCategoryController::class, 'store'])->name('sound-categories.store');
+Route::get('sound-categories/{SoundCategory}/edit', [SoundCategoryController::class, 'edit'])->name('sound-categories.edit');
+Route::put('/sound-categories/{SoundCategory}', [SoundCategoryController::class, 'update'])->name('sound-categories.update');
+Route::delete('/sound-categories/{SoundCategory}', [SoundCategoryController::class, 'destroy'])->name('sound-categories.destroy');
+
+//Genre routes
+Route::get('/genre', [GenreController::class, 'index'])->name('genre.index');
+Route::get('/genre/create', [GenreController::class, 'create'])->name('genre.create');
+Route::post('/genre', [GenreController::class, 'store'])->name('genre.store');
+Route::get('genre/{genre}/edit', [GenreController::class, 'edit'])->name('genre.edit');
+Route::put('/genre/{genre}', [GenreController::class, 'update'])->name('genre.update');
+Route::delete('/genre/{genre}', [GenreController::class, 'destroy'])->name('genre.destroy');
 
 //Verify routes 
 Route::get('/verify', [VerificationController::class, 'index'])->name('verification.index');
@@ -53,9 +67,11 @@ Route::get('/fetch-subcategories/{categoryId}', [SubCategoryController::class, '
 
 Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
+Route::middleware(['realCategory'])->group(function () {
 // Upload routes
 Route::get('/upload', [MediaController::class, 'upload'])->name('upload');
 Route::post('/upload', [MediaController::class, 'uploadPost'])->name('upload.post');
+});
 
 // gallery
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
@@ -68,6 +84,9 @@ Route::get('/pictures/search', [PictureController::class, 'search'])->name('pict
 
 //Welcome page
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
+
+//error page
+Route::get('/error', function () {return view('error');})->name('error');
 }); //end of auth
 
 
@@ -75,6 +94,11 @@ Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+//random
+Route::get('/crazy', function () {
+    return response()->file(public_path('crazy.mp4'));
+})->name('crazy');
 
 // Test route
 Route::get('/test', function () {

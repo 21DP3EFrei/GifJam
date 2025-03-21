@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('Apraksts', 200)->nullable();
             $table->boolean('Status')->default(0);
             $table->string('Fails', 300)->nullable();
-            $table->enum('Failu_tips', ['.png', '.jpg', '.gif', '.jpeg','.mp3', '.FLAC', '.WAV']);
+            $table->enum('Failu_tips', ['.png', '.jpg', '.gif', '.jpeg','.mp3', '.FLAC', '.WAV', '.webp']);
             $table->enum('Augsupielades_tips', array_column(UploadType::cases(), 'value'));
             $table->string('Autors', 100);
             $table->boolean('Autortiesibas');
