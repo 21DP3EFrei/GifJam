@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
             'admin' => \App\Http\Middleware\Admin::class,
+            'realCategory' => \App\Http\Middleware\CategoryExists::class,
         ],
 
         'api' => [

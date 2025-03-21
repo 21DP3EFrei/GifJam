@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Kategorija extends Model
 {
-    protected $fillable = ['Nosaukums', 'Apraksts', 'Apakskategorija']; 
     protected $table = 'kategorija'; 
     protected $primaryKey = 'K_ID';
+    protected $fillable = ['Nosaukums', 'Apraksts', 'Apakskategorija']; 
 
     // This sets up the relationship for child categories
     public function subcategories()

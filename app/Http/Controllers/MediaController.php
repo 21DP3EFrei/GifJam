@@ -9,7 +9,7 @@ use App\Models\Kategorija;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use app\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class MediaController extends Controller
 {
@@ -32,8 +32,11 @@ class MediaController extends Controller
             'author' => 'required|string',
             'copyright' => 'required|string|in:Yes,No',
             'category_id' => 'required|exists:kategorija,K_ID', // Ensure the selected category exists
-            'uploadFile' => 'required|image|mimes:png,jpeg,webp,gif|max:1000000', // Validate uploaded image with specific formats
+            'uploadFile' => 'required|mimes:png,jpeg,webp,gif,jpg|max:1000000',
+        ], [
+            'uploadFile.mimes' => 'Only image and GIF files are allowed.',
         ]);
+
     
         // Store the uploaded image file
         $image = $request->file('uploadFile');

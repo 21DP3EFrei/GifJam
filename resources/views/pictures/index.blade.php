@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <!-- Filter Form -->
-    <form method="POST" id="filterForm">
+    <form method="GET" id="filterForm" class="mx-2">
         @csrf
-        <div class="row mb-2">
-            <div class="col-md-3">
+        <div class="flex gap-5 items-start">
+            <div class="col-md-3 flex flex-col w-80">
                 <label for="category">Category</label>
-                <select name="category" class="form-select" id="category">
+                <select name="category_id" class="input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="category">
                     <option value="">All Categories</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->K_ID }}" {{ request('category_id') == $category->K_ID ? 'selected' : '' }}>
@@ -18,10 +18,10 @@
                 </select>
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-3 flex flex-col w-80">
                 <label for="subcategory">Subcategory</label>
-                <select name="subcategory" class="form-select" id="subcategory">
-                    <option value="">All Subcategories</option> <!-- Default option -->
+                <select name="subcategory_id" class="input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="subcategory">
+                    <option value="">All Subcategories</option>
                     @foreach ($subcategories as $subcategory)
                         <option value="{{ $subcategory->K_ID }}" {{ request('subcategory_id') == $subcategory->K_ID ? 'selected' : '' }}>
                             {{ $subcategory->Nosaukums }}
@@ -30,44 +30,44 @@
                 </select>
             </div>
             
-            <div class="col-md-3">
+            <div class="col-md-3 flex flex-col w-50">
                 <label for="sort_by">Sort By</label>
-                <select class="form-select form-select-sm" id="sort_by" name="sort_by" onchange="document.getElementById('filterForm').submit()">
+                <select class="input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="sort_by" name="sort_by">
                     <option value="newest" {{ request('sort_by') == 'newest' ? 'selected' : '' }}>Newest First</option>
                     <option value="oldest" {{ request('sort_by') == 'oldest' ? 'selected' : '' }}>Oldest First</option>
                     <option value="name_az" {{ request('sort_by') == 'name_az' ? 'selected' : '' }}>Name (A-Z)</option>
                     <option value="author" {{ request('sort_by') == 'author' ? 'selected' : '' }}>Author</option>
                 </select>
             </div>
-            <div class="col-md-3 mt-4">
-                <a class="bg-red-500 border rounded btn text-white" href="{{ route('pictures.index')}}">X</a>
+            <div class="col-md-3 flex flex-col mt-6">
+                <button class=" p-3 btn-circle btn btn-error text-white border border-black" href="{{ route('pictures.index')}}">X</button>
             </div>
         </div>
         
         <!-- Search Input -->
-        <div class="input-group mb-3 mt-3">
-            <input type="text" class="form-control" id="searchInput" name="search" placeholder="Search memes..." autocomplete="off">
-            <button type="submit" class="btn btn-primary">Search</button>
+        <div class="flex items-center gap-2 mt-8">
+            <svg class="h-5 w-5 opacity-50 text-gray-500 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
+            <input  type="text" class="grow input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="searchInput" name="search" placeholder="Search memes..." autocomplete="off"/>
+            <button type="submit" class="btn btn-primary w-30">Search</button>
         </div>
     </form>
 
-    <!-- Display Pictures -->
-    <div class="row mt-3 ">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3 row mx-1 my-1">
         @if ($pictures->isEmpty())
-        <div class="col-md-3 mb-3 flex items-center justify-center">
-            <h1 class="text-white text-4xl font-bold">No media here yet...</h1>
-        </div>        
+            <div class="col-span-full flex items-center justify-center">
+                <h1 class="text-white text-4xl font-bold text-center">No media here yet...</h1>
+            </div>
         @else
-            @foreach($pictures as $picture)
-                <div class="col-md-3 mb-3">
-                    <div class="card h-80">
-                        <a href="{{ route('pictures.show', $picture) }}">
-                            <img src="{{ asset('storage/' . $picture->Fails) }}" class="card-img-top object-contain w-full h-60" alt="{{ $picture->Nosaukums }}">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $picture->Nosaukums }}</h5>
-                            <p class="card-text text-gray-500">{{ $picture->Apraksts }}</p>
-                        </div>
+            @foreach ($pictures as $picture)
+                <div class="rounded-2xl bg-white dark:bg-gray-400 shadow-lg overflow-hidden">
+                    <!-- Image -->
+                    <a href="{{ route('pictures.show', $picture) }}">
+                        <img src="{{ asset('storage/' . $picture->Fails) }}"  class="card-img-top object-contain w-full h-60" alt="{{ $picture->Nosaukums }}"> {{-- class="w-full h-60 object-cover rounded-t-2xl" fill card--}}
+                    </a>
+                    <!-- Card Body -->
+                    <div class="p-4 border-t-2 border-black dark:bg-blue-400 bg-gray-300">
+                        <h5 class="font-bold text-lg truncate">{{ $picture->Nosaukums }}</h5>
+                        <p class="text-sm text-gray-700 dark:text-gray-200 truncate">{{ $picture->Apraksts }}</p>
                     </div>
                 </div>
             @endforeach
@@ -78,9 +78,9 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
+$(document).ready(function () {
     // Handle category change
-    $('#category').on('change', function(){
+    $('#category').on('change', function () {
         var category_id = $('#category').val();
 
         if (category_id) {
@@ -90,29 +90,40 @@ $(document).ready(function() {
             $.ajax({
                 url: url,
                 type: "GET",
-                success: function(data) {
+                success: function (data) {
                     if (data.success) {
                         var subcategory_data = data.data;
                         $('#subcategory').html('<option value="">All Subcategories</option>'); // Reset to default
-                        $.each(subcategory_data, function(key, value) {
-                            $('#subcategory').append('<option value="'+value.K_ID+'">'+value.Nosaukums+'</option>');
+                        $.each(subcategory_data, function (key, value) {
+                            $('#subcategory').append('<option value="' + value.K_ID + '">' + value.Nosaukums + '</option>');
                         });
+
+                        // Trigger a filter update after loading subcategories
+                        applyFilters();
                     } else {
                         alert(data.msg);
                     }
                 },
-                error: function() {
+                error: function () {
                     alert('Failed to load subcategories.');
                 }
             });
         } else {
             // Reset subcategory dropdown if no category selected
             $('#subcategory').html('<option value="">All Subcategories</option>');
+
+            // Trigger a filter update after resetting subcategories
+            applyFilters();
         }
     });
 
     // Handle changes in filters to apply filtering via AJAX
-    $('#category, #subcategory, #searchInput, #sort_by').on('change keyup', function() {
+    $('#category, #subcategory, #searchInput, #sort_by').on('change keyup', function () {
+        applyFilters();
+    });
+
+    // Function to apply filters and update the media content
+    function applyFilters() {
         var category_id = $('#category').val();
         var subcategory_id = $('#subcategory').val();
         var search = $('#searchInput').val();
@@ -127,13 +138,23 @@ $(document).ready(function() {
                 search: search,
                 sort_by: sort_by
             },
-            success: function(data) {
+            success: function (data) {
                 $('.row.mt-3').html(data.data); // Update the media content dynamically
+
+                // Optionally, update the URL with query parameters
+                var urlParams = new URLSearchParams({
+                    category_id: category_id,
+                    subcategory_id: subcategory_id,
+                    search: search,
+                    sort_by: sort_by
+                }).toString();
+
+                history.pushState(null, '', '?' + urlParams);
             },
-            error: function() {
+            error: function () {
                 alert('Error loading media.');
             }
         });
-    });
+    }
 });
 </script>

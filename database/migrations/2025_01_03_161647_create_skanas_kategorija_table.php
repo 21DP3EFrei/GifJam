@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('skanas_kategorija', function (Blueprint $table) {
             $table->id('SKat_ID');
-            $table->string('Nosaukums');
-            $table->string('Apraksts');
+            $table->string('Nosaukums', 100);
+            $table->string('Apraksts', 300)->nullable();
             $table->unsignedBigInteger('Apakskategorija')->nullable();
             $table->foreign('Apakskategorija')->references('SKat_ID')->on('skanas_kategorija')->onDelete('cascade');
             $table->timestamps();

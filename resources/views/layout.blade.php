@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body class="min-h-screen flex flex-col">
    <!-- old header -->
-    <x-app-layout class="flex-grow">
+    <x-app-layout class="grow">
 {{--         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-white dark:bg-blue-900 leading-tight">
                 @yield('header')
@@ -17,7 +16,7 @@
 
 
         <!-- Content -->
-        <div class="py-12 background flex-grow display-block min-h-screen dynamic-background" >
+        <div class="py-12 background grow display-block min-h-screen dynamic-background" >
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="header overflow-hidden shadow-xl sm:rounded-lg dark:text-white dark:bg-blue-950">
                     @yield('content')

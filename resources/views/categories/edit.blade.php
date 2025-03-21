@@ -2,22 +2,27 @@
 
 @section('title', 'Edit Categories')
 @section('content')
-<div class="container">
-        <h1>Edit Category</h1>
-        <form action="{{ route('categories.update', ['categories' => $categories->K_ID]) }}" method="POST">
+<x-custom-header name="custom-header">
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-white dark:bg-blue-900 leading-tight">
+        <button class="hover:border rounded-sm w-24 h-10 text-lg transition ease-in hover:bg-blue-500" onclick="history.back()">← Go Back</button>
+    </h2>
+</x-custom-header>
+<div class="container mx-3">
+        <h1 class="h1">Edit Category</h1>
+        <form action="{{ route('categories.update', ['categories' => $categories->K_ID]) }}" method="POST" class="mt-2 px-8 rounded-xl">
             @csrf
             @method('PUT')
             <div class="form-group mb-2">
                 <label for="Nosaukums">Category Name:</label>
-                <input type="text" class="form-control" id="name" name="Nosaukums" value="{{ $categories->Nosaukums }}" required>
+                <input type="text" class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white autofill:!bg-black w-full" autocomplete="off" id="name" name="Nosaukums" value="{{ $categories->Nosaukums }}" required>
             </div>
             <div class="form-group mb-2">
                 <label for="Apraksts">Description:</label>
-                <textarea class="form-control" id="description" name="Apraksts">{{ $categories->Apraksts }}</textarea>
+                <textarea class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white autofill:!bg-black w-full" autocomplete="off" id="description" name="Apraksts">{{ $categories->Apraksts }}</textarea>
             </div>
             <div class="form-group mb-2">
                 <label for="apakskategorija">Subcategory of: </label>
-                <select class="form-control" id="apakskategorija" name="Apakskategorija">
+                <select class="select input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white autofill:!bg-black w-full" id="apakskategorija" name="Apakskategorija">
                     @if ($categories->Apakskategorija)  
                         <option value="{{ $categories->Apakskategorija }}" selected> {{ $categories->parent->Nosaukums }} </option>
                     @endif
@@ -36,10 +41,4 @@
             <button type="submit" class="btn btn-primary mb-3">Update</button>
         </form>
     </div>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-</head>
-</html>
 @endsection

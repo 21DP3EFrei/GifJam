@@ -6,47 +6,63 @@
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
         </div>
+    @elseif($errors->has('uploadFile'))
+    <div class="alert alert-danger">
+        {{ $errors->first('uploadFile') }}
+    </div>
     @endif
-    <form method="POST" action="{{ route('upload.post') }}" enctype="multipart/form-data" class="mt-2">
+    <form id="myForm" method="POST" action="{{ route('upload.post') }}" enctype="multipart/form-data" class="mt-2 px-8 rounded-xl">
         @csrf
-        <div class="mb-3">
+        <div class="mx-4">
+        <div class="my-5 flex flex-col">
             <label for="fileName" class="form-label">Name</label>
-            <input type="text" class="form-control" name="fileName" id="fileName" required aria-required="true">
+            <input type="text" class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white autofill:!bg-black w-full" name="fileName" id="fileName" required aria-required="true" autocomplete="off"/>
         </div>
-        <div class="mb-3">
+        <div class="my-5 flex flex-col">
             <label for="fileDescription" class="form-label">Description</label>
-            <textarea class="form-control" name="fileDescription" id="fileDescription" rows="3" aria-multiline="true"></textarea>
+            <textarea class="input input-md border rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="fileDescription" id="fileDescription" rows="3" aria-multiline="true"></textarea>
         </div>
-        <div class="mb-3">
+        <div class="my-5 flex flex-col">
             <label for="author" class="form-label">Author</label>
-            <input type="text" class="form-control" name="author" id="author" required aria-required="true">
+            <input type="text" class="input input-sm  rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="author" id="author" required aria-required="true" autocomplete="off">
         </div>
-        <div class="mb-3">
+        <div class="my-5 flex flex-col">
             <label for="copyright" class="form-label">Copyright</label>
-            <select class="form-select" name="copyright" id="copyright">
+            <select class="select input-sm rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="copyright" id="copyright">
+                <option disabled selected></option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select>
         </div>
-        <div class="mb-3">
+        <div class="my-5 flex flex-col">
             <label for="category_id" class="form-label">Category</label>
-            <select class="form-select" name="category_id" id="category_id" required aria-required="true">
+            <select class="select input-sm rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="category_id" id="category_id" required aria-required="true">
+                <option disabled selected></option>
                 @foreach($categories as $category)
                     <option value="{{ $category->K_ID }}">{{ $category->Nosaukums }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="mb-3">
+        <div class="my-5 flex flex-col">
             <label for="uploadFile" class="form-label">Upload File</label>
-            <input class="form-control" type="file" name="uploadFile" id="uploadFile" required aria-required="true">
+            <input class="file-input file-input-primary  rounded-lg cursor-pointerfocus:outline-none dark:border-blue-600 dark:placeholder-gray-400 border border-black bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" type="file" name="uploadFile" id="uploadFile" required aria-required="true" accept=".png, .gif, .webp, .jpg, .jpeg">
         </div>
-        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        <button id="submitPause" type="submit" class="btn btn-primary mb-8 btn-wide">Submit</button>
+        </div>
     </form>
 </div>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-</head>
-</html>
+<script>
+document.getElementById("myForm").addEventListener("submit", function(event) {
+        // Get the submit button
+        const submitButton = document.getElementById("submitPause");
+
+        // Disable the button to prevent multiple submissions
+        submitButton.disabled = true;
+
+        // Re-enable the button after 5 seconds
+        setTimeout(function() {
+            submitButton.disabled = false;
+        }, 5000);
+    });
+</script>
 @endsection

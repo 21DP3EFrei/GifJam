@@ -10,7 +10,7 @@ class Zanrs extends Model
 
     protected $table = 'zanrs';
     protected $primaryKey = 'Z_ID';
-    protected $fillable = ['Nosaukums', 'Apraksts'];
+    protected $fillable = ['Nosaukums', 'Apraksts', 'Apakszanrs'];
     public function subgenre()
     {
         return $this->hasMany(Zanrs::class, 'Apakszanrs', 'Z_ID');
