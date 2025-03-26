@@ -63,4 +63,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Media::class, 'Lietotajs', 'id');
     }
+    public function block()
+    {
+        return $this->hasOne(Noblokets::class, 'L_ID');
+    }
 }

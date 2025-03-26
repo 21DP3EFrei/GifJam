@@ -12,17 +12,23 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SoundCategoryController;
+use App\Http\Controllers\NobloketsController;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\LocalizationController;
 
-Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
+Route::get('/change-lang/{lang}', [LocalizationController::class, 'change'])->name('change.lang');
+/* Route::middleware(['language'])->group(function () {
+ */Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'blocked'])->group(function () {
 Route::middleware(['admin'])->group(function () {
 //Admin routes
 
 // Category routes
 Route::get('/categories', [KategorijaController::class, 'index'])->name('categories.index');
-Route::get('/categories/create', [KategorijaController::class, 'create'])->name('categories.create');
+Route::get('/categories/create', action: [KategorijaController::class, 'create'])->name('categories.create');
 Route::post('/categories', [KategorijaController::class, 'store'])->name('categories.store');
 Route::get('categories/{categories}/edit', [KategorijaController::class, 'edit'])->name('categories.edit');
 Route::put('/categories/{categories}', [KategorijaController::class, 'update'])->name('categories.update');
@@ -47,10 +53,14 @@ Route::delete('/genre/{genre}', [GenreController::class, 'destroy'])->name('genr
 //Verify routes 
 Route::get('/verify', [VerificationController::class, 'index'])->name('verification.index');
 Route::post('/verify/{media}', [VerificationController::class, 'mediaverify'])->name('verification.mediaverify');
+Route::get('/verify/{media}/edit', [VerificationController::class, 'editMedia'])->name('verification.edit');
+Route::put('/verify/{media}', [VerificationController::class, 'update'])->name('verification.update');
 
 // Unverification routes 
 Route::get('/unverify', [UnverificationController::class, 'index'])->name('unverification.index');
 Route::post('/unverify/{media}', [UnverificationController::class, 'mediaunverify'])->name('unverification.mediaunverify');
+Route::get('/unverify/{media}/edit', [UnverificationController::class, 'editMedia'])->name('unverification.edit');
+Route::put('/unverify/{media}', [UnverificationController::class, 'update'])->name('unverification.update');
 
 // Subcategory routes
 Route::get('/subcategories', [SubCategoryController::class, 'index'])->name('subcategories.index');
@@ -62,7 +72,16 @@ Route::put('/subcategories/{subcategory}', [SubCategoryController::class, 'updat
 Route::delete('/subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('subcategories.destroy');
 Route::get('/fetch-subcategories/{categoryId}', [SubCategoryController::class, 'getSubcategories'])->name('fetch.subcategories');
 
+//Blocking routes
+Route::get('/block', [NobloketsController::class, 'index'])->name('block.index');
+Route::get('/block/create', [NobloketsController::class, 'create'])->name('block.create');
+Route::post('/block', [NobloketsController::class, 'store'])->name('block.store');
+Route::get('block/{block}/edit', [NobloketsController::class, 'edit'])->name('block.edit');
+Route::put('/block/{block}', [NobloketsController::class, 'update'])->name('block.update');
+Route::delete('/block/{block}', [NobloketsController::class, 'destroy'])->name('block.destroy');
+Route::post('/block/create/{user}', [NobloketsController::class, 'specific'])->name('block.specific');
 });//end of admin
+
 //Public routes
 
 Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
@@ -85,9 +104,11 @@ Route::get('/pictures/search', [PictureController::class, 'search'])->name('pict
 //Welcome page
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 
-//error page
+//error pages
 Route::get('/error', function () {return view('error');})->name('error');
-}); //end of auth
+Route::get('/blocked', function () {return view('block');})->name('block');
+
+}); //end of auth and blocked
 
 
 // Home route
@@ -104,4 +125,5 @@ Route::get('/crazy', function () {
 Route::get('/test', function () {
     return 'This is a test route!';
 });
+
 require __DIR__.'/auth.php';

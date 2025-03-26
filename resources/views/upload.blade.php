@@ -49,6 +49,7 @@
         </div>
         <button id="submitPause" type="submit" class="btn btn-primary mb-8 btn-wide">Submit</button>
         </div>
+        <input type="hidden" name="Multivides_tips" value="Image">
     </form>
 </div>
 <script>

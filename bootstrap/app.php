@@ -6,6 +6,8 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\CategoryExists;
+use App\Http\Middleware\BlockUser;
+use App\Http\Middleware\Localization;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -18,7 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'admin' => Admin::class,
-            'realCategory' => CategoryExists::class
+            'realCategory' => CategoryExists::class,
+            'blocked' => BlockUser::class,
+            'localization' => Localization::class,
         ]);
     })
     ->withMiddleware(function (Middleware $middleware) {

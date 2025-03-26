@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
-
+use Illuminate\Foundation\Http\Middleware;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -33,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
             $event->extendSocialite('google', \SocialiteProviders\Google\Provider::class);
         });
+    $this->app['router']->aliasMiddleware('localization', \App\Http\Middleware\Localization::class);    
     }
 }

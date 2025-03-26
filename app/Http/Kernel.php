@@ -39,6 +39,8 @@ class Kernel extends HttpKernel
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
             'admin' => \App\Http\Middleware\Admin::class,
             'realCategory' => \App\Http\Middleware\CategoryExists::class,
+            'blocked' => \App\Http\Middleware\BlockUser::class,
+            'localization' => \App\Http\Middleware\Localization::class,
         ],
 
         'api' => [

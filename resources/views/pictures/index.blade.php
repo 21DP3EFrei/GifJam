@@ -40,7 +40,7 @@
                 </select>
             </div>
             <div class="col-md-3 flex flex-col mt-6">
-                <button class=" p-3 btn-circle btn btn-error text-white border border-black" href="{{ route('pictures.index')}}">X</button>
+                <a href="{{ route('pictures.index') }}" class="p-2 btn-circle btn btn-error text-white border border-black inline-block">X</a>
             </div>
         </div>
         
@@ -73,7 +73,6 @@
             @endforeach
         @endif
     </div>
-       
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

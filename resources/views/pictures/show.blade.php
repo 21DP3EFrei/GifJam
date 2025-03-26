@@ -44,10 +44,4 @@
         </div>
     </div>
 </div>
-
 @endsection
-<script>
-    window.addEventListener('popstate', function () {
-    location.reload();
-});
-</script>
