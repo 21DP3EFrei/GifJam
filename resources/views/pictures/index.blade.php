@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Gallery')
+@section('title',  __('translation.navigation_gallery'))
 @section('content')
 <div class="container">
     <!-- Filter Form -->
@@ -7,9 +7,9 @@
         @csrf
         <div class="flex gap-5 items-start">
             <div class="col-md-3 flex flex-col w-80">
-                <label for="category">Category</label>
+                <label for="category">{{ __('translation.navigation_categoriesName') }}</label>
                 <select name="category_id" class="input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="category">
-                    <option value="">All Categories</option>
+                    <option value="">{{ __('translation.allCategories') }}</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->K_ID }}" {{ request('category_id') == $category->K_ID ? 'selected' : '' }}>
                             {{ $category->Nosaukums }}
@@ -19,9 +19,9 @@
             </div>
             
             <div class="col-md-3 flex flex-col w-80">
-                <label for="subcategory">Subcategory</label>
+                <label for="subcategory">{{ __('translation.subcategory') }}</label>
                 <select name="subcategory_id" class="input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="subcategory">
-                    <option value="">All Subcategories</option>
+                    <option value="">{{ __('translation.allSubcategories') }}</option>
                     @foreach ($subcategories as $subcategory)
                         <option value="{{ $subcategory->K_ID }}" {{ request('subcategory_id') == $subcategory->K_ID ? 'selected' : '' }}>
                             {{ $subcategory->Nosaukums }}
@@ -31,12 +31,12 @@
             </div>
             
             <div class="col-md-3 flex flex-col w-50">
-                <label for="sort_by">Sort By</label>
+                <label for="sort_by">{{ __('translation.sortBy') }}</label>
                 <select class="input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="sort_by" name="sort_by">
-                    <option value="newest" {{ request('sort_by') == 'newest' ? 'selected' : '' }}>Newest First</option>
-                    <option value="oldest" {{ request('sort_by') == 'oldest' ? 'selected' : '' }}>Oldest First</option>
-                    <option value="name_az" {{ request('sort_by') == 'name_az' ? 'selected' : '' }}>Name (A-Z)</option>
-                    <option value="author" {{ request('sort_by') == 'author' ? 'selected' : '' }}>Author</option>
+                    <option value="newest" {{ request('sort_by') == 'newest' ? 'selected' : '' }}>{{ __('translation.newest') }}</option>
+                    <option value="oldest" {{ request('sort_by') == 'oldest' ? 'selected' : '' }}>{{ __('translation.oldest') }}</option>
+                    <option value="name_az" {{ request('sort_by') == 'name_az' ? 'selected' : '' }}>{{ __('translation.nameAZ') }}</option>
+                    <option value="author" {{ request('sort_by') == 'author' ? 'selected' : '' }}>{{ __('translation.author') }}</option>
                 </select>
             </div>
             <div class="col-md-3 flex flex-col mt-6">
@@ -47,15 +47,15 @@
         <!-- Search Input -->
         <div class="flex items-center gap-2 mt-8">
             <svg class="h-5 w-5 opacity-50 text-gray-500 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
-            <input  type="text" class="grow input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="searchInput" name="search" placeholder="Search memes..." autocomplete="off"/>
-            <button type="submit" class="btn btn-primary w-30">Search</button>
+            <input  type="text" class="grow input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="searchInput" name="search" placeholder="{{ __('translation.searchMeme') }}" autocomplete="off"/>
+            <button type="submit" class="btn btn-primary w-30">{{ __('translation.search') }}</button>
         </div>
     </form>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3 row mx-1 my-1">
         @if ($pictures->isEmpty())
             <div class="col-span-full flex items-center justify-center">
-                <h1 class="text-white text-4xl font-bold text-center">No media here yet...</h1>
+                <h1 class="text-white text-4xl font-bold text-center">{{ __('translation.noMedia') }}</h1>
             </div>
         @else
             @foreach ($pictures as $picture)

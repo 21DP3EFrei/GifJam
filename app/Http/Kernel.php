@@ -40,7 +40,6 @@ class Kernel extends HttpKernel
             'admin' => \App\Http\Middleware\Admin::class,
             'realCategory' => \App\Http\Middleware\CategoryExists::class,
             'blocked' => \App\Http\Middleware\BlockUser::class,
-            'localization' => \App\Http\Middleware\Localization::class,
         ],
 
         'api' => [

@@ -1,18 +1,18 @@
     <table class="table table-zebra overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">
         @if ($media->isEmpty())
         <div class="col-span-full flex items-center justify-center">
-            <h1 class="text-white text-4xl font-bold text-center">No media here yet...</h1>
+            <h1 class="text-white text-4xl font-bold text-center">{{ __('translation.noMedia') }}</h1>
         </div>
     @else
     <thead>
         <tr class="text-center align-middle bg-slate-100 dark:bg-cyan-700 text-black dark:text-white border border-gray-300">
-            <th class="border-separate border border-gray-400">File Name</th>
-            <th class="border-separate border border-gray-400">Description</th>
-            <th class="border-separate border border-gray-400">Actions</th>
-            <th class="border-separate border border-gray-400">Category</th>
-            <th class="border-separate border border-gray-400">Image</th>
-            <th class="border-separate border border-gray-400">Uploaded at</th>
-            <th class="border-separate border border-gray-400">Updated at</th>
+            <th class="border-separate border border-gray-400">{{ __('translation.fileName') }}</th>
+            <th class="border-separate border border-gray-400">{{ __('translation.description') }}</th>
+            <th class="border-separate border border-gray-400">{{ __('translation.actions') }}</th>
+            <th class="border-separate border border-gray-400">{{ __('translation.category') }}</th>
+            <th class="border-separate border border-gray-400">{{ __('translation.image') }}</th>
+            <th class="border-separate border border-gray-400">{{ __('translation.uploaded') }}</th>
+            <th class="border-separate border border-gray-400">{{ __('translation.updated') }}</th>
         </tr>
     </thead>
     <tbody id="mediaTableBody">
@@ -32,9 +32,9 @@
                     @csrf
                     <div class="flex items-center py-1">
                         <input class="radio bg-red-100 border-red-700 checked:bg-red-700 checked:text-red-600 checked:border-red-600 cursor-pointer" type="radio" name="status" id="unapprove{{ $media->id }}" value="1">
-                        <label class="ml-1" for="unapprove{{ $media->id }}">Unapprove</label>
+                        <label class="ml-1" for="unapprove{{ $media->id }}">{{ __('translation.unverify') }}</label>
                     </div>
-                    <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded-sm cursor-pointer">Update</button>
+                    <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded-sm cursor-pointer">{{ __('translation.update') }}</button>
                 </form>
             </td>
                 @if ($media->kategorijas !== null && $media->kategorijas->isNotEmpty())

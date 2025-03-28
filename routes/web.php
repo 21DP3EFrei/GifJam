@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\LocalizationController;
 
-Route::get('/change-lang/{lang}', [LocalizationController::class, 'change'])->name('change.lang');
+Route::get('locale/{lang}', [LocalizationController::class, 'selected']);
 /* Route::middleware(['language'])->group(function () {
  */Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');

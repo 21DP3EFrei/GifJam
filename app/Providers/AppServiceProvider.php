@@ -24,9 +24,9 @@ class AppServiceProvider extends ServiceProvider
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
             return (new MailMessage)
                 ->greeting('') // Removes "Hello!"
-                ->subject('Welcome to GiJam')
-                ->line('Before you get started, you need to verify your email address.')
-                ->action('Verify', $url)
+                ->subject( __('translation.welcomeToEmail'))
+                ->line( __('translation.explainEmail'))
+                ->action(__('translation.navigation_verify'), $url)
                 ->salutation(''); // Removes "Best Regards, {{app_name}}"
         });
 

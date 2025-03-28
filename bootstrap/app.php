@@ -8,6 +8,7 @@ use App\Http\Middleware\Admin;
 use App\Http\Middleware\CategoryExists;
 use App\Http\Middleware\BlockUser;
 use App\Http\Middleware\Localization;
+use Illuminate\Support\Facades\App;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -28,6 +29,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
             AddLinkHeadersForPreloadedAssets::class,
+            Localization::class,
         ]);
         $middleware->redirectTo('/');
     })

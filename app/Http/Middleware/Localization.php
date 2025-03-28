@@ -13,12 +13,10 @@ class Localization
 {
     public function handle(Request $request, Closure $next): Response
     {    
-        if ($request->session()->has('locale')) {
-            $locale = $request->session()->get('locale');
-            App::setLocale($locale);
-        } else {
-        }
-    
+        $locale = Session::get('locale') ?? 'en';
+        Session::put('locale', $locale);
+        App::setLocale($locale);
+
         return $next($request);
     }
 }

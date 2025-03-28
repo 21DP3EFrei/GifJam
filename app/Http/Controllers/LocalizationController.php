@@ -4,22 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\App;
 class LocalizationController extends Controller
 {
-    public function change(Request $request)
+    public function selected($lang)
     {
-        $lang = $request->lang;
-
-        // Validate the language
-        if (!in_array($lang, ['en', 'lv', 'ru'])) {
-            abort(400); // Bad request if the language is invalid
+        if (in_array($lang,['en', 'lv', 'ru']))
+        {
+            App::setLocale($lang);
+            Session::put('locale', $lang);
         }
-
-        // Store the selected language in the session
-        Session::put('locale', $lang);
-
-        // Redirect back to the previous page
-        return redirect()->back();
-    }
+        return back();
+}
 }

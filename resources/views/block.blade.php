@@ -6,19 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GifJam - Home</title>
+    <title>GifJam - {{ __('translation.home') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.15.1/dist/full.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1 class="text-4xl mb-3">You have been blocked</h1>
-        <p class="mb-2">Hello, {{ auth()->user()->name }}!</p>
-        <p class="mb-2">You have been blocked for: {{ $blockReason ?? 'No reason provided' }}</p>
-        <p class="mb-2">Please create a new account.</p>
+        <h1 class="text-4xl mb-3">{{ __('translation.blocked') }}</h1>
+        <p class="mb-2">{{ __('translation.hello') }} {{ auth()->user()->name }}! <br> {{ __('translation.blockfor') }} {{ $blockReason ?? 'No reason provided' }} <br> {{ __('translation.newAcc') }}</p>
         <form action="{{ route('logout') }}" method="POST" style="display: inline;">
             @csrf
-            <button type="submit" class="btn btn-primary hover:underline">Return to home page</button>
+            <button type="submit" class="btn btn-primary hover:underline">{{ __('translation.returnHome') }}</button>
         </form>
     </div>
 </body>

@@ -1,20 +1,20 @@
 @extends('layout')
 
-@section('title', 'Unverify')
+@section('title', __('translation.unverify'))
 @section('content')
 <x-custom-header name="custom-header">
     <h2 class="font-semibold text-xl text-gray-800 dark:text-white dark:bg-blue-900 leading-tight">
-       Unverify
+        {{ __('translation.unverify') }}
     </h2>
 </x-custom-header>
 <div class="container mx-2 px-1 py-1">
-    <form action="{{ route('unverification.index') }}" method="GET" id="filterForm">
+    <form action="{{ route('verification.index') }}" method="GET" id="filterForm">
         @csrf
-        <button type="submit" class="btn btn-primary mt-2 mb-2">Show Pending</button>
+        <button type="submit" class="btn btn-primary mt-2 mb-2">{{ __('translation.pending') }}</button>
         <div class="flex items-center gap-2 mt-5 px-2 pb-2">
             <svg class="h-5 w-5 opacity-50 text-gray-500 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
             <input  type="text" class="grow input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="searchInput" name="search" placeholder="Search media..." autocomplete="off"/>
-            <button type="submit" class="btn btn-primary w-30">Search</button>
+            <button type="submit" class="btn btn-primary w-30">{{ __('translation.search') }}</button>
         </div>
     </form>
     @if (session('success'))
@@ -24,13 +24,13 @@
         <table class="table table-zebra overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">
         <thead>
             <tr class="text-center align-middle bg-slate-100 dark:bg-cyan-700 text-black dark:text-white border border-gray-300">
-                <th class="border-separate border border-gray-400">File Name</th>
-                <th class="border-separate border border-gray-400">Description</th>
-                <th class="border-separate border border-gray-400">Actions</th>
-                <th class="border-separate border border-gray-400">Category</th>
-                <th class="border-separate border border-gray-400">Image</th>
-                <th class="border-separate border border-gray-400">Uploaded at</th>
-                <th class="border-separate border border-gray-400">Updated at</th>
+                <th class="border-separate border border-gray-400">{{ __('translation.fileName') }}</th>
+                <th class="border-separate border border-gray-400">{{ __('translation.description') }}</th>
+                <th class="border-separate border border-gray-400">{{ __('translation.actions') }}</th>
+                <th class="border-separate border border-gray-400">{{ __('translation.category') }}</th>
+                <th class="border-separate border border-gray-400">{{ __('translation.image') }}</th>
+                <th class="border-separate border border-gray-400">{{ __('translation.uploaded') }}</th>
+                <th class="border-separate border border-gray-400">{{ __('translation.updated') }}</th>
             </tr>
         </thead>
         <tbody id="mediaTableBody">
@@ -50,9 +50,9 @@
                         @csrf
                         <div class="flex items-center py-1">
                             <input class="radio bg-red-100 border-red-700 checked:bg-red-700 checked:text-red-600 checked:border-red-600 cursor-pointer" type="radio" name="status" id="unapprove{{ $media->id }}" value="1">
-                            <label class="ml-1" for="unapprove{{ $media->id }}">Unapprove</label>
+                            <label class="ml-1" for="unapprove{{ $media->id }}">{{ __('translation.unverify') }}</label>
                         </div>
-                        <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded-sm cursor-pointer">Update</button>
+                        <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded-sm cursor-pointer">{{ __('translation.update') }}</button>
                     </form>
                 </td>
                     @if ($media->kategorijas !== null && $media->kategorijas->isNotEmpty())
