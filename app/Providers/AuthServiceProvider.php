@@ -26,11 +26,7 @@ public function boot()
 {
     $this->registerPolicies();
 
-    Gate::define('access-categories', function (User $user) {
-        return $user->usertype === 'admin';
-    });
-
-    Gate::define('access-verification', function (User $user) {
+    Gate::define('admin-access', function (User $user) {
         return $user->usertype === 'admin';
     });
 }

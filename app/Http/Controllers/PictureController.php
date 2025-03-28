@@ -104,8 +104,6 @@ class PictureController extends Controller
         }
     }
     
-
-
     public function show(Media $media)
     {
         return view('pictures.show', compact('media'));
@@ -113,7 +111,11 @@ class PictureController extends Controller
 
     public function download(Media $media)
     {
-        return response()->download(storage_path('app/public/' . $media->Fails));
+
+        $filePath = storage_path('app/public/' . $media->Fails);
+        $newFileName = $media->Nosaukums . '.' . pathinfo($media->Fails, PATHINFO_EXTENSION);
+    
+        return response()->download($filePath, $newFileName);
     }
     public function __construct()
     {

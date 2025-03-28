@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <head>
-    <title>Profile</title>
+    <title>{{ __('translation.navigation_profile') }}</title>
 </head>
 </html>
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
 
     <div class="dynamic-background">
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            <div class="relative items-center flex justify-between mb-10 sm:mt-0">
+                <h1 name="title" class="flex items-center whitespace-nowrap text-lg font-semibold text-gray-700 dark:text-white">
+                    {{ __('translation.changeLang') }}
+                </h1>
+                <select class="w-50 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-white border p-4 dark:border-gray-100 dark:bg-blue-950" onchange="window.location.href = this.value">
+                    @php
+                        $languages = ['en' =>  __('translation.english'), 'lv' =>  __('translation.latvian'), 'ru' =>  __('translation.russian')];
+                        $currentLanguage = Session::get('locale', 'en'); // Get the current locale from the session
+                    @endphp
+                    @foreach ($languages as $code => $name)
+                        <option value="{{ url('locale/' . $code) }}" {{ $currentLanguage === $code ? 'selected' : '' }}>
+                            {{ $name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <x-section-border />
             @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                 @livewire('profile.update-profile-information-form')
 
@@ -28,13 +40,13 @@
             @endif
             @endif
 
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
+            {{-- @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.two-factor-authentication-form')
                 </div>
 
                 <x-section-border />
-            @endif
+            @endif --}}
 
             <div class="mt-10 sm:mt-0">
                 @livewire('profile.logout-other-browser-sessions-form')
@@ -47,6 +59,7 @@
                     @livewire('profile.delete-user-form')
                 </div>
             @endif
+        </div>
         </div>
     </div>
     <style>
@@ -63,4 +76,3 @@
         }
 </style>
 </x-app-layout>
-    

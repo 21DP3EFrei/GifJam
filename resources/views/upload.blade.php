@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Meme Upload')
+@section('title', __('translation.Pupload'))
 @section('content')
 <div class="container">
     @if(session('success'))
@@ -15,27 +15,27 @@
         @csrf
         <div class="mx-4">
         <div class="my-5 flex flex-col">
-            <label for="fileName" class="form-label">Name</label>
+            <label for="fileName" class="form-label">{{ __('translation.name') }}</label>
             <input type="text" class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white autofill:!bg-black w-full" name="fileName" id="fileName" required aria-required="true" autocomplete="off"/>
         </div>
         <div class="my-5 flex flex-col">
-            <label for="fileDescription" class="form-label">Description</label>
+            <label for="fileDescription" class="form-label">{{ __('translation.description') }}</label>
             <textarea class="input input-md border rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="fileDescription" id="fileDescription" rows="3" aria-multiline="true"></textarea>
         </div>
         <div class="my-5 flex flex-col">
-            <label for="author" class="form-label">Author</label>
+            <label for="author" class="form-label">{{ __('translation.author') }}</label>
             <input type="text" class="input input-sm  rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="author" id="author" required aria-required="true" autocomplete="off">
         </div>
         <div class="my-5 flex flex-col">
-            <label for="copyright" class="form-label">Copyright</label>
+            <label for="copyright" class="form-label">{{ __('translation.copyright') }}</label>
             <select class="select input-sm rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="copyright" id="copyright">
                 <option disabled selected></option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+                <option value="Yes">{{ __('translation.yes') }}</option>
+                <option value="No">{{ __('translation.no') }}</option>
             </select>
         </div>
         <div class="my-5 flex flex-col">
-            <label for="category_id" class="form-label">Category</label>
+            <label for="category_id" class="form-label">{{ __('translation.category') }}</label>
             <select class="select input-sm rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="category_id" id="category_id" required aria-required="true">
                 <option disabled selected></option>
                 @foreach($categories as $category)
@@ -44,11 +44,12 @@
             </select>
         </div>
         <div class="my-5 flex flex-col">
-            <label for="uploadFile" class="form-label">Upload File</label>
+            <label for="uploadFile" class="form-label">{{ __('translation.uploadFile') }}</label>
             <input class="file-input file-input-primary  rounded-lg cursor-pointerfocus:outline-none dark:border-blue-600 dark:placeholder-gray-400 border border-black bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" type="file" name="uploadFile" id="uploadFile" required aria-required="true" accept=".png, .gif, .webp, .jpg, .jpeg">
         </div>
-        <button id="submitPause" type="submit" class="btn btn-primary mb-8 btn-wide">Submit</button>
+        <button id="submitPause" type="submit" class="btn btn-primary mb-8 btn-wide">{{ __('translation.submit') }}</button>
         </div>
+        <input type="hidden" name="Multivides_tips" value="Image">
     </form>
 </div>
 <script>

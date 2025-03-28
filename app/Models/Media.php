@@ -13,7 +13,7 @@ class Media extends Model
 
     protected $table = 'medija';
     protected $primaryKey = 'Me_ID';
-    protected $fillable = ['Nosaukums', 'Apraksts', 'Status', 'Fails', 'Failu tips', 'Augsupielades tips' , 'Autors', 'Autortiesibas'];
+    protected $fillable = ['Nosaukums', 'Apraksts', 'Status', 'Fails', 'Multivides_tips', 'Autors', 'Autortiesibas'];
 
 
     public function kategorijas()

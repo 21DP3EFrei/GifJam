@@ -1,13 +1,12 @@
 @extends('layout')
 
-@section('title', 'Welcome')
-{{-- @section('header', 'Welcome') --}}
+@section('title', __('translation.navigation_welcome'))
+
 @section('content')
 <div class="container ml-8">
-    <h1 class="h1">Welcome</h1>
+    <h1 class="h1">{{ __('translation.welcome') }}</h1>
     @if (auth()->check())
-        <p>Hello, {{ auth()->user()->name }}!</p>
-        <p>You are logged in as a {{ auth()->user()->usertype }}.</p> <!-- Display user type -->
+        <p>{{ __('translation.greeting') }} {{ auth()->user()->name }}! <br> {{ __('translation.logged_in') }} {{ auth()->user()->usertype }}.</p>
     @else
         <p>Please log in to access this area.</p>
     @endif
@@ -43,8 +42,7 @@ var x = setInterval(function() {
     document.getElementById("demo").innerHTML = "EXPIRED";
   }
 }, 1000);
+
 </script>
 
 @endsection
-
-

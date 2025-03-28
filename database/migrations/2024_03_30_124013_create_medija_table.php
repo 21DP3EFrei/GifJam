@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enum\UploadType;
+use App\Enum\MultividesTips;
 
 return new class extends Migration
 {
@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('Apraksts', 200)->nullable();
             $table->boolean('Status')->default(0);
             $table->string('Fails', 300)->nullable();
-            $table->enum('Failu_tips', ['.png', '.jpg', '.gif', '.jpeg','.mp3', '.FLAC', '.WAV', '.webp']);
-            $table->enum('Augsupielades_tips', array_column(UploadType::cases(), 'value'));
+            $table->enum('Multivides_tips', array_column(MultividesTips::cases(), 'value'));
             $table->string('Autors', 100);
             $table->boolean('Autortiesibas');
             $table->unsignedBigInteger('Lietotajs')->nullable();

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GifJam - Home</title>
+    <title>GifJam - {{ __('translation.home') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.15.1/dist/full.css" rel="stylesheet">
 </head>
@@ -13,13 +13,24 @@
         <div class="container mx-auto flex items-center justify-between px-4 py-2">
             <a href="" class="flex items-center space-x-3 text-primary">
                 <img class="h-10 w-14" src="{{ asset('images/gifjam.png') }}" alt="Logo" class="h-12">
-            </a>
+            </a>            
             <div>
+                <select class="w-50 rounded-md border-gray-300 shadow-sm focus:ring-opacity-50 border p-3 py-1 mr-2" style="background-color: #051d2c" onchange="window.location.href = this.value">
+                    @php
+                        $languages = ['en' =>  'En', 'lv' => 'Lv', 'ru' =>  'Ru'];
+                        $currentLanguage = Session::get('locale', 'en'); // Get the current locale from the session
+                    @endphp
+                    @foreach ($languages as $code => $name)
+                        <option value="{{ url('locale/' . $code) }}" {{ $currentLanguage === $code ? 'selected' : '' }}>
+                            {{ $name }}
+                        </option>
+                    @endforeach
+                </select>
             @if (auth()->check()) 
-                <a href="/welcome" class="btn btn-primary mr-2">Welcome</a>
+                <a href="/welcome" class="btn btn-primary mr-2">{{ __('translation.navigation_welcome') }}</a>
             @else
-                <a href="/login" class="btn btn-primary mr-2">Log in</a>
-                <a href="/register" class="btn btn-outline">Register</a>
+                <a href="/login" class="btn btn-primary mr-2">{{ __('translation.login') }}</a>
+                <a href="/register" class="btn btn-outline">{{ __('translation.register') }}</a>
             @endif
             </div>
         </div>
@@ -28,43 +39,43 @@
     <!-- Main Content Area -->
     <div class="container mx-auto text-center mt-16">
         <h1 class="text-5xl font-bold flex items-center justify-center">
-            Welcome to GifJam!
+            {{ __('translation.welcomeTo') }}
             <a href="Click.mp4" target="_blank">
                 <img src="{{ asset('Coin.gif') }}" alt="Coin" class="w-12 h-12 ml-2 cursor-pointer">
             </a>
         </h1>
-        <p class="text-lg mt-4">Explore and share your favorite memes, gifs, music, and sound effects.</p>
+        <p class="text-lg mt-4">{{ __('translation.welcomeExplain') }}</p>
 
         <!-- Info Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-1 mt-12">
             <!-- Memes + Gifs Card -->
             <div class="card bg-gray-700 shadow-xl p-6 mx-4">
                 <img src="{{ asset('lol.png') }}" class="w-12 h-12 mx-auto mb-4" alt="Memes Icon">
-                <h2 class="text-xl font-semibold">Memes + Gifs</h2>
-                <p class="mt-2">Discover and share hilarious memes and trending gifs with your friends and followers.</p>
+                <h2 class="text-xl font-semibold">{{ __('translation.MG') }}</h2>
+                <p class="mt-2">{{ __('translation.MGdescription') }}</p>
             </div>
 
             <!-- Sounds Card -->
             <div class="card bg-gray-700 shadow-xl p-6 mx-4">
                 <img src="{{ asset('Note.png') }}" class="w-12 h-12 mx-auto mb-4" alt="Sounds Icon">
-                <h2 class="text-xl font-semibold">Sounds</h2>
-                <p class="mt-2">Access a variety of sound effects to add fun and personality to your content.</p>
+                <h2 class="text-xl font-semibold">{{ __('translation.sound') }}</h2>
+                <p class="mt-2">{{ __('translation.soundDescription') }}</p>
             </div>
 
             <!-- Music Card -->
             <div class="card bg-gray-700 shadow-xl p-6 mx-4">
                 <img src="{{ asset('CD.png') }}" class="w-12 h-12 mx-auto mb-4" alt="Music Icon">
-                <h2 class="text-xl font-semibold">Music</h2>
-                <p class="mt-2">Explore our library of music tracks to enhance your videos and streams.</p>
+                <h2 class="text-xl font-semibold">{{ __('translation.music') }}</h2>
+                <p class="mt-2">{{ __('translation.musicDescription') }}</p>
             </div>
         </div>
 
         <!-- Join Now Section -->
         <div class="card bg-base-200 shadow-lg mt-12 p-8 text-center">
-            <h2 class="text-2xl text-primary font-semibold">What are you waiting for?</h2>
-            <p class="mt-2">Join GifJam now to create, share, and enjoy a world of content with your community!</p>
+            <h2 class="text-2xl text-primary font-semibold">{{ __('translation.what') }}</h2>
+            <p class="mt-2">{{ __('translation.joinGifjam') }}</p>
             <img src="{{ asset('banan.gif') }}" class="w-12 h-12 mx-auto" alt="Banana">
-            <a href="/register" class="btn btn-lg btn-success">Join Now</a>
+            <a href="/register" class="btn btn-lg btn-success">{{ __('translation.join') }}</a>
         </div>
     </div>
 

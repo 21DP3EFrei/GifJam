@@ -1,6 +1,6 @@
     @if ($pictures->isEmpty())
         <div class="col-span-full flex items-center justify-center">
-            <h1 class="text-white text-4xl font-bold text-center">No media here yet...</h1>
+            <h1 class="text-white text-4xl font-bold text-center">{{ __('translation.noMedia') }}</h1>
         </div>
     @else
         @foreach ($pictures as $picture)

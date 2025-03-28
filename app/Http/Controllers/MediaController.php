@@ -8,8 +8,9 @@ use Illuminate\Http\Response;
 use App\Models\Kategorija;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
-use app\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Mime\MimeTypes;
+use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
@@ -32,12 +33,11 @@ class MediaController extends Controller
             'author' => 'required|string',
             'copyright' => 'required|string|in:Yes,No',
             'category_id' => 'required|exists:kategorija,K_ID', // Ensure the selected category exists
-            'uploadFile' => 'required|mimes:png,jpeg,webp,gif,jpg|max:1000000',
+            'uploadFile' => 'required|mimes:png,jpeg,webp,gif,jpg|max:20000',
         ], [
             'uploadFile.mimes' => 'Only image and GIF files are allowed.',
         ]);
 
-    
         // Store the uploaded image file
         $image = $request->file('uploadFile');
         $fileName = $image->getClientOriginalName(); // Get the original filename
@@ -52,6 +52,7 @@ class MediaController extends Controller
         $media->Autortiesibas = ($request->copyright == 'Yes') ? 1 : 0;
         $media->Status = 0; // Set the default status to unpublished
         $media->Lietotajs = Auth::id();
+        $media->Multivides_tips = $request->input('Multivides_tips');
         $media->save();
 
         $categories = $request->category_id;
