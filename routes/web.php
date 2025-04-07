@@ -16,6 +16,10 @@ use App\Http\Controllers\NobloketsController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\MuzikaController;
+use App\Http\Controllers\SkanasController;
+use App\Http\Controllers\MusicLibrary;
+use App\Http\Controllers\SoundLibrary;
 
 Route::get('locale/{lang}', [LocalizationController::class, 'selected']);
 /* Route::middleware(['language'])->group(function () {
@@ -28,7 +32,7 @@ Route::middleware(['admin'])->group(function () {
 
 // Category routes
 Route::get('/categories', [KategorijaController::class, 'index'])->name('categories.index');
-Route::get('/categories/create', action: [KategorijaController::class, 'create'])->name('categories.create');
+Route::get('/categories/create', [KategorijaController::class, 'create'])->name('categories.create');
 Route::post('/categories', [KategorijaController::class, 'store'])->name('categories.store');
 Route::get('categories/{categories}/edit', [KategorijaController::class, 'edit'])->name('categories.edit');
 Route::put('/categories/{categories}', [KategorijaController::class, 'update'])->name('categories.update');
@@ -84,12 +88,17 @@ Route::post('/block/create/{user}', [NobloketsController::class, 'specific'])->n
 
 //Public routes
 
+//Delete user
 Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
 Route::middleware(['realCategory'])->group(function () {
 // Upload routes
 Route::get('/upload', [MediaController::class, 'upload'])->name('upload');
 Route::post('/upload', [MediaController::class, 'uploadPost'])->name('upload.post');
+Route::get('/uploadMusic', [MuzikaController::class, 'upload'])->name('uploadMusic');
+Route::post('/uploadMusic', [MuzikaController::class, 'uploadPost'])->name('uploadMusic.post');
+Route::get('/uploadSound', [SkanasController::class, 'upload'])->name('uploadSound');
+Route::post('/uploadSound', [SkanasController::class, 'uploadPost'])->name('uploadSound.post');
 });
 
 // gallery
@@ -101,12 +110,33 @@ Route::get('/pictures/{media}', [PictureController::class, 'show'])->name('pictu
 Route::get('/pictures/download/{media}', [PictureController::class, 'download'])->name('pictures.download');
 Route::get('/pictures/search', [PictureController::class, 'search'])->name('pictures.search');
 
+//sound library
+Route::get('/sounds', [SoundLibrary::class, 'index'])->name('sounds.index');
+Route::post('/sounds', [SoundLibrary::class, 'index'])->name('sounds.index');
+Route::get('/get/soundSubCategories/{sound_category_id}', [SoundLibrary::class, 'getSubcategories'])->name('getSoundSubCategories');
+Route::get('/sounds', [SoundLibrary::class, 'index'])->name('sounds.index');
+Route::get('/sounds/{media}', [SoundLibrary::class, 'show'])->name('sounds.show');
+Route::get('/sounds/download/{media}', [SoundLibrary::class, 'download'])->name('sounds.download');
+Route::get('/sounds/search', [SoundLibrary::class, 'search'])->name('sounds.search');
+
+//music library
+Route::get('/music', [MusicLibrary::class, 'index'])->name('music.index');
+Route::post('/music', [MusicLibrary::class, 'index'])->name('music.index');
+Route::get('/get/genre/{genre_id}', [MusicLibrary::class, 'getSubgenre'])->name('getSubgenre');
+Route::get('/music', [MusicLibrary::class, 'index'])->name('music.index');
+Route::get('/music/{media}', [MusicLibrary::class, 'show'])->name('music.show');
+Route::get('/music/download/{media}', [MusicLibrary::class, 'download'])->name('music.download');
+Route::get('/music/search', [MusicLibrary::class, 'search'])->name('music.search');
+
 //Welcome page
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 
 //error pages
 Route::get('/error', function () {return view('error');})->name('error');
 Route::get('/blocked', function () {return view('block');})->name('block');
+
+//random media
+Route::get('/random', [])->name('random');
 
 }); //end of auth and blocked
 

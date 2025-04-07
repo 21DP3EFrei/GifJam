@@ -11,10 +11,10 @@
     <!-- Navbar -->
     <nav class="navbar bg-gray-900 shadow-lg">
         <div class="container mx-auto flex items-center justify-between px-4 py-2">
-            <a href="" class="flex items-center space-x-3 text-primary">
+            <a href="" class="flex items-center space-x-3 text-primary !sm:hidden">
                 <img class="h-10 w-14" src="{{ asset('images/gifjam.png') }}" alt="Logo" class="h-12">
             </a>            
-            <div>
+            <div class="flex flex-row">
                 <select class="w-50 rounded-md border-gray-300 shadow-sm focus:ring-opacity-50 border p-3 py-1 mr-2" style="background-color: #051d2c" onchange="window.location.href = this.value">
                     @php
                         $languages = ['en' =>  'En', 'lv' => 'Lv', 'ru' =>  'Ru'];

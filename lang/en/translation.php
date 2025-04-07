@@ -144,7 +144,8 @@ return [
     'notBlocked'=> 'Unblocked',
     'uSure'=> 'Are you sure you want to remove this?',
     'selectUser'=> 'Select a user',
-    
+    'file'=> 'File',
+
     'navigation_welcome'=> 'Welcome',
     'navigation_upload'=> 'Upload',
     'navigation_gallery'=> 'Gallery',
@@ -157,6 +158,8 @@ return [
     'navigation_manage'=> 'Manage Account',
     'navigation_profile'=> 'Profile',
     'navigation_logOut'=> 'Log Out',
+    'navigation_admin'=> 'Dashboard',    
+    'navigation_unverify'=> 'Verified',
 
     'remember'=> 'Remember me',
     'noaccount'=> "Don't have an account?",

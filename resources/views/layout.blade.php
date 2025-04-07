@@ -41,13 +41,10 @@ body {
 
         @media (prefers-color-scheme: dark) {
             .dynamic-background {
-                background-color: #001729; /* Dark mode background */
+                background-color: #001729 !important; /* Dark mode background */
             }
         }
-
-        @media (prefers-color-scheme: light) {
             .dynamic-background {
-                background-color: rgb(195, 193, 193); /* Light mode background */
-            }
+                background-color: rgb(222, 221, 221); /* Light mode background */
         }
 </style>

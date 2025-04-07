@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Media;
 use App\Models\Kategorija;
+use App\Models\Skana_kategorija;
+use App\Models\Zanrs;
 
 class UnverificationController extends Controller
 {
@@ -50,19 +52,32 @@ class UnverificationController extends Controller
     {
         $allMedia = Media::all(); 
         $categories = Kategorija::all();
-        return view('unverification.edit', compact('media', 'allMedia', 'categories'));
+        $soundCategories = Skana_kategorija::all();
+        $zanrs = Zanrs::all();
+
+        return view('unverification.edit', compact('media', 'allMedia', 'categories', 'soundCategories', 'zanrs'));
     }
     public function update(Request $request, Media $media)
     {
+        $sound = $media->skana;  
+        $music = $media->music;  
+
         // Validate the request data
         $request->validate([
             'Nosaukums' => 'required|string',
             'Apraksts' => 'nullable|string',
             'Autors' => 'required|string',
             'Autortiesibas' => 'required|in:0,1', // Ensure the value is either 0 or 1
-            'Kategorija_id' => 'required|exists:kategorija,K_ID', // Ensure the selected category exists
         ]);
-    
+
+        if ($media->Multivides_tips === 'Image') {
+            $rules['Kategorija_id'] = 'exists:kategorija,K_ID';
+        } elseif ($media->Multivides_tips === 'Sound') {
+            $rules['SoundKategorija_id'] = 'exists:skana_kategorija,SKat_ID';
+        } elseif ($media->Multivides_tips === 'Music') {
+            $rules['Zanrs_id'] = 'exists:zanrs,Z_ID';
+        }
+
         // Update the media record
         $media->update([
             'Nosaukums' => $request->Nosaukums,
@@ -72,11 +87,17 @@ class UnverificationController extends Controller
         ]);
     
         // Sync the selected categories with the media
-        $categories = $request->Kategorija_id; // Use the correct field name from the request
-        $media->kategorijas()->sync($categories); // Use sync() to avoid duplicates
-    
+        if ($media->Multivides_tips === 'Image') {
+            $media->kategorijas()->sync($request->Kategorija_id);
+        } elseif ($media->Multivides_tips === 'Sound' && $sound) {
+            $sound->skanaKategorija()->sync($request->SoundKategorija_id);
+        } elseif ($media->Multivides_tips === 'Music' && $music) {
+            $music->zanrs()->sync($request->Zanrs_id);
+        }
+
         return redirect()->route('unverification.index')->with('success', 'Media updated successfully.');
     }
+
     public function __construct()
     {
         $this->middleware('auth');
