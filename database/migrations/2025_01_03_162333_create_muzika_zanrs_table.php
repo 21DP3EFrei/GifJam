@@ -15,10 +15,8 @@ return new class extends Migration
             $table->id('MZ_ID'); 
             $table->unsignedBigInteger('Muzika');
             $table->unsignedBigInteger('Zanrs'); 
-
             $table->foreign('Muzika')->references('Mu_ID')->on('muzika')->onDelete('cascade');
             $table->foreign('Zanrs')->references('Z_ID')->on('zanrs')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

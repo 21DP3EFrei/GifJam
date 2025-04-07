@@ -3,42 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Kategorija;
-use App\Models\Media; 
+use App\Models\Skana_kategorija;
+use App\Models\Media;
+use App\Models\Skana; 
 use Illuminate\Support\Facades\Storage; 
 
-class PictureController extends Controller
+class SoundLibrary extends Controller
 {
     public function index(Request $request)
     {
         // Fetch categories and subcategories
-        $categories = Kategorija::whereNull('Apakskategorija')->get();
-        $subcategories = Kategorija::whereNotNull('Apakskategorija')->get();
+        $categories = Skana_kategorija::whereNull('Apakskategorija')->get();
+        $subcategories = Skana_kategorija::whereNotNull('Apakskategorija')->get();
     
         // Initialize query for media
-        $query = Media::where('Status', 1 )->where('Multivides_tips', 'Image'); // Ensure only verified media is fetched
-    
+        $query = Media::where('Status', 1)->where('Multivides_tips', 'Sound');
+
         // Apply filters (category, subcategory, search, sort_by)
-        if ($request->filled('category_id')) {
-            $categoryId = $request->category_id;
+        if ($request->filled('sound_category_id')) {
+            $categoryId = $request->sound_category_id;
             $allSubCategoryIds = $this->getSubcategoryIds($categoryId);
             array_unshift($allSubCategoryIds, $categoryId);
-    
-            $query->whereHas('kategorijas', function ($q) use ($allSubCategoryIds) {
-                $q->whereIn('K_ID', $allSubCategoryIds);
+
+            $query->whereHas('skanaKategorija', function ($q) use ($allSubCategoryIds) {
+                $q->whereIn('SKat_ID', $allSubCategoryIds);
             });
         }
-    
+
         if ($request->filled('subcategory_id') && $request->subcategory_id) {
             $query->whereHas('kategorijas', function ($q) use ($request) {
-                $q->where('K_ID', $request->subcategory_id);
+                $q->where('SKat_ID', $request->subcategory_id);
             });
         }
-    
+
         if ($request->filled('search')) {
             $query->where('Nosaukums', 'like', '%' . $request->input('search') . '%');
         }
-    
+
         switch ($request->sort_by) {
             case 'newest':
                 $query->orderByDesc('Me_ID');
@@ -56,25 +57,26 @@ class PictureController extends Controller
                 $query->orderBy('Me_ID');
                 break;
         }
-    
-        $pictures = $query->get();
-    
+
+        $sound = $query->get();
+
         // Check if the request is via AJAX
         if ($request->ajax()) {
-            return response()->json(['success' => true, 'data' => view('pictures.media', compact('pictures'))->render()])
+            return response()->json(['success' => true, 'data' => view('sounds.media', compact('sounds'))->render()])
                 ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
                 ->header('Pragma', 'no-cache')
                 ->header('Expires', '0');
         }
-    
+
         // Return the full view for non-AJAX requests
-        return view('pictures.index', compact('categories', 'subcategories', 'pictures'));
+        return view('sounds.index', compact('categories', 'subcategories', 'sound'));
     }
+
     // Recursive method to get all subcategory IDs, including nested subcategories
     public function getSubcategoryIds($categoryId)
     {
         // Get the direct subcategories of the selected category
-        $subcategories = Kategorija::where('Apakskategorija', $categoryId)->get();
+        $subcategories = Skana_kategorija::where('Apakskategorija', $categoryId)->get();
         
         $allSubCategoryIds = $subcategories->pluck('K_ID')->toArray();
         
@@ -96,7 +98,7 @@ class PictureController extends Controller
     
             // Fetch the subcategory details using the IDs obtained
             // You can choose to return both the category and subcategories in the response.
-            $subcategories = Kategorija::whereIn('K_ID', $allSubCategoryIds)->get(['K_ID', 'Nosaukums']);
+            $subcategories = Skana_kategorija::whereIn('K_ID', $allSubCategoryIds)->get(['K_ID', 'Nosaukums']);
     
             return response()->json(['success' => true, 'data' => $subcategories]);
         } catch (\Exception $e) {

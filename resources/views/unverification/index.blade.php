@@ -8,9 +8,9 @@
     </h2>
 </x-custom-header>
 <div class="container mx-2 px-1 py-1">
-    <form action="{{ route('verification.index') }}" method="GET" id="filterForm">
+    <form action="{{ route('unverification.index') }}" method="GET" id="filterForm">
         @csrf
-        <button type="submit" class="btn btn-primary mt-2 mb-2">{{ __('translation.pending') }}</button>
+        <a type="submit" class="btn btn-primary mt-2 mb-2" href="{{ route('verification.index') }}">{{ __('translation.pending') }}</a>
         <div class="flex items-center gap-2 mt-5 px-2 pb-2">
             <svg class="h-5 w-5 opacity-50 text-gray-500 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
             <input  type="text" class="grow input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="searchInput" name="search" placeholder="Search media..." autocomplete="off"/>
@@ -27,8 +27,8 @@
                 <th class="border-separate border border-gray-400">{{ __('translation.fileName') }}</th>
                 <th class="border-separate border border-gray-400">{{ __('translation.description') }}</th>
                 <th class="border-separate border border-gray-400">{{ __('translation.actions') }}</th>
-                <th class="border-separate border border-gray-400">{{ __('translation.category') }}</th>
-                <th class="border-separate border border-gray-400">{{ __('translation.image') }}</th>
+                <th class="border-separate border border-gray-400">{{ __('translation.category') }} / {{ __('translation.navigation_genre') }}</th>
+                <th class="border-separate border border-gray-400">{{ __('translation.file') }}</th>
                 <th class="border-separate border border-gray-400">{{ __('translation.uploaded') }}</th>
                 <th class="border-separate border border-gray-400">{{ __('translation.updated') }}</th>
             </tr>
@@ -55,23 +55,69 @@
                         <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded-sm cursor-pointer">{{ __('translation.update') }}</button>
                     </form>
                 </td>
-                    @if ($media->kategorijas !== null && $media->kategorijas->isNotEmpty())
-                    <td>
+                <td class="text-center">
+                    @if ($media->Multivides_tips === 'Image' && $media->kategorijas && $media->kategorijas->isNotEmpty())
+                        <strong>Categories:</strong>
                         @foreach($media->kategorijas as $category)
                             {{ $category->Nosaukums }}{{ !$loop->last ? ', ' : '' }}
                         @endforeach
+                        <br>
+                
+                        @elseif ($media->Multivides_tips === 'Sound' && $media->skana && $media->skana->skanaKategorija && $media->skana->skanaKategorija->isNotEmpty())
+                            <strong>Sound Categories:</strong>
+                            @foreach($media->skana->skanaKategorija as $category)
+                                {{ $category->Nosaukums }}{{ !$loop->last ? ', ' : '' }}
+                            @endforeach
+                            <br>
+
+                        @elseif ($media->Multivides_tips === 'Music' && $media->music && $media->music->zanrs && $media->music->zanrs->isNotEmpty())
+                            <strong>Genres:</strong>
+                            @foreach($media->music->zanrs as $genre)
+                                {{ $genre->Nosaukums }}{{ !$loop->last ? ', ' : '' }}
+                            @endforeach
+                        @else
+                        -
+                        @endif
+                </td>
+                    @if ($media->Multivides_tips === 'Image')
+                    <td class="text-center">
+                        <div class="flex items-center justify-between space-x-2">
+                        <img class="cursor-pointer" src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}" width="100" height="100" onclick="this.classList.toggle('fixed'); this.classList.toggle('inset-0'); this.classList.toggle('w-full'); this.classList.toggle('h-full'); this.classList.toggle('object-contain'); this.classList.toggle('z-50'); this.classList.toggle('bg-black');"/>       
+                        <div class="border rounded-full w-9 h-9 flex justify-center items-center transition ease-in-out duration-300 hover:bg-blue-300">
+                            <a href="{{ asset('storage/' . $media->Fails) }}" download="{{ $media->Fails }}" class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800">↓</a>
+                        </div>
+                        </div>
+                    </td>
+                    @elseif ($media->Multivides_tips === 'Sound' || $media->Multivides_tips === 'Music')
+                    <td>
+                        ​​<script type="module" src="https://cdn.jsdelivr.net/npm/media-chrome@3/+esm"> </script>
+                        <div class="flex items-center justify-between">
+                        <media-controller audio style="--media-background-color: transparent;">
+                            <audio slot="media" src="{{ asset('storage/' . $media->Fails) }}" crossorigin></audio>
+                        <media-control-bar class="flex items-center justify-between w-full flex-col">
+                            <!-- Left Controls -->
+                            <div class="flex items-center">
+                                <media-play-button class="bg-blue" style="--media-control-background: transparent; --media-control-hover-background: transparent;"></media-play-button>
+                            </div>
+                            <div class="flex items-center">
+                                <media-playback-rate-button rates="0.5 1 2" style="--media-control-background: transparent; --media-control-hover-background: transparent;"></media-playback-rate-button> <!-- Rate limit is 16 -->
+                            </div>
+                
+                            <!-- Time Display -->
+                            <div class="flex items-center space-x-1">
+                                <media-time-display style="--media-control-background: transparent; --media-control-hover-background: transparent;"></media-time-display><p>/ </p>
+                                <media-duration-display style="--media-control-background: transparent; --media-control-hover-background: transparent;"></media-duration-display>
+                            </div>
+                        </media-control-bar>
+                        </media-controller>
+                        <div class="border rounded-full w-9 h-9 flex justify-center items-center transition ease-in-out duration-300 hover:bg-blue-300 text-end">
+                            <a href="{{ asset('storage/' . $media->Fails) }}" download="{{ $media->Fails }}" class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800">↓</a>
+                        </div>
+                        </div>
                     </td>
                     @else
-                        <td class="text-center">-</td>
+                    <td class="text-center">-</td>
                     @endif    
-                <td class="text-center">
-                    <div class="flex items-center justify-center space-x-2">
-                    <img class="cursor-pointer" src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}" width="100" height="100" onclick="this.classList.toggle('fixed'); this.classList.toggle('inset-0'); this.classList.toggle('w-full'); this.classList.toggle('h-full'); this.classList.toggle('object-contain'); this.classList.toggle('z-50'); this.classList.toggle('bg-black');"/>       
-                    <div class="border rounded-full w-9 h-9 flex justify-center items-center transition ease-in-out duration-300 hover:bg-blue-300">
-                        <a href="{{ asset('storage/' . $media->Fails) }}" download="{{ $media->Fails }}" class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800">↓</a>
-                    </div>
-                    </div>
-                </td>
                 <td class="text-center">{{ $media->created_at->format('D M Y')}}</td>
                 <td class="text-center">{{ $media->updated_at->format('D/M/Y')}},  {{ $media->updated_at->format('H:i')}} </td>
             </tr>

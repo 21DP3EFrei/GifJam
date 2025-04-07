@@ -7,7 +7,7 @@ use App\Models\Kategorija;
 use App\Models\Media; 
 use Illuminate\Support\Facades\Storage; 
 
-class PictureController extends Controller
+class MusicLibrary extends Controller
 {
     public function index(Request $request)
     {
@@ -16,7 +16,7 @@ class PictureController extends Controller
         $subcategories = Kategorija::whereNotNull('Apakskategorija')->get();
     
         // Initialize query for media
-        $query = Media::where('Status', 1 )->where('Multivides_tips', 'Image'); // Ensure only verified media is fetched
+        $query = Media::where('Status', 1 )->where('Multivides_tips', 'Music'); 
     
         // Apply filters (category, subcategory, search, sort_by)
         if ($request->filled('category_id')) {

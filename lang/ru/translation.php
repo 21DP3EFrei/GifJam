@@ -157,6 +157,9 @@ return [
     'navigation_manage'=> 'Управление аккаунтом',
     'navigation_profile'=> 'Профиль',
     'navigation_logOut'=> 'Выйти',
+    'navigation_admin'=> 'Администратор',    
+    'navigation_unverify'=> 'Непроверено',
+    'file'=> 'Файл',
 
     'remember' => 'Запомнить меня',
     'noaccount' => 'Нет аккаунта?',

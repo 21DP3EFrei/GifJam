@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('muzika', function (Blueprint $table) {
             $table->id('Mu_ID');
-            $table->integer('Garums');
-            $table->date('Izlaists');
-            $table->integer('Bitrate')->nullable();
+            $table->year('Izlaists')->nullable();
             $table->unsignedBigInteger('Medija')->nullable();
             $table->foreign('Medija')->references('Me_ID')->on('medija')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

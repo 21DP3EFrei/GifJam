@@ -33,7 +33,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="bg-gray-300 dark:bg-sky-950">
                 {{ $slot }}
             </main>
         </div>

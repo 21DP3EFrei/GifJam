@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Models\Kategorija;
+use App\Models\Zanrs;
+use App\Models\Skana_kategorija;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,8 +21,8 @@ class CategoryExists
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Check if the authenticated user is an admin
-        if (Kategorija::count() === 0) {
+        // Check if categories exists
+        if (Kategorija::count() === 0 || Zanrs::count() === 0 || Skana_kategorija::count() === 0) {
             return redirect()->route('error');
         }
         return $next($request);

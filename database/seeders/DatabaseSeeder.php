@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 use App\Models\Skana_kategorija;
-use App\Models\Skana;
 use App\Models\Music;
 use App\Models\Zanrs;
 use Illuminate\Database\Seeder;
@@ -28,14 +27,11 @@ class DatabaseSeeder extends Seeder
             MediaSeeder::class,
             MusicSeeder::class,
             Skana_kategorijaSeeder::class,
-            SoundSeeder::class,
             GenreSeeder::class,
         ]);
         
         Media::factory(1)->has(Kategorija::factory(2))->create();
         Music::factory(2)->has(Zanrs::factory(2))->create();
-        Skana::factory(2)->has(Skana_kategorija::factory(2))->create();
-        Media::factory(2)->has(Skana::factory()->count(3))->create();
         Media::factory(1)->has(Music::factory()->count(3))->create();
 
        

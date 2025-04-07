@@ -4,21 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Media;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Models\Kategorija;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\Mime\MimeTypes;
-use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
-    public function index()
-    {
-        $medias = Media::all();
-        return view('media.index', compact('media'));
-    }
     public function upload()
     {
         $categories = Kategorija::all();
@@ -26,7 +17,6 @@ class MediaController extends Controller
     }
     public function uploadPost(Request $request)
     {
-        Log::info('Upload Post method started.');
         $request->validate([
             'fileName' => 'required|string',
             'fileDescription' => 'nullable|string',
@@ -52,7 +42,7 @@ class MediaController extends Controller
         $media->Autortiesibas = ($request->copyright == 'Yes') ? 1 : 0;
         $media->Status = 0; // Set the default status to unpublished
         $media->Lietotajs = Auth::id();
-        $media->Multivides_tips = $request->input('Multivides_tips');
+        $media->Multivides_tips = 'Image';
         $media->save();
 
         $categories = $request->category_id;
@@ -62,10 +52,7 @@ class MediaController extends Controller
         return back()->with('success', 'File uploaded successfully and awaiting review.');
     }
     public function verify(Request $request, Media $media)
-{
-    $categories = Kategorija::all();
-    
-
+    {
     // Validate the request
     $request->validate([
         'status' => 'required|boolean', // Status should be either true (approved) or false (rejected)
@@ -80,6 +67,7 @@ class MediaController extends Controller
     // Redirect back to the verification index page with a success message
     return Redirect::route('verification.index')->with('success', 'File verification status updated successfully.');
 }
+
 public function __construct()
     {
         $this->middleware('auth');

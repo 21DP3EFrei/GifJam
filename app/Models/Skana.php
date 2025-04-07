@@ -11,7 +11,6 @@ class Skana extends Model
 
     protected $table = 'skana';
     protected $primaryKey = 'Sk_ID';
-    protected $fillable = ['Garums'];
 
     public function media()
     {
@@ -21,4 +20,6 @@ class Skana extends Model
     {
         return $this->belongsToMany(Skana_kategorija::class, 'skana_un_kategorija', 'Skana', 'Kategorija');
     }
+    public $timestamps = false;
+
 }

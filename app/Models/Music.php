@@ -11,7 +11,7 @@ class Music extends Model
 
     protected $table = 'muzika';
     protected $primaryKey = 'Mu_ID';
-    protected $fillable = ['Garums', 'Izlaists', 'Bitrate'];
+    protected $fillable = ['Izlaists'];
 
     public function media()
     {
@@ -21,4 +21,5 @@ class Music extends Model
     {
         return $this->belongsToMany(Zanrs::class, 'muzika_zanrs', 'Muzika', 'Zanrs');
     }
+    public $timestamps = false;
 }

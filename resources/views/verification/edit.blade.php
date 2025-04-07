@@ -31,15 +31,46 @@
                     <option value="0" {{ $media->Autortiesibas == '0' ? 'selected' : '' }}>{{ __('translation.no') }}</option>    
                 </select>
             </div>
-            <div class="my-5 flex flex-col">
-                <label for="Kategorija_id" class="form-label">{{ __('translation.category') }}</label>
-                <select class="select input-sm rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="Kategorija_id" id="Kategorija_id" required aria-required="true">
-                    @foreach($categories as $category)
-                    <option value="{{ $category->K_ID }}" {{ $media->Kategorija_id == $category->K_ID ? 'selected' : '' }}>{{ $category->Nosaukums }}</option>
-                    @endforeach
-                </select>
-            </div>
+            <td class="text-center">
+                @if ($media->Multivides_tips === 'Image')
+                <div class="my-5 flex flex-col">
+                    <label for="Kategorija_id" class="form-label">{{ __('translation.category') }}</label>
+                    <select class="select input-sm rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="Kategorija_id" id="Kategorija_id" required>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->K_ID }}" {{ $media->kategorijas->contains($category->K_ID) ? 'selected' : '' }}>
+                                {{ $category->Nosaukums }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
+            @elseif ($media->Multivides_tips === 'Sound')
+                <div class="my-5 flex flex-col">
+                    <label for="SoundKategorija_id" class="form-label">{{ __('translation.category') }}</label>
+                    <select class="select input-sm rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="SoundKategorija_id" id="SoundKategorija_id" required>
+                        @foreach($soundCategories as $category)
+                            <option value="{{ $category->SKat_ID }}" 
+                                {{ $media->skana && $media->skana->skanaKategorija->contains($category->SKat_ID) ? 'selected' : '' }}>
+                                {{ $category->Nosaukums }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+            @elseif ($media->Multivides_tips === 'Music')
+                <div class="my-5 flex flex-col">
+                    <label for="Zanrs_id" class="form-label">{{ __('translation.category') }}</label>
+                    <select class="select input-sm rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" name="Zanrs_id" id="Zanrs_id" required>
+                        @foreach($zanrs as $genre)
+                            <option value="{{ $genre->Z_ID }}" 
+                                {{ $media->music && $media->music->zanrs->contains($genre->Z_ID) ? 'selected' : '' }}>
+                                {{ $genre->Nosaukums }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
+            </td>
             <button type="submit" class="btn btn-primary mb-3">{{ __('translation.update') }}</button>
         </form>
     </div>

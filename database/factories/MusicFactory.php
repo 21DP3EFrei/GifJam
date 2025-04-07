@@ -17,9 +17,7 @@ class MusicFactory extends Factory
     public function definition(): array
     {
         return [
-            'Garums' => fake()->randomDigitNot(0),
-            'Izlaists' => fake()->date('Y-m-d',  'now'),
-            'Bitrate' => fake()->randomDigitNot(0),
+            'Izlaists' => fake()->year( 'now'),
         ];
     }
     
