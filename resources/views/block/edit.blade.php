@@ -9,15 +9,21 @@
 </x-custom-header>
 <div class="container mx-3">
     <h1 class="h1">{{ __('translation.update') }} {{ $block->lietotajs?->name ??  __('translation.unknownUser') }} {{ __('translation.Status') }}</h1>
+    @if ($errors->any())
+    <div class="alert alert-error">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <form action="{{ route('block.update', ['block' => $block->B_ID]) }}" method="POST" class="mt-2 px-8 rounded-xl">
         @csrf
         @method('PUT')
         <div class="form-group mb-2">
             <label for="Iemesls">{{ __('translation.reason') }}:</label>
-            <textarea class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white w-full" autocomplete="off" id="Iemesls" name="Iemesls">{{ $block->Iemesls }}</textarea>
-            @if ($errors->has('Iemesls'))
-                <p class="text-red-500 text-sm">{{ $errors->first('Iemesls') }}</p>
-            @endif
+            <textarea class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white w-full" autocomplete="off" id="Iemesls" name="Iemesls" required oninvalid="this.setCustomValidity('{{ __('translation.fillReason') }}')" oninput="this.setCustomValidity('')">{{ $block->Iemesls }}</textarea>
         </div>
         <div class="form-group mb-2">
             <label for="Blokets" class="form-label">{{ __('translation.status') }}:</label>
@@ -25,9 +31,6 @@
                 <option value="Block" {{ $block->Blokets == 1 ? 'selected' : '' }}>{{ __('translation.isBlocked') }}</option>
                 <option value="Unblock" {{ $block->Blokets == 0 ? 'selected' : '' }}>{{ __('translation.notBlocked') }}</option>
             </select>
-            @if ($errors->has('Blokets'))
-                <p class="text-red-500 text-sm">{{ $errors->first('Blokets')}}</p>
-            @endif
         </div>
         <button type="submit" class="btn btn-primary mb-3">{{ __('translation.update') }}</button>
     </form>

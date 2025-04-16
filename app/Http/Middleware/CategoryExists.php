@@ -21,10 +21,17 @@ class CategoryExists
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Check if categories exists
-        if (Kategorija::count() === 0 || Zanrs::count() === 0 || Skana_kategorija::count() === 0) {
-            return redirect()->route('error');
+        $hasCategories = 
+            Kategorija::exists() && 
+            Zanrs::exists() && 
+            Skana_kategorija::exists();
+    
+        // If no categories, always redirect to error page
+        if (!$hasCategories && $request->routeIs('upload', 'uploadMusic', 'uploadSound')) {
+            return redirect()->route('welcome')->with('error', __('translation.errorMessage'));
         }
-        return $next($request);
+        else{
+            return $next($request);
+        }
     }
 }

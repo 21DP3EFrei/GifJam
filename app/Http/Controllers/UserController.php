@@ -11,8 +11,8 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'name' => 'required|string|max:50',
+            'email' => 'required|string|email|max:100',
         ]);
 
         $user = Auth::user();
@@ -20,17 +20,17 @@ class UserController extends Controller
         $user->email = $request->email;
 
 
-        return redirect()->route('user.profile')->with('success', 'Profile updated successfully.');
+        return redirect()->route('user.profile')->with('success', __('translation.profileUpdate'));
     }
         public function destroy(User $user)
         {
             if (Auth::id() !== $user->id) {
-                return redirect()->route('home')->with('error', 'Unauthorized action.');
+                return redirect()->route('home')->with('error', __('translation.unauthorized'));
             }
     
             Auth::logout(); 
             $user->delete(); 
     
-            return redirect('/')->with('success', 'Account deleted successfully.');
+            return redirect('/')->with('success', __('translation.accountDelete'));
         }
     }

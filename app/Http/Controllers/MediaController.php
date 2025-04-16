@@ -18,14 +18,14 @@ class MediaController extends Controller
     public function uploadPost(Request $request)
     {
         $request->validate([
-            'fileName' => 'required|string',
-            'fileDescription' => 'nullable|string',
-            'author' => 'required|string',
+            'fileName' => 'required|string|max:100',
+            'fileDescription' => 'nullable|string|max:200',
+            'author' => 'required|string|max:100',
             'copyright' => 'required|string|in:Yes,No',
             'category_id' => 'required|exists:kategorija,K_ID', // Ensure the selected category exists
             'uploadFile' => 'required|mimes:png,jpeg,webp,gif,jpg|max:20000',
         ], [
-            'uploadFile.mimes' => 'Only image and GIF files are allowed.',
+            'uploadFile.mimes' => __('translation.uploadImage'),
         ]);
 
         // Store the uploaded image file
@@ -49,25 +49,8 @@ class MediaController extends Controller
         $media->kategorijas()->attach($categories);
     
         // Return a success message
-        return back()->with('success', 'File uploaded successfully and awaiting review.');
+        return back()->with('success', __('translation.fileUploaded'));
     }
-    public function verify(Request $request, Media $media)
-    {
-    // Validate the request
-    $request->validate([
-        'status' => 'required|boolean', // Status should be either true (approved) or false (rejected)
-    ]);
-
-    // Update the status of the specified file
-    $media->update([
-        'Status' => $request->status ? 1 : 0, // Convert boolean value to integer (1 for approved, 0 for rejected)
-    ]);
-
-    
-    // Redirect back to the verification index page with a success message
-    return Redirect::route('verification.index')->with('success', 'File verification status updated successfully.');
-}
-
 public function __construct()
     {
         $this->middleware('auth');

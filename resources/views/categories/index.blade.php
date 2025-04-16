@@ -4,7 +4,14 @@
 @section('content')
 <div class="container mx-2">
         <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3 mt-3">{{ __('translation.createNewCategory') }}</a>
-        <a href="{{ route('subcategories.index') }}" class="btn btn-primary mb-3 mt-3">Switch to Subcategories</a>
+        @if (session('success'))
+        <div class="alert alert-success mx-2 my-2 mr-3">{{ session('success') }}</div>
+        @endif
+        @if ($categories->isEmpty())
+        <div class="col-span-full flex items-center justify-center">
+            <h1 class="text-white text-3xl font-bold text-center">{{ __('translation.noCategories') }}</h1>
+        </div>
+        @else
         <div class="table-responsive overflow-x-auto mx-3">
             <table class="table table-zebra overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">        
             <thead>
@@ -18,10 +25,10 @@
             <tbody>
                 @foreach($categories as $category)
                 <tr class="align-middle items-center text-center hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300">
-                        <td>{{ $category->Nosaukums }}</td>
-                        <td>{{ $category->Apraksts }}</td>
+                        <td>{{ Str::limit($category->Nosaukums, 20) }}</td>
+                        <td>{{ Str::limit($category->Apraksts, 25) }}</td>
                         @if ($category->parent)
-                        <td>{{ $category->parent->Nosaukums }}</td>
+                        <td>{{ Str::limit($category->parent->Nosaukums, 25) }}</td>
                         @else
                         <td>-</td>
                         @endif
@@ -30,7 +37,7 @@
                             <form action="{{ route('categories.destroy', $category->K_ID) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-error !text-pink-100" onclick="return confirm('Are you sure you want to delete this category?')">{{ __('translation.delete') }}</button>
+                                <button type="submit" class="btn btn-sm btn-error !text-pink-100" onclick="return confirm('{{ __('translation.deleteCate') }}')">{{ __('translation.delete') }}</button>
                             </form>
                         </td>
                     </tr>
@@ -38,5 +45,6 @@
             </tbody>
         </table>
         </div>
+        @endif
     </div>
 @endsection

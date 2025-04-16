@@ -25,18 +25,18 @@ class KategorijaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Nosaukums' => 'required|string',
-            'Apraksts' => 'nullable|string',
+            'Kat_Nosaukums' => 'required|string|max:100',
+            'Apraksts' => 'nullable|string|max:300',
             'Apakskategorija' => 'nullable|exists:kategorija,K_ID'
         ]);
 
         Kategorija::create([
-            'Nosaukums' => $request->Nosaukums,
+            'Nosaukums' => $request->Kat_Nosaukums,
             'Apraksts' => $request->Apraksts, 
             'Apakskategorija' => $request->Apakskategorija,
         ]);
 
-        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
+        return redirect()->route('categories.index')->with('success', __('translation.categoryCreate'));
     }
 
     // Method to display a form for editing a category
@@ -51,18 +51,18 @@ class KategorijaController extends Controller
     public function update(Request $request, Kategorija $categories)
     {
         $request->validate([
-            'Nosaukums' => 'required|string',
-            'Apraksts' => 'nullable|string',
+            'Kat_Nosaukums' => 'required|string|max:100',
+            'Apraksts' => 'nullable|string|max:300',
             'Apakskategorija' => 'nullable|exists:kategorija,K_ID'
         ]);
 
         $categories->update([
-            'Nosaukums' => $request->Nosaukums,
+            'Nosaukums' => $request->Kat_Nosaukums,
             'Apraksts' => $request->Apraksts,
             'Apakskategorija' => $request->Apakskategorija,
         ]);
 
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+        return redirect()->route('categories.index')->with('success', __('translation.categoryUpdate'));
     }
 
     // Method to delete a category
@@ -70,7 +70,7 @@ class KategorijaController extends Controller
     {
         $categories->delete();
 
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+        return redirect()->route('categories.index')->with('success', __('translation.categoryDelete'));
     }
 
     public function __construct()

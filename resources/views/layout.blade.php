@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/media-chrome@3/+esm"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body class="min-h-screen flex flex-col">
    <!-- old header -->
@@ -17,15 +19,13 @@
 
         <!-- Content -->
         <div class="py-12 background grow display-block min-h-screen dynamic-background" >
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto sm:px-6 md:px-20 lg:px-8">
                 <div class="header overflow-hidden shadow-xl sm:rounded-lg dark:text-white dark:bg-blue-950">
                     @yield('content')
                 </div>
             </div>
         </div>
-    </x-app-layout>
-    <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
-    @stack('scripts') 
+    </x-app-layout> 
 </body>
 </html>
 

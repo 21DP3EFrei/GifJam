@@ -25,16 +25,13 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             MediaSeeder::class,
-            MusicSeeder::class,
             Skana_kategorijaSeeder::class,
             GenreSeeder::class,
         ]);
         
-        Media::factory(1)->has(Kategorija::factory(2))->create();
-        Music::factory(2)->has(Zanrs::factory(2))->create();
-        Media::factory(1)->has(Music::factory()->count(3))->create();
-
-       
+        // Media::factory(1)->has(Kategorija::factory(2))->create();
+        // Music::factory(2)->has(Zanrs::factory(2))->create();
+        // Media::factory(1)->has(Music::factory()->count(3))->create();
 
 }
 }

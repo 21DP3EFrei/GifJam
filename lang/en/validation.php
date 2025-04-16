@@ -96,7 +96,7 @@ return [
         'array' => 'The :attribute field must not have more than :max items.',
         'file' => 'The :attribute field must not be greater than :max kilobytes.',
         'numeric' => 'The :attribute field must not be greater than :max.',
-        'string' => 'The :attribute field must not be greater than :max characters.',
+        'string' => "The :attribute can't be more than :max characters.",
     ],
     'max_digits' => 'The :attribute field must not have more than :max digits.',
     'mimes' => 'The :attribute field must be a file of type: :values.',
@@ -191,6 +191,19 @@ return [
     |
     */
 
-    'attributes' => [],
-
+'attributes' => [
+    'fileName' => 'file name',
+    'fileDescription' => 'description',
+    'author' => 'author field',
+    'Autors' => 'author field',
+    'Apraksts' => 'description',
+    'Nosaukums' => 'file name',
+    'Iemesls' => 'reason',
+    'password' => 'password',
+    'current_password' => 'current password',
+    'Kat_Nosaukums' => 'category name',
+    'G_Nosaukums' => 'genre name',
+    'name' => 'name',
+    'email' => 'email',
+],
 ];

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('skana', function (Blueprint $table) {
             $table->id('Sk_ID');
+            $table->integer('Bitrate')->nullable();
             $table->unsignedBigInteger('Medija')->nullable();
             $table->foreign('Medija')->references('Me_ID')->on('medija')->onDelete('cascade');
         });

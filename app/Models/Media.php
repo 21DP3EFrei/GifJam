@@ -6,6 +6,7 @@ use App\Http\Controllers\MuzikaController;
 use App\Http\Controllers\SkanasController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Support\Facades\Storage;
 
 class Media extends Model
 {
@@ -35,5 +36,11 @@ class Media extends Model
         return $this->belongsTo(User::class, 'Lietotajs', 'id' );
     }
 
+    protected static function booted()
+    {
+        static::deleted(function ($file) {
+            Storage::delete($file->Fails);
+        });
+    }
 }
 

@@ -2,7 +2,7 @@
     <x-authentication-card>
     <x-slot name="logo">
     <a class="navbar-brand" href="http://127.0.0.1:5500/api/resources/views/home%20page/Home.html">
-        <img src="{{ asset('images/gifjam.png') }}" alt="Logo">
+        <img src="{{ asset('images/gifjam.png') }}"  alt="{{ __('translation.logo') }}">
     </a>
 </x-slot>
 

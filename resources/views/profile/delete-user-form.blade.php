@@ -29,13 +29,12 @@
                 {{ __('translation.deleteAccountConfirm') }}
 
                 <div class="mt-4" x-data="{}" x-on:confirming-delete-user.window="">
-                    <x-input type="password" class="mt-1 block w-3/4"
+                    <input type="password" class="mt-1 block w-3/4 border-gray-300 focus:border-indigo-500 p-2 focus:ring-indigo-500 rounded-md shadow-xs border bg-gray-200 dark:!bg-black dark:text-white dark:active:!bg-black dark:focus:!bg-black dark:focus:text-white autofill:!bg-white"
                                 autocomplete="current-password"
                                 placeholder="{{ __('translation.password') }}"
                                 x-ref="password"
                                 wire:model="password"
                                 wire:keydown.enter="deleteUser" />
-
                     <x-input-error for="password" class="mt-2" />
                 </div>
             </x-slot>
@@ -57,7 +56,7 @@
                     {{ __('translation.deleteAccount') }}
                 </x-danger-button>
                 @else
-                    <form action="{{ route('user.destroy', Auth::id()) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete your account?');" class="inline">
+                    <form action="{{ route('user.destroy', Auth::id()) }}" method="POST" onsubmit="return confirm('{{ __('translation.deleteAccountConfirmSocial') }}');" class="inline">
                         @csrf
                         @method('DELETE')
                         <x-danger-button class="ms-3" type="submit">

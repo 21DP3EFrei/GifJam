@@ -11,6 +11,7 @@ class Skana extends Model
 
     protected $table = 'skana';
     protected $primaryKey = 'Sk_ID';
+    protected $fillable = ['Bitrate'];
 
     public function media()
     {

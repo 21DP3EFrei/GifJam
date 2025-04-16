@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\KategorijaController; 
-use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UnverificationController;
 use App\Http\Controllers\PictureController;
@@ -26,7 +25,7 @@ Route::get('locale/{lang}', [LocalizationController::class, 'selected']);
  */Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
 
-Route::middleware(['auth', 'verified', 'blocked'])->group(function () {
+Route::middleware(['auth', 'verified', 'blocked', 'realCategory'])->group(function () {
 Route::middleware(['admin'])->group(function () {
 //Admin routes
 
@@ -66,16 +65,6 @@ Route::post('/unverify/{media}', [UnverificationController::class, 'mediaunverif
 Route::get('/unverify/{media}/edit', [UnverificationController::class, 'editMedia'])->name('unverification.edit');
 Route::put('/unverify/{media}', [UnverificationController::class, 'update'])->name('unverification.update');
 
-// Subcategory routes
-Route::get('/subcategories', [SubCategoryController::class, 'index'])->name('subcategories.index');
-Route::get('/subcategories/create', [SubCategoryController::class, 'create'])->name('subcategories.create');
-Route::post('/subcategories', [SubCategoryController::class, 'store'])->name('subcategories.store');
-Route::get('/subcategories/{subcategory}', [SubCategoryController::class, 'show'])->name('subcategories.show');
-Route::get('/subcategories/{subcategory}/edit', [SubCategoryController::class, 'edit'])->name('subcategories.edit');
-Route::put('/subcategories/{subcategory}', [SubCategoryController::class, 'update'])->name('subcategories.update');
-Route::delete('/subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('subcategories.destroy');
-Route::get('/fetch-subcategories/{categoryId}', [SubCategoryController::class, 'getSubcategories'])->name('fetch.subcategories');
-
 //Blocking routes
 Route::get('/block', [NobloketsController::class, 'index'])->name('block.index');
 Route::get('/block/create', [NobloketsController::class, 'create'])->name('block.create');
@@ -91,7 +80,6 @@ Route::post('/block/create/{user}', [NobloketsController::class, 'specific'])->n
 //Delete user
 Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
-Route::middleware(['realCategory'])->group(function () {
 // Upload routes
 Route::get('/upload', [MediaController::class, 'upload'])->name('upload');
 Route::post('/upload', [MediaController::class, 'uploadPost'])->name('upload.post');
@@ -99,31 +87,24 @@ Route::get('/uploadMusic', [MuzikaController::class, 'upload'])->name('uploadMus
 Route::post('/uploadMusic', [MuzikaController::class, 'uploadPost'])->name('uploadMusic.post');
 Route::get('/uploadSound', [SkanasController::class, 'upload'])->name('uploadSound');
 Route::post('/uploadSound', [SkanasController::class, 'uploadPost'])->name('uploadSound.post');
-});
 
-// gallery
+//gallery
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
-Route::post('/pictures', [PictureController::class, 'index'])->name('pictures.index');
 Route::get('/get/subcategories/{category_id}', [PictureController::class, 'getSubcategories'])->name('getSubcategories');
-Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
 Route::get('/pictures/{media}', [PictureController::class, 'show'])->name('pictures.show');
 Route::get('/pictures/download/{media}', [PictureController::class, 'download'])->name('pictures.download');
 Route::get('/pictures/search', [PictureController::class, 'search'])->name('pictures.search');
 
 //sound library
 Route::get('/sounds', [SoundLibrary::class, 'index'])->name('sounds.index');
-Route::post('/sounds', [SoundLibrary::class, 'index'])->name('sounds.index');
 Route::get('/get/soundSubCategories/{sound_category_id}', [SoundLibrary::class, 'getSubcategories'])->name('getSoundSubCategories');
-Route::get('/sounds', [SoundLibrary::class, 'index'])->name('sounds.index');
 Route::get('/sounds/{media}', [SoundLibrary::class, 'show'])->name('sounds.show');
 Route::get('/sounds/download/{media}', [SoundLibrary::class, 'download'])->name('sounds.download');
 Route::get('/sounds/search', [SoundLibrary::class, 'search'])->name('sounds.search');
 
 //music library
 Route::get('/music', [MusicLibrary::class, 'index'])->name('music.index');
-Route::post('/music', [MusicLibrary::class, 'index'])->name('music.index');
-Route::get('/get/genre/{genre_id}', [MusicLibrary::class, 'getSubgenre'])->name('getSubgenre');
-Route::get('/music', [MusicLibrary::class, 'index'])->name('music.index');
+Route::get('/get/genre/{genre_id}', [MusicLibrary::class, 'getSubgenres'])->name('getSubgenre');
 Route::get('/music/{media}', [MusicLibrary::class, 'show'])->name('music.show');
 Route::get('/music/download/{media}', [MusicLibrary::class, 'download'])->name('music.download');
 Route::get('/music/search', [MusicLibrary::class, 'search'])->name('music.search');
@@ -132,7 +113,6 @@ Route::get('/music/search', [MusicLibrary::class, 'search'])->name('music.search
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 
 //error pages
-Route::get('/error', function () {return view('error');})->name('error');
 Route::get('/blocked', function () {return view('block');})->name('block');
 
 //random media
@@ -146,10 +126,13 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-//random
+//misc 
 Route::get('/crazy', function () {
     return response()->file(public_path('crazy.mp4'));
 })->name('crazy');
+Route::get('/me', function () {
+    return redirect()->to('https://www.youtube.com/@Epic_brawler_Gaming');
+});
 
 // Test route
 Route::get('/test', function () {

@@ -45,7 +45,7 @@ class UnverificationController extends Controller
         ]);
 
         // Redirect back to the unverification index page with a success message
-        return redirect()->route('unverification.index')->with('success', 'File unverification status updated successfully.');
+        return redirect()->route('unverification.index')->with('success', __('translation.verifyStatus'));
     }
 
     public function editMedia(Request $request, Media $media)
@@ -62,13 +62,20 @@ class UnverificationController extends Controller
         $sound = $media->skana;  
         $music = $media->music;  
 
-        // Validate the request data
-        $request->validate([
-            'Nosaukums' => 'required|string',
-            'Apraksts' => 'nullable|string',
-            'Autors' => 'required|string',
-            'Autortiesibas' => 'required|in:0,1', // Ensure the value is either 0 or 1
-        ]);
+        //Validation rules
+        $rules = [
+            'Nosaukums' => 'required|string|max:100',
+            'Apraksts' => 'nullable|string|max:200',
+            'Autortiesibas' => 'required|in:0,1',
+        ];
+        
+        if (Media::where('Status', 1)->where('Multivides_tips', 'Sound')->exists()) {
+            $rules['Autors'] = 'nullable|string|max:100';
+        } else {
+            $rules['Autors'] = 'required|string|max:100';
+        }
+
+        $request->validate($rules);
 
         if ($media->Multivides_tips === 'Image') {
             $rules['Kategorija_id'] = 'exists:kategorija,K_ID';
@@ -95,7 +102,7 @@ class UnverificationController extends Controller
             $music->zanrs()->sync($request->Zanrs_id);
         }
 
-        return redirect()->route('unverification.index')->with('success', 'Media updated successfully.');
+        return redirect()->route('unverification.index')->with('success', __('translation.verifyUpdate'));
     }
 
     public function __construct()

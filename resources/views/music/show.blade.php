@@ -13,35 +13,54 @@
     <div class="flex flex-col md:flex-row gap-6">
         <!-- Left Column: Text and Button -->
         <div class="w-auto md:w-1/2 flex flex-col ml-4 my-4">
-            <h1 class="text-2xl font-bold mb-4">{{ $media->Nosaukums }}{{ __('translation.info') }}</h1>
+            <h1 class="text-2xl font-bold mb-4 break-words overflow-wrap">{{ $media->Nosaukums }}{{ __('translation.info') }}</h1>
             <form class="space-y-2 mr-2">
-                <!-- Description -->
-                <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm">
+                <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">
                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">{{ __('translation.description') }}</h3>
-                    <p class="text-gray-600 dark:text-gray-300">{{ $media->Apraksts }}</p>
+                    <div class="flex flex-col"> 
+                        <p class="text-gray-600 dark:text-gray-300 break-words overflow-wrap" >
+                            {{ $media->Apraksts }}
+                        </p>
+                    </div>
                 </div>
-            
-                <!-- Author -->
+                <!--Mid section-->
                 <div class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm">
+                    <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.bitrate') }}</label>
+                    <p class="text-sm text-gray-900 dark:text-white font-semibold">{{round($music->Bitrate / 1000)}} {{ __('translation.kbps') }}</p>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm">
+                    <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.released') }}</label>
+                    <p class="text-sm text-gray-900 dark:text-white font-semibold">{{$music->Izlaists }}</p>
+                </div>
+                <div class="items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">
                     <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.author') }}</label>
-                    <p class="text-sm text-gray-900 dark:text-white font-semibold">{{ $media->Autors }}</p>
+                    <p class="text-sm text-gray-900 dark:text-white font-semibold break-words overflow-wrap">{{ $media->Autors }}</p>
                 </div>
-            
-                <!-- Copyright -->
                 <div class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm">
-                    <label for="copyright" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.copyright') }}</label>
+                    <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.copyright') }}</label>
                     <p class="text-sm text-gray-900 dark:text-white font-semibold">{{ $media->Autortiesibas ? __('translation.yes') : __('translation.no') }}</p>
                 </div>
+            
             </form>
             <!-- Download Button -->
-            <form action="{{ route('pictures.download', $media) }}" method="GET" class="space-y-2">
+            <form action="{{ route('music.download', $media) }}" method="GET" class="space-y-2">
                 @csrf
                 <button type="submit" class="btn btn-primary w-40 mt-3">{{ __('translation.download') }}</button>
             </form>
         </div>
-        <div class="w-full md:w-1/2 flex justify-center items-center my-2">
-            <img src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}"  class="cursor-pointer rounded-lg shadow-lg" onclick="this.classList.toggle('fixed'); this.classList.toggle('inset-0'); this.classList.toggle('w-full'); this.classList.toggle('h-full'); this.classList.toggle('object-contain'); this.classList.toggle('z-50'); this.classList.toggle('bg-black');"/>
-        </div>
+        <div class="w-full md:w-1/2 flex justify-center items-center my-2 mr-2">
+            <media-controller audio id="mc" style="--media-background-color: transparent;" class="flex-col">
+                <audio slot="media" src="{{ asset('storage/' . $media->Fails) }}"></audio>
+                <media-control-bar>
+                  <media-play-button class="p-2"></media-play-button>
+                  <media-time-display showduration=""></media-time-display>
+                  <media-time-range></media-time-range>
+                  <media-mute-button></media-mute-button>
+                  <media-volume-range></media-volume-range>
+                  <media-playback-rate-button rates="0.5 1 1.5 2 8"></media-playback-rate-button>
+                </media-control-bar>
+              </media-controller>
+       </div>
     </div>
 </div>
 @endsection

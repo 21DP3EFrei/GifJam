@@ -26,18 +26,18 @@ class SoundCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Nosaukums' => 'required|string',
-            'Apraksts' => 'nullable|string',
+            'Kat_Nosaukums' => 'required|string|max:100',
+            'Apraksts' => 'nullable|string|max:300',
             'Apakskategorija' => 'nullable|exists:skanas_kategorija,SKat_ID'
         ]);
 
         Skana_Kategorija::create([
-            'Nosaukums' => $request->Nosaukums,
+            'Nosaukums' => $request->Kat_Nosaukums,
             'Apraksts' => $request->Apraksts, 
             'Apakskategorija' => $request->Apakskategorija,
         ]);
 
-        return redirect()->route('sound-categories.index')->with('success', 'Sound category created successfully.');
+        return redirect()->route('sound-categories.index')->with('success', __('translation.ScCreate'));
     }
 
     // Method to display a form for editing a category
@@ -52,18 +52,18 @@ class SoundCategoryController extends Controller
     public function update(Request $request, Skana_Kategorija $SoundCategory)
     {
         $request->validate([
-            'Nosaukums' => 'required|string',
-            'Apraksts' => 'nullable|string',
+            'Kat_Nosaukums' => 'required|string|max:100',
+            'Apraksts' => 'nullable|string|max:300',
             'Apakskategorija' => 'nullable|exists:skanas_kategorija,SKat_ID'
         ]);
 
         $SoundCategory->update([
-            'Nosaukums' => $request->Nosaukums,
+            'Nosaukums' => $request->Kat_Nosaukums,
             'Apraksts' => $request->Apraksts,
             'Apakskategorija' => $request->Apakskategorija,
         ]);
 
-        return redirect()->route('sound-categories.index')->with('success', 'Sound category updated successfully.');
+        return redirect()->route('sound-categories.index')->with('success', __('translation.scUpdate'));
     }
 
     // Method to delete a category
@@ -71,7 +71,7 @@ class SoundCategoryController extends Controller
     {
         $SoundCategory->delete();
 
-        return redirect()->route('sound-categories.index')->with('success', 'Sound category deleted successfully.');
+        return redirect()->route('sound-categories.index')->with('success', __('translation.scDelete'));
     }
 
     public function __construct()

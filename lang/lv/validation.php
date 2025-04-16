@@ -33,7 +33,7 @@ return [
 ],
 'boolean' => 'Laukam :attribute ir jābūt patiesam vai aplamam.',
 'can' => 'Laukā :attribute ir neautorizēta vērtība.',
-'confirmed' => 'Lauka :attribute apstiprinājums nesakrīt.',
+'confirmed' => ':attribute apstiprinājums nesakrīt.',
 'contains' => 'Laukam :attribute trūkst nepieciešamas vērtības.',
 'current_password' => 'Parole ir nepareiza.',
 'date' => 'Laukam :attribute ir jābūt derīgam datumam.',
@@ -96,7 +96,7 @@ return [
     'array' => 'Laukam :attribute nedrīkst būt vairāk par :max elementiem.',
     'file' => 'Laukam :attribute nedrīkst būt lielāks par :max kilobaitiem.',
     'numeric' => 'Laukam :attribute nedrīkst būt lielāks par :max.',
-    'string' => 'Laukam :attribute nedrīkst būt garāks par :max rakstzīmēm.',
+    'string' => ':attribute nedrīkst būt garāks par :max rakstzīmēm.',
 ],
 'max_digits' => 'Laukam :attribute nedrīkst būt vairāk par :max cipariem.',
 'mimes' => 'Laukam :attribute ir jābūt faila tipam: :values.',
@@ -187,5 +187,19 @@ return [
 | of "email". This simply helps us make our message more expressive.
 |
 */
-'attributes' => [],
+'attributes' => [
+    'fileName' => 'Faila nosaukums',
+    'password' => 'Paroles lauks',
+    'fileDescription' => 'Apraksts',
+    'author' => 'Autora lauks',
+    'Autors' => 'Autora lauks',
+    'Apraksts' => 'Apraksts',
+    'Nosaukums' => 'Faila nosaukums',
+    'Iemesls' => 'Iemesls',
+    'current_password' => 'pašreizējā parole',
+    'Kat_Nosaukums' => 'Kategorijas nosaukums',
+    'G_Nosaukums' => 'Žanra nosaukums',
+    'name' => 'Vārds',
+    'email' => 'E-pasts',
+],
 ];

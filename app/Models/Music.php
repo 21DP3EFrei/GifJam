@@ -11,7 +11,7 @@ class Music extends Model
 
     protected $table = 'muzika';
     protected $primaryKey = 'Mu_ID';
-    protected $fillable = ['Izlaists'];
+    protected $fillable = ['Izlaists', 'Bitrate'];
 
     public function media()
     {

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('Status')->default(0);
             $table->string('Fails', 300)->nullable();
             $table->enum('Multivides_tips', array_column(MultividesTips::cases(), 'value'));
-            $table->string('Autors', 100);
+            $table->string('Autors', 100)->nullable();
             $table->boolean('Autortiesibas');
             $table->unsignedBigInteger('Lietotajs')->nullable();
             $table->foreign('Lietotajs')->references('id')->on('users')->onDelete('cascade');

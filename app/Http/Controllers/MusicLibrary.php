@@ -3,42 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Kategorija;
+use App\Models\Music;
+use App\Models\Zanrs;
 use App\Models\Media; 
-use Illuminate\Support\Facades\Storage; 
 
 class MusicLibrary extends Controller
 {
     public function index(Request $request)
     {
-        // Fetch categories and subcategories
-        $categories = Kategorija::whereNull('Apakskategorija')->get();
-        $subcategories = Kategorija::whereNotNull('Apakskategorija')->get();
+        // Fetch genres and subgenres
+        $genres = Zanrs::whereNull('Apakszanrs')->get();
+        $subgenres = Zanrs::whereNotNull('Apakszanrs')->get();
     
         // Initialize query for media
         $query = Media::where('Status', 1 )->where('Multivides_tips', 'Music'); 
+        // Apply filters (genre, subgenre, search, sort_by)
+        if ($request->filled('genre_id')) {
+            $genreId = $request->genre_id;
+            $allSubGenreIds = $this->getSubgenreIds($genreId);
+            array_unshift($allSubGenreIds, $genreId);
     
-        // Apply filters (category, subcategory, search, sort_by)
-        if ($request->filled('category_id')) {
-            $categoryId = $request->category_id;
-            $allSubCategoryIds = $this->getSubcategoryIds($categoryId);
-            array_unshift($allSubCategoryIds, $categoryId);
-    
-            $query->whereHas('kategorijas', function ($q) use ($allSubCategoryIds) {
-                $q->whereIn('K_ID', $allSubCategoryIds);
+            $query->whereHas('music.zanrs', function ($q) use ($allSubGenreIds) {
+                $q->whereIn('Z_ID', $allSubGenreIds);
             });
         }
     
-        if ($request->filled('subcategory_id') && $request->subcategory_id) {
-            $query->whereHas('kategorijas', function ($q) use ($request) {
-                $q->where('K_ID', $request->subcategory_id);
+        if ($request->filled('subgenre_id') && $request->subgenre_id) {
+            $query->whereHas('music.zanrs', function ($q) use ($request) {
+                $q->where('Z_ID', $request->subgenre_id);
             });
         }
     
         if ($request->filled('search')) {
             $query->where('Nosaukums', 'like', '%' . $request->input('search') . '%');
         }
-    
         switch ($request->sort_by) {
             case 'newest':
                 $query->orderByDesc('Me_ID');
@@ -52,61 +50,70 @@ class MusicLibrary extends Controller
             case 'oldest':
                 $query->orderBy('Me_ID');
                 break;
+            case 'yearUp':
+                $query->join('muzika', 'medija.Me_ID', '=', 'muzika.Medija')
+                        ->orderBy('muzika.Izlaists', 'asc');
+                break; 
+            case 'yearDown':
+                $query->join('muzika', 'medija.Me_ID', '=', 'muzika.Medija')
+                        ->orderBy('muzika.Izlaists', 'desc');
+                break;
             default:
-                $query->orderBy('Me_ID');
+                $query->orderByDesc('Me_ID');
                 break;
         }
     
-        $pictures = $query->get();
+        $music = $query->get();
     
         // Check if the request is via AJAX
         if ($request->ajax()) {
-            return response()->json(['success' => true, 'data' => view('pictures.media', compact('pictures'))->render()])
+            return response()->json(['success' => true, 'data' => view('music.media', compact('music'))->render()])
                 ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
                 ->header('Pragma', 'no-cache')
                 ->header('Expires', '0');
         }
     
         // Return the full view for non-AJAX requests
-        return view('pictures.index', compact('categories', 'subcategories', 'pictures'));
+        return view('music.index', compact('genres', 'subgenres', 'music'));
     }
-    // Recursive method to get all subcategory IDs, including nested subcategories
-    public function getSubcategoryIds($categoryId)
+    // Recursive method to get all subgenre IDs, including nested subgenres
+    public function getSubgenreIds($genreId)
     {
-        // Get the direct subcategories of the selected category
-        $subcategories = Kategorija::where('Apakskategorija', $categoryId)->get();
+        // Get the direct subgenres of the selected genre
+        $subgenres = Zanrs::where('Apakszanrs', $genreId)->get();
         
-        $allSubCategoryIds = $subcategories->pluck('K_ID')->toArray();
+        $allSubGenreIds = $subgenres->pluck('Z_ID')->toArray();
         
-        // For each subcategory, get its own subcategories (nested recursion)
-        foreach ($subcategories as $subcategory) {
-            // Merge nested subcategories
-            $allSubCategoryIds = array_merge($allSubCategoryIds, $this->getSubcategoryIds($subcategory->K_ID));
+        // For each subgenre, get its own subgenres (nested recursion)
+        foreach ($subgenres as $subgenre) {
+            // Merge nested subgenres
+            $allSubGenreIds = array_merge($allSubGenreIds, $this->getSubgenreIds($subgenre->Z_ID));
         }
         
-        return $allSubCategoryIds;
+        return $allSubGenreIds;
     }    
     
-    // Function to update subcategories
-    public function getSubcategories($categoryId)
+    // Function to update subgenres
+    public function getSubgenres($genreId)
     {
         try {
-            // Get all subcategories (including nested) associated with the selected category
-            $allSubCategoryIds = $this->getSubcategoryIds($categoryId);
+            // Get all subgenres (including nested) associated with the selected genre
+            $allSubGenreIds = $this->getSubgenreIds($genreId);
     
-            // Fetch the subcategory details using the IDs obtained
-            // You can choose to return both the category and subcategories in the response.
-            $subcategories = Kategorija::whereIn('K_ID', $allSubCategoryIds)->get(['K_ID', 'Nosaukums']);
+            // Fetch the subgenre details using the IDs obtained
+            // You can choose to return both the genre and subgenres in the response.
+            $subgenres = Zanrs::whereIn('Z_ID', $allSubGenreIds)->get(['Z_ID', 'Nosaukums']);
     
-            return response()->json(['success' => true, 'data' => $subcategories]);
+            return response()->json(['success' => true, 'data' => $subgenres]);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'msg' => 'No data']);
+            return response()->json(['success' => false, 'msg' => __('translation.noData')]);
         }
     }
     
     public function show(Media $media)
     {
-        return view('pictures.show', compact('media'));
+        $music = Music::where('Medija', $media->Me_ID)->first();
+        return view('music.show', compact('media', 'music'));
     }
 
     public function download(Media $media)

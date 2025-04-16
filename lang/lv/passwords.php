@@ -18,5 +18,5 @@ return [
     'throttled' => 'Lūdzu, uzgaidiet, pirms mēģināt vēlreiz.',
     'token' => 'Šis paroles atjauninājuma talons nav derīgs.',
     'user' => "Nevar atrast lietotāju ar šādu e-pasta adresi.",
-
+    'currentPassword' => "Ievadītā parole neatbilst jūsu pašreizējai parolei.",
 ];

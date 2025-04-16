@@ -9,11 +9,20 @@
 </x-custom-header>
 <div class="container mx-3">
     <h1 class="h1">{{ __('translation.navigation_block') }}</h1>
+    @if ($errors->any())
+    <div class="alert alert-error mr-5">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <form action="{{ route('block.store') }}" method="POST" class="mt-2 px-8 rounded-xl">
         @csrf
         <div class="my-5 flex flex-col">
             <label for="L_ID" class="form-label">{{ __('translation.user') }}:</label>
-            <select class="select input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white w-full" id="L_ID" name="L_ID">
+            <select class="select input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white w-full" id="L_ID" name="L_ID" required oninvalid="this.setCustomValidity('{{ __('translation.fillUser') }}')"oninput="this.setCustomValidity('')">
                 <option value=""></option>
                 @foreach($user as $users)
                     <option value="{{ $users->id }}">{{ $users->name }} id:({{ $users->id }})</option>
@@ -25,7 +34,7 @@
         </div>
         <div class="my-5 flex flex-col">
             <label for="Iemesls" class="form-label">{{ __('translation.reason') }}:</label>
-            <textarea class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white w-full" autocomplete="off" id="Iemesls" name="Iemesls"></textarea>
+            <textarea class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white w-full" autocomplete="off" id="Iemesls" name="Iemesls" required oninvalid="this.setCustomValidity('{{ __('translation.fillReason') }}')"oninput="this.setCustomValidity('')"></textarea>
         </div>
         <button type="submit" class="btn btn-primary my-2">{{ __('translation.create')}}</button>
     </form>

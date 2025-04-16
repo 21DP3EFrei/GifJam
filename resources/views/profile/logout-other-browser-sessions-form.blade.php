@@ -71,13 +71,12 @@
                 {{ __('translation.EnterPasswordBroswer') }}
 
                 <div class="mt-4" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
-                    <x-input type="password" class="mt-1 block w-3/4"
+                    <input type="password" class="mt-1 block w-3/4 border-gray-300 focus:border-indigo-500 p-2 focus:ring-indigo-500 rounded-md shadow-xs border bg-gray-200 dark:!bg-black dark:text-white dark:active:!bg-black dark:focus:!bg-black dark:focus:text-white autofill:!bg-white"
                                 autocomplete="current-password"
                                 placeholder="{{ __('translation.password') }}"
                                 x-ref="password"
                                 wire:model="password"
                                 wire:keydown.enter="logoutOtherBrowserSessions" />
-
                     <x-input-error for="password" class="mt-2" />
                 </div>
             </x-slot>
@@ -87,11 +86,11 @@
                     {{ __('translation.cancel') }}
                 </x-secondary-button>
 
-                <x-button class="ms-3"
+                <button class="ms-3 inline-flex items-center px-4 py-2 bg-gray-700 dark:bg-gray-950 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'"
                             wire:click="logoutOtherBrowserSessions"
                             wire:loading.attr="disabled">
                     {{ __('translation.logout') }}
-                </x-button>
+                </button>
             </x-slot>
         </x-dialog-modal>
     </x-slot>

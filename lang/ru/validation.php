@@ -187,5 +187,19 @@ return [
 | of "email". This simply helps us make our message more expressive.
 |
 */
-'attributes' => [],
+'attributes' => [
+    'fileName' => 'название файла',
+    'fileDescription' => 'описание',
+    'author' => 'поле автора',
+    'Autors' => 'поле автора',
+    'Apraksts' => 'описание',
+    'Nosaukums' => 'название файла',
+    'Iemesls' => 'причина',
+    'password' => 'пароль',
+    'current_password' => 'текущий пароль',
+    'Kat_Nosaukums' => 'название категории',
+    'G_Nosaukums' => 'название жанра',
+    'name' => 'имя',
+    'email' => 'электронная почта',
+],
 ];
