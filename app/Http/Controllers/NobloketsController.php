@@ -30,7 +30,7 @@ class NobloketsController extends Controller
     {
         $request->validate([
             'L_ID' => 'required|exists:users,id', // Validate the selected user ID
-            'Iemesls' => 'nullable|string',      // Validate the reason
+            'Iemesls' => 'nullable|string|max:200', // Validate the reason
         ]);
     
         Noblokets::create([
@@ -39,7 +39,7 @@ class NobloketsController extends Controller
             'Iemesls' => $request->Iemesls,    
         ]);
     
-        return redirect()->route('block.index')->with('success', 'User status updated successfully.');
+        return redirect()->route('block.index')->with('success', __('translation.userBlock'));
     }
 
     // Display the form for editing a blocked record
@@ -52,7 +52,7 @@ class NobloketsController extends Controller
     {
     $request->validate([
     'Blokets' => 'required|string|in:Block,Unblock',
-    'Iemesls' => 'nullable|string',
+    'Iemesls' => 'nullable|string|max:200',
     ]);
     
     $block->update([
@@ -61,7 +61,7 @@ class NobloketsController extends Controller
     ]);
     
     
-    return redirect()->route('block.index')->with('success', 'User status updated successfully.');
+    return redirect()->route('block.index')->with('success', __('translation.userStatus'));
     }
 
     // Delete the specified blocked record
@@ -69,13 +69,13 @@ class NobloketsController extends Controller
     {
         $block->delete();
 
-        return redirect()->route('block.index')->with('success', 'User status deleted successfully.');
+        return redirect()->route('block.index')->with('success', __('translation.userBlockDelete'));
     }
 
     public function specific(Request $request, User $user)
     {
         $request->validate([
-            'Iemesls' => 'required|string|max:255', 
+            'Iemesls' => 'required|string|max:200', 
         ]);
     
         // Create a new entry in the Noblokets table
@@ -85,7 +85,7 @@ class NobloketsController extends Controller
             'Iemesls' => $request->Iemesls,
         ]);
     
-        return redirect()->route('block.index')->with('success', 'User status updated successfully.');
+        return redirect()->route('block.index')->with('success', __('translation.userBlock'));
     }
 
 public function __construct()

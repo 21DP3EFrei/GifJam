@@ -26,18 +26,18 @@ class GenreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Nosaukums' => 'required|string',
-            'Apraksts' => 'nullable|string',
+            'G_Nosaukums' => 'required|string|max:100',
+            'Apraksts' => 'nullable|string|max:300',
             'Apakszanrs' => 'nullable|exists:zanrs,Z_ID'
         ]);
 
         Zanrs::create([
-            'Nosaukums' => $request->Nosaukums,
+            'Nosaukums' => $request->G_Nosaukums,
             'Apraksts' => $request->Apraksts, 
             'Apakszanrs' => $request->Apakszanrs,
         ]);
 
-        return redirect()->route('genre.index')->with('success', 'Genre created successfully.');
+        return redirect()->route('genre.index')->with('success', __('translation.genreCreate'));
     }
 
     // Method to display a form for editing a category
@@ -52,18 +52,18 @@ class GenreController extends Controller
     public function update(Request $request, Zanrs $genre)
     {
         $request->validate([
-            'Nosaukums' => 'required|string',
-            'Apraksts' => 'nullable|string',
+            'G_Nosaukums' => 'required|string|max:100',
+            'Apraksts' => 'nullable|string|max:300',
             'Apakszanrs' => 'nullable|exists:zanrs,Z_ID'
         ]);
 
         $genre->update([
-            'Nosaukums' => $request->Nosaukums,
+            'Nosaukums' => $request->G_Nosaukums,
             'Apraksts' => $request->Apraksts,
             'Apakszanrs' => $request->Apakszanrs,
         ]);
 
-        return redirect()->route('genre.index')->with('success', 'Genre updated successfully.');
+        return redirect()->route('genre.index')->with('success', __('translation.genreUpdate'));
     }
 
     // Method to delete a category
@@ -71,7 +71,7 @@ class GenreController extends Controller
     {
         $genre->delete();
 
-        return redirect()->route('genre.index')->with('success', 'Genre deleted successfully.');
+        return redirect()->route('genre.index')->with('success', __('translation.genreDelete'));
     }
 
     public function __construct()

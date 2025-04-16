@@ -20,18 +20,24 @@ class SkanasController extends Controller
         {
             // Validate the request
             $request->validate([
-                'fileName' => 'required|string',
-                'fileDescription' => 'nullable|string',
-                'author' => 'required|string',
-                'copyright' => 'required|string|in:Yes,No',
+                'fileName' => 'required|string|max:100',
+                'fileDescription' => 'nullable|string|max:200',
                 'category_id' => 'required|exists:skanas_kategorija,SKat_ID', // Ensure the selected category exists
                 'uploadFile' => 'required|mimes:aac,aiff,alac,m4a,flac,mp3,wav,opus|max:20000',
             ], [
-                'uploadFile.mimes' => 'Only sound files are allowed.',
+                'uploadFile.mimes' => __('translation.uploadSound'),
             ]);
 
-            // Store the uploaded sound file
             $sound = $request->file('uploadFile');
+        
+            // Analyze the file metadata using getID3
+            $getID3 = new \getID3;
+            $fileInfo = $getID3->analyze($sound->getPathname());
+        
+            // Extract the year from metadata
+            $bitrate = $fileInfo['audio']['bitrate'] ?? null;
+
+            // Store the uploaded sound file
             $fileName = $sound->getClientOriginalName(); // Get the original filename
             $filePath = $sound->storeAs('uploads', $fileName, 'public'); // Store the file in the public disk
 
@@ -40,8 +46,7 @@ class SkanasController extends Controller
             $media->Nosaukums = $request->fileName;
             $media->Apraksts = $request->fileDescription;
             $media->Fails = $filePath; // Store the file path in the database
-            $media->Autors = $request->author;
-            $media->Autortiesibas = ($request->copyright == 'Yes') ? 1 : 0;
+            $media->Autortiesibas = 0; // Set to non copyrighthed by default
             $media->Status = 0; // Set the default status to unpublished
             $media->Lietotajs = Auth::id();
             $media->Multivides_tips = 'Sound'; // Assuming this is always "Sound" for this controller
@@ -50,6 +55,7 @@ class SkanasController extends Controller
             // Create a new Skana instance and associate it with the Media instance
             $skana = new Skana();
             $skana->Medija = $media->Me_ID; // Associate the Media ID with the Skana instance
+            $skana->Bitrate = $bitrate;
             $skana->save();
 
             // Attach the selected category to the Skana instance
@@ -57,22 +63,9 @@ class SkanasController extends Controller
             $skana->skanaKategorija()->attach($categoryId);
 
             // Return a success message
-            return back()->with('success', 'File uploaded successfully and awaiting review.');
+            return back()->with('success', __('translation.fileUploaded'));
         }
-        public function verify(Request $request, Media $media)
-    {
-            $request->validate([
-            'status' => 'required|boolean',
-        ]);
 
-        $media->update([
-            'Status' => $request->status ? 1 : 0,
-        ]);
-    
-        
-        // Redirect back to the verification index page with a success message
-        return Redirect::route('verification.index')->with('success', 'File verification status updated successfully.');
-    }
     public function __construct()
         {
             $this->middleware('auth');

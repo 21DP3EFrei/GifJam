@@ -27,6 +27,5 @@ class UserSeeder extends Seeder
             'usertype' => 'admin',
             'email_verified_at' => now(), 
         ]);
-        User::factory(3)->create();
     }
 }

@@ -7,7 +7,7 @@
     <x-authentication-card>
         <x-slot name="logo">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img class="h-10 w-14" src="{{ asset('images/gifjam.png') }}" alt="Logo">
+                <img class="h-10 w-14" src="{{ asset('images/gifjam.png') }}" alt="{{ __('translation.logo') }}">
             </a>
         </x-slot>
 
@@ -24,12 +24,12 @@
 
             <div>
                 <x-label for="email" value="{{ __('translation.email') }}" class="text-black dark:text-white" />
-                <x-input id="email" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-input novalidate id="email" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" oninvalid="this.setCustomValidity('{{ __('translation.fillEmail') }}')" oninput="this.setCustomValidity('');"/>
             </div>
 
             <div class="mt-4">
                 <x-label for="password" value="{{ __('translation.password') }}" class="text-black dark:text-white"/>
-                <x-input id="password" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="password" name="password" required autocomplete="current-password" />
+                <x-input id="password" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="password" name="password" required autocomplete="current-password" oninvalid="this.setCustomValidity('{{ __('translation.fillPassword') }}')" oninput="this.setCustomValidity('');"/>
             </div>
 
             <div class="block mt-4">
@@ -45,7 +45,7 @@
                 </a>
 
                 <!-- Login button aligned to the right -->
-                <x-button class="ms-auto">
+                <x-button id="loginButton" class="ms-auto">
                     {{ __('translation.login') }}
                 </x-button>
             </div>
@@ -53,9 +53,22 @@
         <h1 class="text-gray-400 opacity-45">{{ __('translation.orSign') }}</h1>
         <a href="{{ route('auth.google.redirect') }}" class="flex justify-center items-center space-x-4 text-center">
             <div class=" py-1 border-black border-2 bg-transparent  dark:bg-gray-700  flex items-center rounded-full">
-                <img class="h-auto w-auto max-h-10 max-w-12 rounded-sm ml-1 mr-1" src="{{ asset('images/Google.png') }}" alt="google login">
-                <h1 class="ml-1 mr-2 dark:text-gray-300 font-bold">{{ __('translation.googleSign') }}</h1>
+                <img class="h-auto w-auto max-h-10 max-w-12 rounded-sm ml-1 mr-1" src="{{ asset('images/Google.png') }}"  alt="{{ __('translation.logoGoogleL') }}">
+                <h1 class="ml-1 mr-2 dark:text-gray-300 font-bold">{{ __('translation.googleSignIn') }}</h1>
             </div>
         </a>
     </x-authentication-card>
 </x-guest-layout>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        const registerButton = document.getElementById('loginButton');
+    
+        form.addEventListener('submit', function (event) {
+            // Disable the button to prevent multiple submissions
+            registerButton.disabled = true;
+            registerButton.innerHTML = '<span class="loading loading-spinner text-secondary"></span>';
+            return true;
+        });
+    });
+    </script>

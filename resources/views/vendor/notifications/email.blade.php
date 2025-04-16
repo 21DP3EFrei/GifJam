@@ -25,7 +25,7 @@
 ?>
 <div class="h-2 w-3 flex justify-center text-center align-middle items-center justify-items-center">
 <a href="{{ route('home') }}">
-    <img src="{{ asset('images/gifjamsmol.png') }}" alt="Logo">
+    <img src="{{ asset('images/gifjamsmol.png') }}" alt="{{ __('translation.logo') }}">
 </a>
 </div>
 <x-mail::button :url="$actionUrl" :color="$color">

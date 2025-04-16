@@ -53,7 +53,7 @@ class PictureController extends Controller
                 $query->orderBy('Me_ID');
                 break;
             default:
-                $query->orderBy('Me_ID');
+                $query->orderByDesc('Me_ID');
                 break;
         }
     
@@ -100,7 +100,7 @@ class PictureController extends Controller
     
             return response()->json(['success' => true, 'data' => $subcategories]);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'msg' => 'No data']);
+            return response()->json(['success' => false, 'msg' => __('translation.noData')]);
         }
     }
     

@@ -20,14 +20,14 @@ class MuzikaController extends Controller
         {
             // Validate the request
             $request->validate([
-                'fileName' => 'required|string',
-                'fileDescription' => 'nullable|string',
-                'author' => 'required|string',
+                'fileName' => 'required|string|max:100',
+                'fileDescription' => 'nullable|string|max:200',
+                'author' => 'required|string|max:100',
                 'copyright' => 'required|string|in:Yes,No',
                 'category_id' => 'required|exists:zanrs,Z_ID', // Ensure the selected category exists
                 'uploadFile' => 'required|mimes:aac,aiff,alac,m4a,flac,mp3,wav,opus|max:20000',
             ], [
-                'uploadFile.mimes' => 'Only sound files are allowed.',
+                'uploadFile.mimes' => __('translation.uploadSound'),
             ]);
         
             // Initialize the uploaded file
@@ -39,6 +39,7 @@ class MuzikaController extends Controller
         
             // Extract the year from metadata
             $year = $fileInfo['tags']['id3v2']['year'][0] ?? null; // Default to null if year is not found
+            $bitrate = $fileInfo['audio']['bitrate'] ?? null;
         
             // Store the uploaded sound file
             $fileName = $musicFile->getClientOriginalName(); // Get the original filename
@@ -59,7 +60,12 @@ class MuzikaController extends Controller
             // Create a new Music instance and associate it with the Media instance
             $music = new Music();
             $music->Medija = $media->Me_ID; // Associate the Media ID with the Music instance
+            if ($year !== null){ 
             $music->Izlaists = $year; // Save the extracted year
+            }
+            if ($bitrate !== null){ 
+            $music->Bitrate = $bitrate;
+            }
             $music->save();
         
             // Attach the selected category to the Music instance
@@ -67,22 +73,8 @@ class MuzikaController extends Controller
             $music->zanrs()->attach($categoryId);
         
             // Return a success message
-            return back()->with('success', 'File uploaded successfully and awaiting review.');
+            return back()->with('success', __('translation.fileUploaded'));
         }
-        public function verify(Request $request, Media $media)
-    {
-            $request->validate([
-            'status' => 'required|boolean',
-        ]);
-
-        $media->update([
-            'Status' => $request->status ? 1 : 0,
-        ]);
-    
-        
-        // Redirect back to the verification index page with a success message
-        return Redirect::route('verification.index')->with('success', 'File verification status updated successfully.');
-    }
     public function __construct()
         {
             $this->middleware('auth');

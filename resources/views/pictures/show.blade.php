@@ -13,18 +13,22 @@
     <div class="flex flex-col md:flex-row gap-6">
         <!-- Left Column: Text and Button -->
         <div class="w-auto md:w-1/2 flex flex-col ml-4 my-4">
-            <h1 class="text-2xl font-bold mb-4">{{ $media->Nosaukums }}{{ __('translation.info') }}</h1>
+            <h1 class="text-2xl font-bold mb-4 break-words overflow-wrap">{{ $media->Nosaukums }}{{ __('translation.info') }}</h1>
             <form class="space-y-2 mr-2">
                 <!-- Description -->
-                <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm">
+                <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">
                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">{{ __('translation.description') }}</h3>
-                    <p class="text-gray-600 dark:text-gray-300">{{ $media->Apraksts }}</p>
+                    <div class="flex flex-col"> 
+                        <p class="text-gray-600 dark:text-gray-300 break-words overflow-wrap" >
+                            {{ $media->Apraksts }}
+                        </p>
+                    </div>
                 </div>
             
                 <!-- Author -->
-                <div class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm">
-                    <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.author') }}</label>
-                    <p class="text-sm text-gray-900 dark:text-white font-semibold">{{ $media->Autors }}</p>
+                <div class="items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">
+                    <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300 mr-2">{{ __('translation.author') }}</label>
+                    <p class="text-sm text-gray-900 dark:text-white font-semibold break-words overflow-wrap">{{ $media->Autors }}</p>
                 </div>
             
                 <!-- Copyright -->
