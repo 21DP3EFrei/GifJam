@@ -29,8 +29,8 @@
             @if (auth()->check()) 
                 <a href="/welcome" class="btn btn-primary mr-2">{{ __('translation.navigation_welcome') }}</a>
             @else
-                <a href="/login" class="btn btn-primary mr-2">{{ __('translation.login') }}</a>
-                <a href="/register" class="btn btn-outline">{{ __('translation.register') }}</a>
+                <a id="login" href="/login" class="btn btn-primary mr-2">{{ __('translation.login') }}</a>
+                <a id="register" href="/register" class="btn btn-outline">{{ __('translation.register') }}</a>
             @endif
             </div>
         </div>
@@ -45,7 +45,11 @@
             </a>
         </h1>
         <p class="text-lg mt-4">{{ __('translation.welcomeExplain') }}</p>
-
+        @if (auth()->check()) 
+        <a href="mark.mp4" target="_blank" class="inline-block w-fit mx-auto">
+            <img src="{{ asset('images/portugal.png') }}" alt="Coin" class="w-13 h-10 cursor-pointer">
+        </a>                       
+        @endif
         <!-- Info Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-1 mt-12">
             <!-- Memes + Gifs Card -->
@@ -102,3 +106,65 @@
     }
 </style>
 </html>
+<script>
+const loginLink = document.getElementById('login');
+const registerLink = document.getElementById('register');
+
+// Add a click event listener
+loginLink.addEventListener('click', function(event) {
+    // Prevent default action if either button is already disabled
+    if (loginLink.disabled || registerLink.disabled) {
+        event.preventDefault(); 
+        return;
+    }
+
+    // Disable both links for 5 seconds
+    loginLink.disabled = true;
+    loginLink.style.pointerEvents = 'none'; // Disable hover/click effects
+    loginLink.style.opacity = '0.5'; // Visually indicate it's disabled
+
+    registerLink.disabled = true; // Disable the register button
+    registerLink.style.pointerEvents = 'none';
+    registerLink.style.opacity = '0.5';
+
+    // Re-enable both links after 5 seconds
+    setTimeout(() => {
+        loginLink.disabled = false;
+        loginLink.style.pointerEvents = 'auto';
+        loginLink.style.opacity = '1';
+        
+        registerLink.disabled = false; // Re-enable the register button
+        registerLink.style.pointerEvents = 'auto';
+        registerLink.style.opacity = '1';
+    }, 5000);
+});
+
+// Add a click event listener for the register button
+registerLink.addEventListener('click', function(event) {
+    // Prevent default action if either button is already disabled
+    if (loginLink.disabled || registerLink.disabled) {
+        event.preventDefault(); 
+        return;
+    }
+
+    // Disable both links for 5 seconds
+    loginLink.disabled = true; // Disable the login button
+    loginLink.style.pointerEvents = 'none'; // Disable hover/click effects
+    loginLink.style.opacity = '0.5'; // Visually indicate it's disabled
+
+    registerLink.disabled = true; // Disable the register button
+    registerLink.style.pointerEvents = 'none';
+    registerLink.style.opacity = '0.5';
+
+    // Re-enable both links after 5 seconds
+    setTimeout(() => {
+        loginLink.disabled = false;
+        loginLink.style.pointerEvents = 'auto';
+        loginLink.style.opacity = '1';
+        
+        registerLink.disabled = false; // Re-enable the register button
+        registerLink.style.pointerEvents = 'auto';
+        registerLink.style.opacity = '1';
+    }, 5000);
+});
+</script>

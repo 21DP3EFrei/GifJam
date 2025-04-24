@@ -11,7 +11,6 @@ class KategorijaController extends Controller
         {
             $categories = Kategorija::all();
             $categories = Kategorija::with('parent')->get();
-        
             return view('categories.index', compact('categories'));
         }
     // Method to display the form for creating a new category

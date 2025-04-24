@@ -2,8 +2,17 @@
 
 @section('title',  __('translation.block'))
 @section('content')
+@php
+    use App\Models\Noblokets;
+    use App\Models\User;
+    $blockUserID = Noblokets::pluck('L_ID')->toArray();
+    $users = User::whereNotIn('id', $blockUserID)->where('id', '!=', Auth::id())->get();
+@endphp
 <div class="container mx-2">
-    <a href="{{ route('block.create') }}" class="btn btn-primary mb-3 mt-3">{{ __('translation.navigation_block') }}</a>
+    @if ($users->isEmpty())
+    @else
+    <a id="block" href="{{ route('block.create') }}" class="btn btn-primary mb-3 mt-3">{{ __('translation.navigation_block') }}</a>
+    @endif
     <div class="table-responsive overflow-x-auto mx-3 my-2">
         @if (session('success'))
         <div class="alert alert-success mx-2 my-2 mr-3">{{ session('success') }}</div>
@@ -33,7 +42,7 @@
                     <td>{{ $blocked->created_at	}}</td>
                     <td>{{ $blocked->updated_at	 }}</td>
                     <td>
-                        <a href="{{ route('block.edit', $blocked->B_ID) }}" class="btn btn-sm btn-primary">{{ __('translation.edit') }}</a>
+                        <a href="{{ route('block.edit', $blocked->B_ID) }}" class="btn btn-sm btn-primary edit">{{ __('translation.edit') }}</a>
                         <form action="{{ route('block.destroy', $blocked->B_ID) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
@@ -48,4 +57,52 @@
     </div>
     {{ $block->links() }} <!-- Pagination links -->
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const editButtons = document.querySelectorAll('.edit');
+
+    editButtons.forEach(function (editButton) {
+        editButton.addEventListener('click', function (event) {
+            if (editButton.disabled) {
+                event.preventDefault();
+                return;
+            }
+
+            editButton.disabled = true;
+            editButton.style.pointerEvents = 'none';
+            editButton.style.opacity = '0.5';
+
+            setTimeout(() => {
+                editButton.disabled = false;
+                editButton.style.pointerEvents = 'auto';
+                editButton.style.opacity = '1';
+            }, 5000);
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const blockButton = document.getElementById('block');
+
+    // Add a click event listener
+    blockButton.addEventListener('click', function(event) {
+        // Prevent default action if the button is already disabled
+        if (blockButton.disabled) {
+            event.preventDefault(); 
+            return;
+        }
+
+        // Disable the button for 5 seconds
+        blockButton.disabled = true;
+        blockButton.style.pointerEvents = 'none'; // Disable hover/click effects
+        blockButton.style.opacity = '0.5'; // Visually indicate it's disabled
+
+        setTimeout(() => {
+            blockButton.disabled = false;
+            blockButton.style.pointerEvents = 'auto';
+            blockButton.style.opacity = '1';
+        }, 5000);
+    });
+});
+</script>
 @endsection

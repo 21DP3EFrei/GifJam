@@ -1,3 +1,4 @@
+<x-action-section>
 <x-slot name="title">
     {{ __('translation.twoAuth') }}
 </x-slot>
@@ -27,7 +28,7 @@
 
     @if ($this->enabled)
         @if ($showingQrCode)
-            <div class="mt-4 max-w-xl text-sm text-gray-600">
+            <div class="mt-4 max-w-xl text-sm text-gray-600 dark:text-gray-400">
                 <p class="font-semibold">
                     @if ($showingConfirmation)
                         {{ __('translation.completeh2auth') }}
@@ -41,7 +42,7 @@
                 {!! $this->user->twoFactorQrCodeSvg() !!}
             </div>
 
-            <div class="mt-4 max-w-xl text-sm text-gray-600">
+            <div class="mt-4 max-w-xl text-sm text-gray-600 dark:text-gray-400">
                 <p class="font-semibold">
                     {{ __('translation.setupKey') }}: {{ decrypt($this->user->two_factor_secret) }}
                 </p>
@@ -61,13 +62,13 @@
         @endif
 
         @if ($showingRecoveryCodes)
-            <div class="mt-4 max-w-xl text-sm text-gray-600">
+            <div class="mt-4 max-w-xl text-sm text-gray-600 dark:text-gray-400">
                 <p class="font-semibold">
                     {{ __('translation.recoveryCode') }}
                 </p>
             </div>
 
-            <div class="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 rounded-lg">
+            <div class="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-300 dark:bg-gray-600 rounded-lg">
                 @foreach (json_decode(decrypt($this->user->two_factor_recovery_codes), true) as $code)
                     <div>{{ $code }}</div>
                 @endforeach
@@ -92,12 +93,12 @@
             @elseif ($showingConfirmation)
                 <x-confirms-password wire:then="confirmTwoFactorAuthentication">
                     <x-button type="button" class="me-3" wire:loading.attr="disabled">
-                        {{ __('confirm') }}
+                        {{ __('translation.confirm') }}
                     </x-button>
                 </x-confirms-password>
             @else
                 <x-confirms-password wire:then="showRecoveryCodes">
-                    <x-secondary-button class="me-3">
+                    <x-secondary-button class="me-3 ">
                         {{ __('translation.showCode') }}
                     </x-secondary-button>
                 </x-confirms-password>

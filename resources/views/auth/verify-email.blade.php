@@ -15,11 +15,11 @@
         @endif
 
         <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
+            <form id="mail" method="POST" action="{{ route('verification.send') }}">
                 @csrf
 
                 <div>
-                    <x-button type="submit">
+                    <x-button id="send" type="submit">
                         {{ __('translation.resendVerify') }}
                     </x-button>
                 </div>
@@ -40,3 +40,18 @@
         </div>
     </x-authentication-card>
 </x-guest-layout>
+<script>
+    document.getElementById("mail").addEventListener("submit", function(event) {
+            // Get the submit button
+            const sendButton = document.getElementById("send");
+    
+            // Disable the button to prevent multiple submissions
+            sendButton.disabled = true;
+            sendButton.innerHTML = '<span class="loading loading-spinner text-warning"></span>';
+    
+            // Re-enable the button after 5 seconds
+            setTimeout(function() {
+                sendButton.disabled = false;
+            }, 50000);
+        });
+    </script>

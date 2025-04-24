@@ -8,8 +8,6 @@ use App\Models\Skana_kategorija;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\RedirectResponse;
-use function Laravel\Prompts\error;
 
 class CategoryExists
 { 

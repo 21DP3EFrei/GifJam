@@ -1,7 +1,7 @@
 @props(['id' => null, 'maxWidth' => null])
 
 <x-modal :id="$id" :maxWidth="$maxWidth" {{ $attributes }}>
-    <div class="px-6 py-4 bg-gray-300 dark:bg-pink-900">
+    <div class="px-6 py-4 bg-gray-200 dark:bg-pink-900">
         <div class="text-lg font-medium text-gray-900 dark:text-white">
             {{ $title }}
         </div>

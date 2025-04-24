@@ -19,4 +19,6 @@ return [
     'token' => 'Šis paroles atjauninājuma talons nav derīgs.',
     'user' => "Nevar atrast lietotāju ar šādu e-pasta adresi.",
     'currentPassword' => "Ievadītā parole neatbilst jūsu pašreizējai parolei.",
+    '2authPError' => 'Ievadītais divfaktoru autentifikācijas kods nav derīgs.',
+    '2authRError' => 'Ievadītais atgūšanas kods nav derīgs.',
 ];

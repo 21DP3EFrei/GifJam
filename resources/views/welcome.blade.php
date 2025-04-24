@@ -3,14 +3,13 @@
 @section('title', __('translation.navigation_welcome'))
 
 @section('content')
-<div class="container ml-8 flex flex-col">
+<div class="container ml-8 flex flex-col w-auto">
+  <h1 class="h1 break-words overflow-wrap" >{{ __('translation.welcome') }}</h1>
   @if (session('error'))
-    <div class="text-red-500">
+    <div class="dark:text-white alert alert-error mr-10 my-2">
         {{ session('error') }}
     </div>
-@endif
-
-    <h1 class="h1 break-words break-all overflow-wrap" >{{ __('translation.welcome') }}</h1>
+  @endif
     @if (auth()->check())
         <p class="break-word overflow-wrap">{{ __('translation.greeting') }} {{ auth()->user()->name }}! <br> {{ __('translation.logged_in') }} {{ auth()->user()->usertype }}.</p>
     @else

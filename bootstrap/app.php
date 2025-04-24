@@ -8,6 +8,7 @@ use App\Http\Middleware\Admin;
 use App\Http\Middleware\CategoryExists;
 use App\Http\Middleware\BlockUser;
 use App\Http\Middleware\Localization;
+use App\Http\Middleware\RandomMiddleware;
 use Illuminate\Support\Facades\App;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -24,6 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'realCategory' => CategoryExists::class,
             'blocked' => BlockUser::class,
             'localization' => Localization::class,
+            'randomExists' => RandomMiddleware::class,
         ]);
     })
     ->withMiddleware(function (Middleware $middleware) {

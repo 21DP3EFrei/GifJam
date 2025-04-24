@@ -20,9 +20,9 @@ class NobloketsController extends Controller
     {
         // Get the IDs of all blocked users
         $blockUserID = Noblokets::pluck('L_ID')->toArray();
-        $user = User::whereNotIn('id', $blockUserID)->where('id', '!=', Auth::id())->get();
+        $users = User::whereNotIn('id', $blockUserID)->where('id', '!=', Auth::id())->get();
     
-        return view('block.create', compact('user'));
+        return view('block.create', compact('users'));
     }
 
     // Store a newly created blocked record

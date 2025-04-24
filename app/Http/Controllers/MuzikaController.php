@@ -23,7 +23,8 @@ class MuzikaController extends Controller
                 'fileName' => 'required|string|max:100',
                 'fileDescription' => 'nullable|string|max:200',
                 'author' => 'required|string|max:100',
-                'copyright' => 'required|string|in:Yes,No',
+                'copyright' => 'integer',
+                'copyright.*' => 'boolean',
                 'category_id' => 'required|exists:zanrs,Z_ID', // Ensure the selected category exists
                 'uploadFile' => 'required|mimes:aac,aiff,alac,m4a,flac,mp3,wav,opus|max:20000',
             ], [
@@ -51,10 +52,10 @@ class MuzikaController extends Controller
             $media->Apraksts = $request->fileDescription;
             $media->Fails = $filePath; // Store the file path in the database
             $media->Autors = $request->author;
-            $media->Autortiesibas = ($request->copyright == 'Yes') ? 1 : 0;
+            $media->Autortiesibas = ($request->copyright == 1) ? 1 : 0;
             $media->Status = 0; 
             $media->Lietotajs = Auth::id();
-            $media->Multivides_tips = 'Music'; // Assuming this is always "Sound" for this controller
+            $media->Multivides_tips = 'Music';
             $media->save();
         
             // Create a new Music instance and associate it with the Media instance

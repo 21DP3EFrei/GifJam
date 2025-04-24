@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ArticleController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +12,3 @@ use App\Http\Controllers\Api\ArticleController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::post('/articles', [ArticleController::class, 'store']);
-Route::get('/articles', [ArticleController::class, 'index']);
