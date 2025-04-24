@@ -18,5 +18,7 @@ return [
     'throttled' => 'Please wait before retrying.',
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that email address.",
-    'currentPassword' => "The provided password does not match your current password."
+    'currentPassword' => "The provided password does not match your current password.",
+    '2authPError' => 'The provided two factor authentication code was invalid.',
+    '2authRError' => 'The provided recovery code was invalid.',
 ];

@@ -19,13 +19,14 @@ use App\Http\Controllers\MuzikaController;
 use App\Http\Controllers\SkanasController;
 use App\Http\Controllers\MusicLibrary;
 use App\Http\Controllers\SoundLibrary;
+use App\Http\Controllers\RandomController;
 
 Route::get('locale/{lang}', [LocalizationController::class, 'selected']);
 /* Route::middleware(['language'])->group(function () {
  */Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
 
-Route::middleware(['auth', 'verified', 'blocked', 'realCategory'])->group(function () {
+Route::middleware(['auth', 'verified', 'blocked', 'realCategory', 'randomExists'])->group(function () {
 Route::middleware(['admin'])->group(function () {
 //Admin routes
 
@@ -116,7 +117,7 @@ Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/blocked', function () {return view('block');})->name('block');
 
 //random media
-Route::get('/random', [])->name('random');
+Route::get('/random', [RandomController::class, 'random'])->name('random');
 
 }); //end of auth and blocked
 

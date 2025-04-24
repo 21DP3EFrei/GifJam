@@ -1,16 +1,3 @@
-<table class="table table-zebra overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">
-    <thead>
-        <tr class="text-center align-middle bg-slate-100 dark:bg-cyan-700 text-black dark:text-white border border-gray-300">
-            <th class="border-separate border border-gray-400">{{ __('translation.fileName') }}</th>
-            <th class="border-separate border border-gray-400">{{ __('translation.description') }}</th>
-            <th class="border-separate border border-gray-400">{{ __('translation.actions') }}</th>
-            <th class="border-separate border border-gray-400">{{ __('translation.category') }} / {{ __('translation.navigation_genre') }}</th>
-            <th class="border-separate border border-gray-400">{{ __('translation.file') }}</th>
-            <th class="border-separate border border-gray-400">{{ __('translation.uploaded') }}</th>
-            <th class="border-separate border border-gray-400">{{ __('translation.updated') }}</th>
-        </tr>
-    </thead>
-    <tbody id="mediaTableBody">
         @foreach ($approvedMedia as $media)
         <tr class="align-middle items-center hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300">
             <td>
@@ -104,5 +91,3 @@
             <td class="text-center">{{ $media->updated_at->format('D/M/Y')}},  {{ $media->updated_at->format('H:i')}} </td>
         </tr>
         @endforeach
-    </tbody>
-</table>

@@ -14,9 +14,9 @@
     <div class="container">
         <h1 class="text-4xl mb-3">{{ __('translation.blocked') }}</h1>
         <p class="mb-2">{{ __('translation.greeting') }} {{ auth()->user()->name }}! <br> {{ __('translation.blockfor') }} {{ $blockReason ?? 'No reason provided' }} <br> {{ __('translation.newAcc') }}</p>
-        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+        <form id="myform" action="{{ route('logout') }}" method="POST" style="display: inline;">
             @csrf
-            <button type="submit" class="btn btn-primary hover:underline">{{ __('translation.returnHome') }}</button>
+            <button id="logout" type="submit" class="btn btn-primary hover:underline">{{ __('translation.returnHome') }}</button>
         </form>
     </div>
 </body>
@@ -57,3 +57,17 @@
         }
     }
 </style>
+<script>
+    document.getElementById("myform").addEventListener("submit", function() {
+        const leaveButton = document.getElementById("logout");
+
+            // Change text immediately
+            leaveButton.disabled = true;
+            leaveButton.innerHTML = '<span class="loading loading-spinner text-warning mr-2"></span> {{ __("translation.returnHome") }}';
+
+            // Re-enable the button after 5 seconds
+            setTimeout(function() {
+                leaveButton.disabled = false;
+            }, 5000);
+        });
+    </script>

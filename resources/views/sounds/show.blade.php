@@ -4,7 +4,7 @@
 @section('content')
 <x-custom-header name="custom-header">
     <h2 class="font-semibold text-xl text-gray-800 dark:text-white dark:bg-blue-900 leading-tight">
-        <button class="hover:border rounded-sm w-24 h-10 text-lg transition ease-in hover:bg-blue-500" onclick="history.back()">{{ __('translation.back') }}</button>
+        <button id="back" class="hover:border rounded-sm w-24 h-10 text-lg transition ease-in hover:bg-blue-500 cursor-pointer" onclick="history.back()">{{ __('translation.back') }}</button>
     </h2>
 </x-custom-header>
 
@@ -52,4 +52,26 @@
        </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const backButton = document.getElementById('back');
+    
+    backButton.addEventListener('click', function(event) {
+        if (backButton.disabled) {
+            event.preventDefault(); 
+            return;
+        }
+    
+        backButton.disabled = true;
+        backButton.style.pointerEvents = 'none'; 
+        backButton.style.opacity = '0.5'; 
+    
+        setTimeout(() => {
+            backButton.disabled = false;
+            backButton.style.pointerEvents = 'auto';
+            backButton.style.opacity = '1';
+        }, 5000);
+    });
+    });
+</script>
 @endsection

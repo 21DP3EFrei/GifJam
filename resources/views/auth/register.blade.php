@@ -18,22 +18,22 @@
 
             <div>
                 <x-label for="name" value="{{ __('translation.userName') }}" class="text-black dark:text-white" />
-                <x-input id="name" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="text" name="name" :value="old('name')" required autofocus  autocomplete="off" oninvalid="this.setCustomValidity('{{ __('translation.fillName') }}')" oninput="this.setCustomValidity('');"/>
+                <x-input title="{{ __('translation.titleusername') }}" id="name" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="text" name="name" :value="old('name')" required autofocus  autocomplete="off" oninvalid="this.setCustomValidity('{{ __('translation.fillName') }}')" oninput="this.setCustomValidity('');"/>
             </div>
 
             <div class="mt-4">
                 <x-label for="email" value="{{ __('translation.email') }}" class="text-black dark:text-white"/>
-                <x-input novalidate id="email" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="email" name="email" :value="old('email')" required autocomplete="username" oninvalid="this.setCustomValidity('{{ __('translation.fillEmail') }}')" oninput="this.setCustomValidity('');"/>
+                <x-input title="{{ __('translation.email') }}" novalidate id="email" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="email" name="email" :value="old('email')" required autocomplete="username" oninvalid="this.setCustomValidity('{{ __('translation.fillEmail') }}')" oninput="this.setCustomValidity('');"/>
             </div> 
 
             <div class="mt-4">
                 <x-label for="password" value="{{ __('translation.password') }}" class="text-black dark:text-white"/>
-                <x-input id="password" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="password" name="password" required autocomplete="new-password" oninvalid="this.setCustomValidity('{{ __('translation.fillPassword') }}')" oninput="this.setCustomValidity('');"/>
+                <x-input title="{{ __('translation.titleurpassword') }}" id="password" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="password" name="password" required autocomplete="new-password" oninvalid="this.setCustomValidity('{{ __('translation.fillPassword') }}')" oninput="this.setCustomValidity('');"/>
             </div>
 
             <div class="mt-4">
     <x-label for="password_confirmation" value="{{ __('translation.confirmPassword') }}" class="text-black dark:text-white"/>
-    <x-input id="password_confirmation" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="password" name="password_confirmation" required autocomplete="new-password" oninvalid="this.setCustomValidity('{{ __('translation.fillPassword') }}')" oninput="this.setCustomValidity('');"/>
+    <x-input title="{{ __('translation.titleconfpassword') }}" id="password_confirmation" class="input input-lg block mt-1 border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white w-full" type="password" name="password_confirmation" required autocomplete="new-password" oninvalid="this.setCustomValidity('{{ __('translation.fillPassword') }}')" oninput="this.setCustomValidity('');"/>
              </div>
 
 

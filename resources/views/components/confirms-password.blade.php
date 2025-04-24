@@ -24,13 +24,16 @@
         {{ $content }}
 
         <div class="mt-4" x-data="{}" x-on:confirming-password.window="setTimeout(() => $refs.confirmable_password.focus(), 250)">
-            <x-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}" autocomplete="current-password"
-                        x-ref="confirmable_password"
+            <input title="{{ __('translation.titleurpassword') }}" type="password" class="mt-1 block w-3/4 border-gray-300 focus:border-indigo-500 p-2 focus:ring-indigo-500 rounded-md shadow-xs border bg-white dark:!bg-black dark:text-white dark:active:!bg-black dark:focus:!bg-black dark:focus:text-white autofill:!bg-white" x-ref="confirmable_password"
                         wire:model="confirmablePassword"
+                        placeholder="{{ __('translation.password') }}"
                         wire:keydown.enter="confirmPassword" />
-
-            <x-input-error for="confirmable_password" class="mt-2" />
-        </div>
+                        @if ($errors->any())
+                        <div class="alert alert-error mt-2">
+                             <li>{{ __('passwords.currentPassword') }}</li>
+                        </div>
+                        @endif        
+                    </div>
     </x-slot>
 
     <x-slot name="footer">

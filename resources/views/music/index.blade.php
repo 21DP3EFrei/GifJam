@@ -20,7 +20,7 @@
             </div>
             
             <div class="col-md-3 flex flex-col w-80">
-                <label for="subgenre">{{ __('translation.subgenres') }}</label>
+                <label for="subgenre">{{ __('translation.subgenreOfS') }}</label>
                 <select name="subgenre_id" class="input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white  dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="subgenre">
                     <option value="">{{ __('translation.allSubgenres') }}</option>
                     @foreach ($subgenres as $subgenre)
@@ -37,7 +37,7 @@
                     <option value="newest" {{ request('sort_by') == 'newest' ? 'selected' : '' }}>{{ __('translation.newest') }}</option>
                     <option value="oldest" {{ request('sort_by') == 'oldest' ? 'selected' : '' }}>{{ __('translation.oldest') }}</option>
                     <option value="name_az" {{ request('sort_by') == 'name_az' ? 'selected' : '' }}>{{ __('translation.nameAZ') }}</option>
-                    <option value="author" {{ request('sort_by') == 'author' ? 'selected' : '' }}>{{ __('translation.author') }}</option>
+                    <option value="author" {{ request('sort_by') == 'author' ? 'selected' : '' }}>{{ __('translation.authors') }}</option>
                     <option value="yearUp" {{ request('sort_by') == 'yearUp' ? 'selected' : '' }}>{{ __('translation.yearUp') }}</option>
                     <option value="yearDown" {{ request('sort_by') == 'yearDown' ? 'selected' : '' }}>{{ __('translation.yearDown') }}</option>
                 </select>
@@ -50,7 +50,7 @@
         <!-- Search Input -->
         <div class="flex items-center gap-2 mt-8 mb-2">
             <svg class="h-5 w-5 opacity-50 text-gray-500 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
-            <input  type="text" class="grow input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="searchInput" name="search" placeholder="{{ __('translation.searchMusic') }}" autocomplete="off"/>
+            <input title="{{ __('translation.search') }}" type="text" class="grow input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="searchInput" name="search" placeholder="{{ __('translation.searchMusic') }}" autocomplete="off"/>
             <button type="submit" class="btn btn-primary w-30">{{ __('translation.search') }}</button>
         </div>
     </form>

@@ -61,7 +61,8 @@ class VerificationController extends Controller
         $rules = [
             'Nosaukums' => 'required|string|max:100',
             'Apraksts' => 'nullable|string|max:200',
-            'Autortiesibas' => 'required|in:0,1',
+            'Autortiesibas' => 'integer',
+            'Autortiesibas.*' => 'boolean',
         ];
         
         if (Media::where('Status', 1)->where('Multivides_tips', 'Sound')->exists()) {

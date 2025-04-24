@@ -21,7 +21,8 @@ class MediaController extends Controller
             'fileName' => 'required|string|max:100',
             'fileDescription' => 'nullable|string|max:200',
             'author' => 'required|string|max:100',
-            'copyright' => 'required|string|in:Yes,No',
+            'copyright' => 'integer',
+            'copyright.*' => 'boolean',
             'category_id' => 'required|exists:kategorija,K_ID', // Ensure the selected category exists
             'uploadFile' => 'required|mimes:png,jpeg,webp,gif,jpg|max:20000',
         ], [
@@ -39,7 +40,7 @@ class MediaController extends Controller
         $media->Apraksts = $request->fileDescription;
         $media->Fails = $filePath; // Store the file path in the database instead of the actual file content
         $media->Autors = $request->author;
-        $media->Autortiesibas = ($request->copyright == 'Yes') ? 1 : 0;
+        $media->Autortiesibas = ($request->copyright == 1) ? 1 : 0;
         $media->Status = 0; // Set the default status to unpublished
         $media->Lietotajs = Auth::id();
         $media->Multivides_tips = 'Image';

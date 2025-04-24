@@ -2,8 +2,8 @@
 
 @section('title', __('translation.navigation_categoriesName'))
 @section('content')
-<div class="container mx-2">
-        <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3 mt-3">{{ __('translation.createNewCategory') }}</a>
+<div class="container mx-2"> 
+        <a id="create" href="{{ route('categories.create') }}" class="btn btn-primary mb-3 mt-3">{{ __('translation.createNewCategory') }}</a>
         @if (session('success'))
         <div class="alert alert-success mx-2 my-2 mr-3">{{ session('success') }}</div>
         @endif
@@ -33,7 +33,7 @@
                         <td>-</td>
                         @endif
                         <td>
-                            <a href="{{ route('categories.edit', $category->K_ID) }}" class="btn btn-sm btn-primary">{{ __('translation.edit') }}</a>
+                            <a  href="{{ route('categories.edit', $category->K_ID) }}" class="btn btn-sm btn-primary edit">{{ __('translation.edit') }}</a>
                             <form action="{{ route('categories.destroy', $category->K_ID) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
@@ -46,5 +46,50 @@
         </table>
         </div>
         @endif
-    </div>
+    </div> 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const createButton = document.getElementById('create');
+
+    createButton.addEventListener('click', function(event) {
+        if (createButton.disabled) {
+            event.preventDefault(); 
+            return;
+        }
+
+        createButton.disabled = true;
+        createButton.style.pointerEvents = 'none'; 
+        createButton.style.opacity = '0.5'; 
+
+        setTimeout(() => {
+            createButton.disabled = false;
+            createButton.style.pointerEvents = 'auto';
+            createButton.style.opacity = '1';
+        }, 5000);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const editButtons = document.querySelectorAll('.edit');
+
+    editButtons.forEach(function (editButton) {
+        editButton.addEventListener('click', function (event) {
+            if (editButton.disabled) {
+                event.preventDefault();
+                return;
+            }
+
+            editButton.disabled = true;
+            editButton.style.pointerEvents = 'none';
+            editButton.style.opacity = '0.5';
+
+            setTimeout(() => {
+                editButton.disabled = false;
+                editButton.style.pointerEvents = 'auto';
+                editButton.style.opacity = '1';
+            }, 5000);
+        });
+    });
+});
+</script>    
 @endsection
