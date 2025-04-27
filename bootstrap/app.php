@@ -9,6 +9,7 @@ use App\Http\Middleware\CategoryExists;
 use App\Http\Middleware\BlockUser;
 use App\Http\Middleware\Localization;
 use App\Http\Middleware\RandomMiddleware;
+use App\Http\Middleware\MediaSearch;
 use Illuminate\Support\Facades\App;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -26,6 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'blocked' => BlockUser::class,
             'localization' => Localization::class,
             'randomExists' => RandomMiddleware::class,
+            'media' => MediaSearch::class,
         ]);
     })
     ->withMiddleware(function (Middleware $middleware) {

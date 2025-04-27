@@ -42,7 +42,11 @@
                         </div>
                     </div>
                 </td>
+                @unless (empty($media->Apraksts))
                 <td>{{ Str::limit($media->Apraksts, 25) }}</td>
+                @else
+                <td class="text-center">-</td>
+                @endunless
                 {{-- <td>{{ $media->Status == 0 ? 'Pending' : ($media->Status == 1 ? 'Approved' : 'Rejected') }}</td> --}}
                 <td>
                     <form id="myform" action="{{ route('verification.mediaverify', $media) }}" method="POST" class="d-flex align-items-center me-3">

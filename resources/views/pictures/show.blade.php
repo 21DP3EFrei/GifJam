@@ -16,6 +16,7 @@
             <h1 class="text-2xl font-bold mb-4 break-words overflow-wrap">{{ $media->Nosaukums }}{{ __('translation.info') }}</h1>
             <form class="space-y-2 mr-2">
                 <!-- Description -->
+                @unless (empty($media->Apraksts))
                 <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">
                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">{{ __('translation.description') }}</h3>
                     <div class="flex flex-col"> 
@@ -24,6 +25,7 @@
                         </p>
                     </div>
                 </div>
+                @endunless
             
                 <!-- Author -->
                 <div class="items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">

@@ -13,7 +13,7 @@
     <div class="alert alert-success mx-2 my-2 mr-3">{{ session('success') }}</div>
     @endif
     @if(request()->has('search'))
-    <a id="back" class="p-2 btn-circle btn btn-error text-white border border-black inline-block ml-2" href="{{ route('unverification.index') }}">X</a>
+        <button id="back" class="hover:border rounded-sm w-24 h-10 text-lg transition ease-in hover:bg-blue-500 cursor-pointer" onclick="history.back()">{{ __('translation.back') }}</button>
     @endif  
     @if ($approvedMedia->isEmpty() && request()->has('search'))
     <div class="col-span-full flex items-center justify-center">
@@ -29,10 +29,10 @@
         <div class="flex items-center gap-2 mt-5 px-2 pb-2">
             <svg class="h-5 w-5 opacity-50 text-gray-500 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
             <input title="{{ __('translation.search') }}" type="text" class="grow input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="searchInput" name="search" placeholder="{{ __('translation.searchMedia') }}" autocomplete="off"/>
-            <button type="submit" class="btn btn-primary w-30">{{ __('translation.search') }}</button>
+            <button id="search" type="submit" class="btn btn-primary w-30">{{ __('translation.search') }}</button>
         </div>
     </form>
-    <div class="table-responsive overflow-x-auto mx-2">
+    <div class="table-responsive overflow-x-auto mx-2" id="mediaTableBody">
         <table class="table table-zebra overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">
         <thead>
             <tr class="text-center align-middle bg-slate-100 dark:bg-cyan-700 text-black dark:text-white border border-gray-300">
@@ -45,7 +45,7 @@
                 <th class="border-separate border border-gray-400">{{ __('translation.updated') }}</th>
             </tr>
         </thead>
-        <tbody id="mediaTableBody">
+        <tbody>
             @foreach ($approvedMedia as $media)
             <tr class="align-middle items-center hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300">
                 <td>
@@ -56,8 +56,11 @@
                         </div>
                     </div>
                 </td>
-                <td>{{ Str::limit($media->Apraksts, 20) }}</td>
-                <td>
+                @unless (empty($media->Apraksts))
+                <td>{{ Str::limit($media->Apraksts, 25) }}</td>
+                @else
+                <td class="text-center">-</td>
+                @endunless                <td>
                     <form id="myform" action="{{ route('unverification.mediaunverify', $media) }}" method="POST">
                         @csrf
                         <div class="flex items-center py-1">
@@ -146,10 +149,6 @@
 </div>
 <script>
 
-    $('#searchInput').on('change keyup', function () {
-        applyFilters();
-    });
-
     function applyFilters() {
     var search = $('#searchInput').val();
     $.ajax({
@@ -232,24 +231,59 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+    const clearButton = document.getElementById('clear');
+
+    clearButton.addEventListener('click', function(event) {
+        if (clearButton.disabled) {
+            event.preventDefault(); 
+            return;
+        }
+
+        clearButton.disabled = true;
+        clearButton.style.pointerEvents = 'none'; 
+        clearButton.style.opacity = '0.5'; 
+
+        setTimeout(() => {
+            clearButton.disabled = false;
+            clearButton.style.pointerEvents = 'auto';
+            clearButton.style.opacity = '1';
+        }, 5000);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
 const backButton = document.getElementById('back');
 
 backButton.addEventListener('click', function(event) {
     if (backButton.disabled) {
-        event.preventDefault(); 
-        return;
-    }
+event.preventDefault(); 
+return;
+}
 
-    backButton.disabled = true;
-    backButton.style.pointerEvents = 'none'; 
-    backButton.style.opacity = '0.5'; 
+backButton.disabled = true;
+backButton.style.pointerEvents = 'none'; 
+backButton.style.opacity = '0.5'; 
 
-    setTimeout(() => {
-        backButton.disabled = false;
-        backButton.style.pointerEvents = 'auto';
-        backButton.style.opacity = '1';
-    }, 5000);
+setTimeout(() => {
+    backButton.disabled = false;
+    backButton.style.pointerEvents = 'auto';
+    backButton.style.opacity = '1';
+}, 5000);
 });
+});
+
+document.getElementById("filterForm").addEventListener("submit", function(event) {
+    // Get the submit button
+    const searchButton = document.getElementById("search");
+
+    // Disable the button to prevent multiple submissions
+    searchButton.disabled = true;
+    searchButton.innerHTML = '<span class="loading loading-spinner text-warning"></span>';
+
+    // Re-enable the button after 5 seconds
+    setTimeout(function() {
+        searchButton.disabled = false;
+    }, 5000);
 });
 </script>
 @endsection

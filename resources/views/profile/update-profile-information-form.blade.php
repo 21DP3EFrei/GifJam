@@ -66,7 +66,7 @@
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-label for="email" value="{{ __('translation.email') }}" />
-            <x-input title="{{ __('translation.email') }}" novalidate id="email" type="email" class="mt-1 block w-full" wire:model="state.email" required autocomplete="username" oninvalid="this.setCustomValidity('{{ __('translation.fillEmail') }}')" oninput="this.setCustomValidity('');"/>
+            <x-input title="{{ __('translation.email') }}" id="email" type="email" class="mt-1 block w-full" wire:model="state.email" required oninvalid="this.setCustomValidity('{{ __('translation.fillEmail') }}')" oninput="this.setCustomValidity('');"/>
             <x-input-error for="email" class="mt-2" />
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
@@ -97,3 +97,6 @@
         </x-button>
     </x-slot>
 </x-form-section>
+<script>
+
+</script>

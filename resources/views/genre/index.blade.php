@@ -26,7 +26,11 @@
                 @foreach($genre as $genres)
                 <tr class="align-middle items-center text-center hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300">
                         <td>{{ Str::limit($genres->Nosaukums, 20) }}</td>
+                        @unless (empty($genres->Apraksts))
                         <td>{{ Str::limit($genres->Apraksts, 25) }}</td>
+                        @else
+                        <td>-</td>
+                        @endunless
                         @if ($genres->parent)
                         <td>{{ Str::limit($genres->parent->Nosaukums, 25) }}</td>
                         @else

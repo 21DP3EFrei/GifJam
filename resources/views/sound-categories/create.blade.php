@@ -11,7 +11,7 @@
 use App\Models\Skana_kategorija;
 @endphp
 <div class="container mx-3">
-        <h1>{{ __('translation.createSoundCategories') }}</h1>
+        <h1 class="h1">{{ __('translation.createSoundCategories') }}</h1>
         @if ($errors->any())
         <div class="alert alert-error mr-5">
             <ul>

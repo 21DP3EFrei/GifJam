@@ -43,6 +43,9 @@ class KategorijaController extends Controller
     {
         $allCategories = Kategorija::all(); 
         return view('categories.edit', compact('categories', 'allCategories'));
+        if (!$categories) {
+            return redirect()->route('welcome')->with('error', 'Media not found.');
+        }
     }
     
 

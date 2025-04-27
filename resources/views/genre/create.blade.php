@@ -11,7 +11,7 @@ use App\Models\Zanrs;
     </h2>
 </x-custom-header>
 <div class="container mx-3">
-        <h1>{{ __('translation.genre') }}</h1>
+        <h1 class="h1">{{ __('translation.genre') }}</h1>
         @if ($errors->any())
         <div class="alert alert-error mr-5">
             <ul>

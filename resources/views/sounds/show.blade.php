@@ -16,6 +16,7 @@
             <h1 class="text-2xl font-bold mb-4 break-words overflow-wrap">{{ $media->Nosaukums }}{{ __('translation.info') }}</h1>
             <form class="space-y-2 mr-2">
                 <!-- Description -->
+                @unless (empty($media->Apraksts))
                 <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">
                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">{{ __('translation.description') }}</h3>
                     <div class="flex flex-col"> 
@@ -24,12 +25,25 @@
                         </p>
                     </div>
                 </div>
+                @endunless
             
                 <!-- Bittrate -->
+                @if ($sound->Bitrate !== null)
                 <div class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm">
                     <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.bitrate') }}</label>
                     <p class="text-sm text-gray-900 dark:text-white font-semibold">{{round($sound->Bitrate / 1000)}} {{ __('translation.kbps') }}</p>
                 </div>
+                @endif
+                @unless (empty($media->Autors))
+                <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">
+                    <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.author') }}</label>
+                    <div class="flex flex-col"> 
+                        <p class="text-sm text-gray-900 dark:text-white font-semibold break-words overflow-wrap" >
+                            {{ $media->Autors }}
+                        </p>
+                    </div>
+                </div>
+                @endunless
             
             </form>
             <!-- Download Button -->

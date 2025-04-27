@@ -26,7 +26,11 @@
                 @foreach($categories as $category)
                 <tr class="align-middle items-center text-center hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300">
                         <td>{{ Str::limit($category->Nosaukums, 20) }}</td>
+                        @unless (empty($category->Apraksts))
                         <td>{{ Str::limit($category->Apraksts, 25) }}</td>
+                        @else
+                        <td>-</td>
+                        @endunless
                         @if ($category->parent)
                         <td>{{ Str::limit($category->parent->Nosaukums, 25) }}</td>
                         @else
