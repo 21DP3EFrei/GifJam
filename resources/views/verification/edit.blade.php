@@ -33,6 +33,22 @@
                 <label for="Autors">{{ __('translation.author') }}:</label>
                 <textarea title="{{ __('translation.titlefilauthor') }}" class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white autofill:!bg-black w-full" autocomplete="off" id="Autors" name="Autors">{{ $media->Autors }}</textarea>
             </div>
+            @if ($media->Multivides_tips === 'Sound')
+            <div class="form-group mb-2">
+                <label for="Bitrate">{{ __('translation.bitrate') }}:</label>
+                <input  type="number" title="{{ __('translation.bitrate') }}" class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white autofill:!bg-black w-full" autocomplete="off" id="Bitrate" name="Bitrate" value="{{ $sound->Bitrate }}" oninvalid="this.setCustomValidity('{{ __('translation.errorbitrate') }}')"oninput="this.setCustomValidity('')" onKeyPress="if(this.value.length==9) return false;"></input>
+            </div>
+            @endif
+            @if ($media->Multivides_tips === 'Music')
+            <div class="form-group mb-2">
+                <label for="Bitrate">{{ __('translation.bitrate') }}:</label>
+                <input type="number" title="{{ __('translation.bitrate') }}" class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white autofill:!bg-black w-full" autocomplete="off" id="Bitrate" name="Bitrate" value="{{ $music->Bitrate }}" oninvalid="this.setCustomValidity('{{ __('translation.errorbitrate') }}')"oninput="this.setCustomValidity('')" onKeyPress="if(this.value.length==9) return false;"></input>
+            </div>
+            <div class="form-group mb-2">
+                <label for="Izlaists">{{ __('translation.released') }}:</label>
+                <input type="number" title="{{ __('translation.release') }}" max="9999" class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white dark:active:!bg-blue-900 dark:focus:!bg-blue-900 dark:focus:text-white autofill:!bg-black w-full" autocomplete="off" id="Izlaists" name="Izlaists" value="{{ $music->Izlaists }}" oninvalid="this.setCustomValidity('{{ __('translation.errorYear') }}')"oninput="this.setCustomValidity('')" onKeyPress="if(this.value.length==4) return false;"></input>
+            </div>
+            @endif
             <div class="my-5 flex flex-col">
                 <label for="Autortiesibas" class="form-label">{{ __('translation.copyright') }}</label>
                 <input type="hidden"  name="Autortiesibas" id="Autortiesibas" value="0" >

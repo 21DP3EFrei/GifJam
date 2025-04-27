@@ -26,7 +26,11 @@
                 @foreach($SoundCategory as $soundCategory)
                 <tr class="align-middle items-center text-center hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300">
                         <td>{{ Str::limit($soundCategory->Nosaukums, 20) }}</td>
+                        @unless (empty($soundCategory->Apraksts))
                         <td>{{ Str::limit($soundCategory->Apraksts, 25) }}</td>
+                        @else
+                        <td>-</td>
+                        @endunless
                         @if ($soundCategory->parent)
                         <td>{{ Str::limit($soundCategory->parent->Nosaukums, 25) }}</td>
                         @else

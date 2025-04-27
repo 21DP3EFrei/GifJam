@@ -72,7 +72,7 @@ return [
 'image' => 'Laukam :attribute ir jābūt attēlam.',
 'in' => 'Izvēlētais :attribute ir nederīgs.',
 'in_array' => 'Laukam :attribute ir jāeksistē laukā :other.',
-'integer' => 'Laukam :attribute ir jābūt veselam skaitlim.',
+'integer' => ':attribute jābūt veselam skaitlim.',
 'ip' => 'Laukam :attribute ir jābūt derīgai IP adresi.',
 'ipv4' => 'Laukam :attribute ir jābūt derīgai IPv4 adresi.',
 'ipv6' => 'Laukam :attribute ir jābūt derīgai IPv6 adresi.',
@@ -95,7 +95,7 @@ return [
 'max' => [
     'array' => 'Laukam :attribute nedrīkst būt vairāk par :max elementiem.',
     'file' => 'Laukam :attribute nedrīkst būt lielāks par :max kilobaitiem.',
-    'numeric' => 'Laukam :attribute nedrīkst būt lielāks par :max.',
+    'numeric' => ':attribute nevar būt nākotnē.',
     'string' => ':attribute nedrīkst būt garāks par :max rakstzīmēm.',
 ],
 'max_digits' => 'Laukam :attribute nedrīkst būt vairāk par :max cipariem.',
@@ -104,7 +104,7 @@ return [
 'min' => [
     'array' => 'Laukam :attribute ir jābūt vismaz :min elementiem.',
     'file' => 'Laukam :attribute ir jābūt vismaz :min kilobaitiem.',
-    'numeric' => 'Laukam :attribute ir jābūt vismaz :min.',
+    'numeric' => ':attribute nedrīkst būt vecāks par :min.',
     'string' => 'Laukam :attribute ir jābūt vismaz :min rakstzīmēm.',
 ],
 'min_digits' => 'Laukam :attribute ir jābūt vismaz :min cipariem.',
@@ -136,7 +136,7 @@ return [
 'prohibited_unless' => 'Laukam :attribute ir aizliegts, ja vien :other nav :values.',
 'prohibits' => 'Lauks :attribute aizliedz :other klātbūtni.',
 'regex' => 'Lauka :attribute formāts ir nederīgs.',
-'required' => 'Lauks :attribute ir obligāts.',
+'required' => ':attribute ir obligāts.',
 'required_array_keys' => 'Laukam :attribute ir jāsatur ieraksti šiem: :values.',
 'required_if' => 'Lauks :attribute ir obligāts, kad :other ir :value.',
 'required_if_accepted' => 'Lauks :attribute ir obligāts, kad :other ir pieņemts.',
@@ -201,5 +201,7 @@ return [
     'G_Nosaukums' => 'Žanra nosaukums',
     'name' => 'Vārds',
     'email' => 'E-pasts',
+    'Izlaists' => 'Gads',
+    'Bitrate' => 'Bitu pārraides ātrums',
 ],
 ];

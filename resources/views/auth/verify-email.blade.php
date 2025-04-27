@@ -19,7 +19,7 @@
                 @csrf
 
                 <div>
-                    <x-button id="send" type="submit">
+                    <x-button id="send" type="submit" class="mr-2">
                         {{ __('translation.resendVerify') }}
                     </x-button>
                 </div>

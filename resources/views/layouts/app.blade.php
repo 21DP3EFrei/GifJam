@@ -18,11 +18,17 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
+        @php
+            $userId = Auth::id();
+            $isBlocked =  App\Models\Noblokets::where('L_ID', $userId)->where('Blokets', 1)->exists();
+        @endphp
         <x-banner />
 
         <div class="bg-gray-100">
+            @if (!$isBlocked)
             @livewire('navigation-menu')
-
+            @endif
+            
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="header dark:bg-blue-900 shadow-sm border-2 border-gray-500">

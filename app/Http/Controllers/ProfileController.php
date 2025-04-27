@@ -8,6 +8,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Barryvdh\DomPDF\Facade\PDF;;
+use App\Models\User;
+use App\Models\Media;
+use Illuminate\Foundation\Auth\User as AuthUser;
 
 class ProfileController extends Controller
 {
@@ -61,5 +65,33 @@ class ProfileController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function destroyNoPassword(User $user)
+    {
+        if (Auth::id() !== $user->id) {
+            return redirect()->route('home')->with('error', __('translation.unauthorized'));
+        }
+        
+        Auth::logout(); 
+        $user->delete(); 
+        
+        return redirect('/')->with('success', __('translation.accountDelete'));
+    }
+    public function viewPDF()
+    {
+        $data = Media::where('Lietotajs', Auth::id())->get();
+
+        $pdf = PDF::loadview('pdf.user', array('data' => $data));
+        
+        return $pdf->stream();
+    }
+    public function downloadPDF()
+    {
+        $data = Media::where('Lietotajs', Auth::id())->get();
+
+        $pdf = PDF::loadview('pdf.user', array('data' => $data));
+        
+        return $pdf->download(__('translation.pdfname'));
     }
 }

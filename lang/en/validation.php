@@ -72,7 +72,7 @@ return [
     'image' => 'The :attribute field must be an image.',
     'in' => 'The selected :attribute is invalid.',
     'in_array' => 'The :attribute field must exist in :other.',
-    'integer' => 'The :attribute field must be an integer.',
+    'integer' => 'The :attribute must be a valid number.',
     'ip' => 'The :attribute field must be a valid IP address.',
     'ipv4' => 'The :attribute field must be a valid IPv4 address.',
     'ipv6' => 'The :attribute field must be a valid IPv6 address.',
@@ -95,7 +95,7 @@ return [
     'max' => [
         'array' => 'The :attribute field must not have more than :max items.',
         'file' => 'The :attribute field must not be greater than :max kilobytes.',
-        'numeric' => 'The :attribute field must not be greater than :max.',
+        'numeric' => "The :attribute can't be in the future.",
         'string' => "The :attribute can't be more than :max characters.",
     ],
     'max_digits' => 'The :attribute field must not have more than :max digits.',
@@ -104,7 +104,7 @@ return [
     'min' => [
         'array' => 'The :attribute field must have at least :min items.',
         'file' => 'The :attribute field must be at least :min kilobytes.',
-        'numeric' => 'The :attribute field must be at least :min.',
+        'numeric' => 'The :attribute must be at least :min.',
         'string' => 'The :attribute field must be at least :min characters.',
     ],
     'min_digits' => 'The :attribute field must have at least :min digits.',
@@ -205,5 +205,7 @@ return [
     'G_Nosaukums' => 'genre name',
     'name' => 'name',
     'email' => 'email',
+    'Izlaists' => 'year',
+    'Bitrate' => 'bitrate',
 ],
 ];

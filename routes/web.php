@@ -6,12 +6,12 @@ use App\Http\Controllers\KategorijaController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UnverificationController;
 use App\Http\Controllers\PictureController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SoundCategoryController;
 use App\Http\Controllers\NobloketsController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\LocalizationController;
@@ -22,8 +22,7 @@ use App\Http\Controllers\SoundLibrary;
 use App\Http\Controllers\RandomController;
 
 Route::get('locale/{lang}', [LocalizationController::class, 'selected']);
-/* Route::middleware(['language'])->group(function () {
- */Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
+Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
 
 Route::middleware(['auth', 'verified', 'blocked', 'realCategory', 'randomExists'])->group(function () {
@@ -77,9 +76,10 @@ Route::post('/block/create/{user}', [NobloketsController::class, 'specific'])->n
 });//end of admin
 
 //Public routes
-
-//Delete user
-Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+//Pdf
+Route::post('users/view/pdf', [ProfileController::class, 'viewPDF'])->name('view.pdf');
+Route::post('users/download/pdf', [ProfileController::class, 'downloadPDF'])->name('download.pdf');
+Route::delete('/user/{user}', [ProfileController::class, 'destroyNoPassword'])->name('user.destroy');
 
 // Upload routes
 Route::get('/upload', [MediaController::class, 'upload'])->name('upload');
@@ -89,6 +89,8 @@ Route::post('/uploadMusic', [MuzikaController::class, 'uploadPost'])->name('uplo
 Route::get('/uploadSound', [SkanasController::class, 'upload'])->name('uploadSound');
 Route::post('/uploadSound', [SkanasController::class, 'uploadPost'])->name('uploadSound.post');
 
+//Media routes
+Route::middleware(['media'])->group(function () {
 //gallery
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
 Route::get('/get/subcategories/{category_id}', [PictureController::class, 'getSubcategories'])->name('getSubcategories');
@@ -109,6 +111,7 @@ Route::get('/get/genre/{genre_id}', [MusicLibrary::class, 'getSubgenres'])->name
 Route::get('/music/{media}', [MusicLibrary::class, 'show'])->name('music.show');
 Route::get('/music/download/{media}', [MusicLibrary::class, 'download'])->name('music.download');
 Route::get('/music/search', [MusicLibrary::class, 'search'])->name('music.search');
+});
 
 //Welcome page
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');

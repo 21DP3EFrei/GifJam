@@ -156,7 +156,7 @@ return [
 'starts_with' => 'Поле :attribute должно начинаться с одного из следующих: :values.',
 'string' => 'Поле :attribute должно быть строкой.',
 'timezone' => 'Поле :attribute должно быть действительным часовым поясом.',
-'unique' => ':attribute уже занят.',
+'unique' => ':attribute уже занята.',
 'uploaded' => 'Не удалось загрузить :attribute.',
 'uppercase' => 'Поле :attribute должно быть в верхнем регистре.',
 'url' => 'Поле :attribute должно быть действительным URL.',
@@ -200,6 +200,8 @@ return [
     'Kat_Nosaukums' => 'название категории',
     'G_Nosaukums' => 'название жанра',
     'name' => 'имя',
-    'email' => 'электронная почта',
+    'email' => 'Злектронная почта',
+    'Izlaists' => 'год',
+    'Bitrate' => 'битрейт',
 ],
 ];

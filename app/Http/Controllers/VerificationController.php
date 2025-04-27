@@ -45,43 +45,51 @@ class VerificationController extends Controller
 
     public function editMedia(Request $request, Media $media)
     {
+        $sound = $media->skana;  
+        $music = $media->music;  
+
         $allMedia = Media::all(); 
         $categories = Kategorija::all();
         $soundCategories = Skana_kategorija::all();
         $zanrs = Zanrs::all();
 
-        return view('verification.edit', compact('media', 'allMedia', 'categories', 'soundCategories', 'zanrs'));
+        return view('verification.edit', compact('media', 'allMedia', 'categories', 'soundCategories', 'zanrs', 'sound', 'music'));
     }
     public function update(Request $request, Media $media)
     {
         $sound = $media->skana;  
         $music = $media->music;  
-
-        // Validate the request data
+    
+        // Base validation rules
         $rules = [
             'Nosaukums' => 'required|string|max:100',
             'Apraksts' => 'nullable|string|max:200',
             'Autortiesibas' => 'integer',
             'Autortiesibas.*' => 'boolean',
+            'Bitrate' => 'required|integer',
+            'Izlaists' => 'required|integer|min:1900|max:' . date('Y'),
         ];
-        
-        if (Media::where('Status', 1)->where('Multivides_tips', 'Sound')->exists()) {
+    
+        // Conditional validation for 'Autors'
+        if ($media->Multivides_tips == 'Sound') {
             $rules['Autors'] = 'nullable|string|max:100';
+            $rules['Izlaists'] = 'nullable|integer';
         } else {
             $rules['Autors'] = 'required|string|max:100';
         }
 
+        // Validate the request with the fully defined rules
         $request->validate($rules);
-        
-
-        if ($media->Multivides_tips === 'Image') {
+    
+        // Additional conditional rules based on media type
+        if ($media->Multivides_tips == 'Image') {
             $rules['Kategorija_id'] = 'exists:kategorija,K_ID';
-        } elseif ($media->Multivides_tips === 'Sound') {
+        } elseif ($media->Multivides_tips == 'Sound') {
             $rules['SoundKategorija_id'] = 'exists:skana_kategorija,SKat_ID';
-        } elseif ($media->Multivides_tips === 'Music') {
+        } elseif ($media->Multivides_tips == 'Music') {
             $rules['Zanrs_id'] = 'exists:zanrs,Z_ID';
         }
-
+    
         // Update the media record
         $media->update([
             'Nosaukums' => $request->Nosaukums,
@@ -89,6 +97,18 @@ class VerificationController extends Controller
             'Autors' => $request->Autors,
             'Autortiesibas' => $request->Autortiesibas, // Directly use the value (0 or 1)
         ]);
+    
+        // Update related records based on media type
+        if ($media->Multivides_tips === 'Sound') {
+            $sound->update([
+                'Bitrate' => $request->Bitrate,
+            ]);
+        } elseif ($media->Multivides_tips === 'Music') {
+            $music->update([
+                'Bitrate' => $request->Bitrate,
+                'Izlaists' => $request->Izlaists,
+            ]);
+        }
     
         // Sync the selected categories with the media
         if ($media->Multivides_tips === 'Image') {
@@ -98,7 +118,7 @@ class VerificationController extends Controller
         } elseif ($media->Multivides_tips === 'Music' && $music) {
             $music->zanrs()->sync($request->Zanrs_id);
         }
-
+    
         return redirect()->route('verification.index')->with('success', __('translation.verifyUpdate'));
     }
     public function __construct()

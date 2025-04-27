@@ -41,6 +41,7 @@ class Kernel extends HttpKernel
             'realCategory' => \App\Http\Middleware\CategoryExists::class,
             'blocked' => \App\Http\Middleware\BlockUser::class,
             'randomExists' => \App\Http\Middleware\RandomMiddleware::class,
+            'media' => \App\Http\Middleware\MediaSearch::class,
         ],
 
         'api' => [

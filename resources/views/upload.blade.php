@@ -47,7 +47,7 @@
         </div>
         <div class="my-5 flex flex-col">
             <label for="uploadFile" class="form-label">{{ __('translation.uploadFile') }}</label>
-            <input title="{{ __('translation.titlefileUpload') }}" class="file-input file-input-primary  rounded-lg cursor-pointerfocus:outline-none dark:border-blue-600 dark:placeholder-gray-400 border border-black bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" type="file" name="uploadFile" id="uploadFile" required oninvalid="this.setCustomValidity('{{__('translation.fillFile')}}')"oninput="this.setCustomValidity('')" accept=".png, .gif, .webp, .jpg, .jpeg">
+            <input title="{{ __('translation.titlefileUpload') }}" class="file-input file-input-primary rounded-lg cursor-pointerfocus:outline-none dark:border-blue-600 dark:placeholder-gray-400 border border-black bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white w-full" type="file" name="uploadFile" id="uploadFile" required oninvalid="this.setCustomValidity('{{__('translation.fillFile')}}')"oninput="this.setCustomValidity('')" accept=".png, .gif, .webp, .jpg, .jpeg">
         </div>
         <button id="submitPause" type="submit" class="btn btn-primary mb-8 px-16">{{ __('translation.submit') }}</button>
         </div>
@@ -61,7 +61,7 @@ document.getElementById("myForm").addEventListener("submit", function(event) {
 
         // Disable the button to prevent multiple submissions
         submitButton.disabled = true;
-        submitButton.innerHTML = '<span class="loading loading-spinner text-warning px-8"></span>';
+        submitButton.innerHTML = '<span class="loading loading-spinner text-warning"></span>';
 
         // Re-enable the button after 5 seconds
         setTimeout(function() {

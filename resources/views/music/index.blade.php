@@ -43,7 +43,7 @@
                 </select>
             </div>
             <div class="col-md-3 flex flex-col mt-6">
-                <a href="{{ route('music.index') }}" class="p-2 btn-circle btn btn-error text-white border border-black inline-block">X</a>
+                <a id="clear" href="{{ route('music.index') }}" class="p-2 btn-circle btn btn-error text-white border border-black inline-block">X</a>
             </div>
         </div>
         
@@ -51,7 +51,7 @@
         <div class="flex items-center gap-2 mt-8 mb-2">
             <svg class="h-5 w-5 opacity-50 text-gray-500 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
             <input title="{{ __('translation.search') }}" type="text" class="grow input input-md rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white dark:active:bg-blue-900 dark:focus:bg-blue-900 dark:focus:text-white" id="searchInput" name="search" placeholder="{{ __('translation.searchMusic') }}" autocomplete="off"/>
-            <button type="submit" class="btn btn-primary w-30">{{ __('translation.search') }}</button>
+            <button id="search" type="submit" class="btn btn-primary w-30">{{ __('translation.search') }}</button>
         </div>
     </form>
 
@@ -200,6 +200,41 @@ document.addEventListener('DOMContentLoaded', function () {
     if (typeof MediaChrome !== 'undefined') {
         MediaChrome.defineCustomElements();
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const clearButton = document.getElementById('clear');
+
+    clearButton.addEventListener('click', function(event) {
+        if (clearButton.disabled) {
+            event.preventDefault(); 
+            return;
+        }
+
+        clearButton.disabled = true;
+        clearButton.style.pointerEvents = 'none'; 
+        clearButton.style.opacity = '0.5'; 
+
+        setTimeout(() => {
+            clearButton.disabled = false;
+            clearButton.style.pointerEvents = 'auto';
+            clearButton.style.opacity = '1';
+        }, 5000);
+    });
+});
+
+document.getElementById("filterForm").addEventListener("submit", function(event) {
+    // Get the submit button
+    const searchButton = document.getElementById("search");
+
+    // Disable the button to prevent multiple submissions
+    searchButton.disabled = true;
+    searchButton.innerHTML = '<span class="loading loading-spinner text-warning"></span>';
+
+    // Re-enable the button after 5 seconds
+    setTimeout(function() {
+        searchButton.disabled = false;
+    }, 5000);
 });
 </script>
 @endsection

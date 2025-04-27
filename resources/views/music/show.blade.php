@@ -15,6 +15,7 @@
         <div class="w-auto md:w-1/2 flex flex-col ml-4 my-4">
             <h1 class="text-2xl font-bold mb-4 break-words overflow-wrap">{{ $media->Nosaukums }}{{ __('translation.info') }}</h1>
             <form class="space-y-2 mr-2">
+                @unless (empty($media->Apraksts))
                 <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">
                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">{{ __('translation.description') }}</h3>
                     <div class="flex flex-col"> 
@@ -23,18 +24,28 @@
                         </p>
                     </div>
                 </div>
+                @endunless
+
                 <!--Mid section-->
+                @if ($music->Bitrate !== null)
                 <div class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm">
                     <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.bitrate') }}</label>
                     <p class="text-sm text-gray-900 dark:text-white font-semibold">{{round($music->Bitrate / 1000)}} {{ __('translation.kbps') }}</p>
                 </div>
+                @endif
+                @if ($music->Izlaists !== null)
                 <div class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm">
                     <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.released') }}</label>
                     <p class="text-sm text-gray-900 dark:text-white font-semibold">{{$music->Izlaists }}</p>
                 </div>
-                <div class="items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">
-                    <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.author') }}</label>
-                    <p class="text-sm text-gray-900 dark:text-white font-semibold break-words overflow-wrap">{{ $media->Autors }}</p>
+                @endif
+                <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">{{ __('translation.description') }}</h3>
+                    <div class="flex flex-col"> 
+                        <p class="text-gray-600 dark:text-gray-300 break-words overflow-wrap" >
+                            {{ $media->Apraksts }}
+                        </p>
+                    </div>
                 </div>
                 <div class="flex items-center justify-between p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm">
                     <label for="author" class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('translation.copyright') }}</label>

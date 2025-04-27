@@ -52,6 +52,7 @@ class MediaController extends Controller
         // Return a success message
         return back()->with('success', __('translation.fileUploaded'));
     }
+    
 public function __construct()
     {
         $this->middleware('auth');

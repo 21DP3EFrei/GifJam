@@ -40,7 +40,7 @@
             </div>
 
             <div class="mt-4 flex justify-between items-center">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:hover:text-blue-500" href="{{ route('register') }}">
+                <a id="switch" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:hover:text-blue-500" href="{{ route('register') }}">
                     {{ __('translation.noaccount') }}
                 </a>
 
@@ -51,7 +51,7 @@
             </div>
         </form>
         <h1 class="text-gray-400 opacity-45">{{ __('translation.orSign') }}</h1>
-        <a href="{{ route('auth.google.redirect') }}" class="flex justify-center items-center space-x-4 text-center">
+        <a id="google" href="{{ route('auth.google.redirect') }}" class="flex justify-center items-center space-x-4 text-center">
             <div class=" py-1 border-black border-2 bg-transparent  dark:bg-gray-700  flex items-center rounded-full">
                 <img class="h-auto w-auto max-h-10 max-w-12 rounded-sm ml-1 mr-1" src="{{ asset('images/Google.png') }}"  alt="{{ __('translation.logoGoogleL') }}">
                 <h1 class="ml-1 mr-2 dark:text-gray-300 font-bold">{{ __('translation.googleSignIn') }}</h1>
@@ -71,4 +71,46 @@
             return true;
         });
     });
+
+document.addEventListener('DOMContentLoaded', function() {
+const googleButton = document.getElementById('google');
+
+googleButton.addEventListener('click', function(event) {
+    if (googleButton.disabled) {
+        event.preventDefault(); 
+        return;
+    }
+
+    googleButton.disabled = true;
+    googleButton.style.pointerEvents = 'none'; 
+    googleButton.style.opacity = '0.5'; 
+
+    setTimeout(() => {
+        googleButton.disabled = false;
+        googleButton.style.pointerEvents = 'auto';
+        googleButton.style.opacity = '1';
+    }, 5000);
+});
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+const switcBtn = document.getElementById('switch');
+
+switcBtn.addEventListener('click', function(event) {
+    if (switcBtn.disabled) {
+        event.preventDefault(); 
+        return;
+    }
+
+    switcBtn.disabled = true;
+    switcBtn.style.pointerEvents = 'none'; 
+    switcBtn.style.opacity = '0.5'; 
+
+    setTimeout(() => {
+        switcBtn.disabled = false;
+        switcBtn.style.pointerEvents = 'auto';
+        switcBtn.style.opacity = '1';
+    }, 5000);
+});
+});
 </script>

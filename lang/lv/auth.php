@@ -16,6 +16,5 @@ return [
     'failed' => 'Šie autentifikācijas dati nesakrīt ar mūsu ierakstiem.',
     'password' => 'Ievadītā parole ir nepareiza.',
     'throttle' => 'Pārāk daudz pieteikšanās mēģinājumu. Lūdzu, mēģiniet vēlreiz pēc :seconds sekundēm.',
-
-
+    'emailverify' => 'Jūsu e-pasta adrese nav apstiprināta.',
 ];
