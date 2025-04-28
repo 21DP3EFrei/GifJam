@@ -71,20 +71,20 @@ class UnverificationController extends Controller
             'Apraksts' => 'nullable|string|max:200',
             'Autortiesibas' => 'integer',
             'Autortiesibas.*' => 'boolean',
-            'Bitrate' => 'required|integer',
-            'Izlaists' => 'required|integer|min:1900|max:' . date('Y'),
         ];
     
-        // Conditional validation for 'Autors'
+        // Conditional validation based on media type
         if ($media->Multivides_tips == 'Sound') {
             $rules['Autors'] = 'nullable|string|max:100';
+            $rules['Bitrate'] = 'required|integer';
             $rules['Izlaists'] = 'nullable|integer';
-        } else {
+        } elseif ($media->Multivides_tips == 'Music') {
+            $rules['Autors'] = 'required|string|max:100';
+            $rules['Bitrate'] = 'required|integer';
+            $rules['Izlaists'] = 'required|integer|min:1900|max:' . date('Y');
+        } elseif ($media->Multivides_tips == 'Image') {
             $rules['Autors'] = 'required|string|max:100';
         }
-
-        // Validate the request with the fully defined rules
-        $request->validate($rules);
     
         // Additional conditional rules based on media type
         if ($media->Multivides_tips == 'Image') {
@@ -95,12 +95,15 @@ class UnverificationController extends Controller
             $rules['Zanrs_id'] = 'exists:zanrs,Z_ID';
         }
     
+        // Validate the request with the fully defined rules
+        $request->validate($rules);
+    
         // Update the media record
         $media->update([
             'Nosaukums' => $request->Nosaukums,
             'Apraksts' => $request->Apraksts,
             'Autors' => $request->Autors,
-            'Autortiesibas' => $request->Autortiesibas, // Directly use the value (0 or 1)
+            'Autortiesibas' => $request->Autortiesibas,
         ]);
     
         // Update related records based on media type

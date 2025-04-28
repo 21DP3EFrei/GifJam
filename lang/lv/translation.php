@@ -3,7 +3,6 @@
 return [
     'welcome' => 'Laipni lūdzam mūsu vietnē!',
     'greeting' => 'Sveiki,',
-    'logged_in'=> 'Jūs esat ielogojies kā',
     'latvian'=> 'Latviešu',
     'english'=> 'Angļu',
     'russian'=> 'Krievu',
@@ -266,7 +265,7 @@ return [
     'does' => 'Ir',
     'doesnot' => 'Nav',
     'sounds' => 'Skaņa',
-    'pdfname' => 'Augšupielāžu informācija',
+    'pdfname' => 'Augšupielāžu informācija.pdf',
     'release' => 'Izlaišanas gads',
     'errorbitrate' => 'Ievadiet derīgu skaitli',
     'errorYear' => 'Ievadiet derīgu gadu',
@@ -276,11 +275,16 @@ return [
     'welcome4' => 'Cilvēks kas rakstija šo tekstu, beidzās idejas.',
     'welcome5' => 'Sapņi piepildās.',
     'welcome6' => 'Okej ☺',
+    'welcome7' => '3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679',
+    'welcome8' => 'Aiztiec zāli 🌵',
+    'welcome9' => '00110110 00111001 00110100 00110010 00110000',
+    'welcome10' => 'Atpūties mierā Oxy 2024-2024',
     'welcomeDefault' => 'Nekur nevajag steigties.',
     'pend' => 'Gaida apstiprinājumu',
     'aprov' => 'Apstiprināts',
     'rejec' => 'Noraidīts',
     'previous' => 'Iepriekšējais faila statuss',
+    'gen' => 'Žanrs',
 
 
     'navigation_welcome'=> 'Sākums',

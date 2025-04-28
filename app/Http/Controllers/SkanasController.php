@@ -24,6 +24,7 @@ class SkanasController extends Controller
                 'fileDescription' => 'nullable|string|max:200',
                 'category_id' => 'required|exists:skanas_kategorija,SKat_ID', // Ensure the selected category exists
                 'uploadFile' => 'required|mimes:aac,aiff,alac,m4a,flac,mp3,wav,opus|max:20000',
+                'author' => 'nullable|string|max:100',
             ], [
                 'uploadFile.mimes' => __('translation.uploadSound'),
             ]);
@@ -46,6 +47,7 @@ class SkanasController extends Controller
             $media->Nosaukums = $request->fileName;
             $media->Apraksts = $request->fileDescription;
             $media->Fails = $filePath; // Store the file path in the database
+            $media->Autors = $request->author;
             $media->Autortiesibas = 0; // Set to non copyrighthed by default
             $media->Status = 0; // Set the default status to unpublished
             $media->Lietotajs = Auth::id();

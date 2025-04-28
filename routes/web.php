@@ -19,7 +19,6 @@ use App\Http\Controllers\MuzikaController;
 use App\Http\Controllers\SkanasController;
 use App\Http\Controllers\MusicLibrary;
 use App\Http\Controllers\SoundLibrary;
-use App\Http\Controllers\RandomController;
 
 Route::get('locale/{lang}', [LocalizationController::class, 'selected']);
 Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
@@ -120,7 +119,7 @@ Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/blocked', function () {return view('block');})->name('block');
 
 //random media
-Route::get('/random', [RandomController::class, 'random'])->name('random');
+Route::get('/random', [MediaController::class, 'random'])->name('random');
 
 }); //end of auth and blocked
 

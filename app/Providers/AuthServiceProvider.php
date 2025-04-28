@@ -27,7 +27,7 @@ public function boot()
     $this->registerPolicies();
 
     Gate::define('admin-access', function (User $user) {
-        return $user->usertype === 'admin';
+        return $user->usertype == 'admin';
     });
 }
 
