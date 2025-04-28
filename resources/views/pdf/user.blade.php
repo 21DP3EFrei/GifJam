@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>GifJam - {{__('translation.data')}}</title>
+    <title>{{__('translation.pdfnames')}}</title>
 </head>
 <body>
     <table class="w-full">
@@ -32,7 +32,6 @@
                 <tr>
                     <th>{{__('translation.nr')}}</th>
                     <th>{{__('translation.name')}}</th>
-                    <th>{{__('translation.description')}}</th>
                     <th>{{__('translation.author')}}</th>
                     <th>{{__('translation.copyright')}}</th>
                     <th>{{__('translation.type')}}</th>
@@ -45,23 +44,18 @@
                 @foreach($data as $media)
                 <tr class="items">
                     <td>{{ $no }}.</td>
-                    <td>{{ $media->Nosaukums}}</td>
-                    @if ($media->Apraksts == null)
-                    <td>-</td>
-                    @else
-                    <td>{{ $media->Apraksts }}</td>
-                    @endif
+                    <td>{{  Str::limit($media->Nosaukums, 20)}}</td>
                     @if ($media->Autors == null)
                     <td>-</td>
                     @else
-                    <td>{{ $media->Autors }}</td>
+                    <td>{{  Str::limit($media->Autors, 15) }}</td>
                     @endif
                     <td>{{ $media->Autortiesibas ? __('translation.does') : __('translation.doesnot') }}</td>
-                    @if ($media->Multivides_tips === "Image")
+                    @if ($media->Multivides_tips == "Image")
                     <td>{{__('translation.image')}}</td>
-                    @elseif ($media->Multivides_tips === "Music")
+                    @elseif ($media->Multivides_tips == "Music")
                     <td>{{__('translation.music')}}</td>
-                    @elseif ($media->Multivides_tips === "Sound")
+                    @elseif ($media->Multivides_tips == "Sound")
                     <td>{{__('translation.sounds')}}</td>
                     @endif
                     <td>{{ str_replace('uploads/', '', $media->Fails) }}</td>

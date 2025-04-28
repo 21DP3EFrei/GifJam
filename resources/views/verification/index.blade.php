@@ -26,7 +26,7 @@
                 <th class="border-separate border border-gray-400">{{ __('translation.description') }}</th>
               {{--   <th>Status</th> --}}
                 <th class="border-separate border border-gray-400">{{ __('translation.actions') }}</th>
-                <th class="border-separate border border-gray-400">{{ __('translation.category') }} / {{ __('translation.navigation_genre') }}</th>
+                <th class="border-separate border border-gray-400">{{ __('translation.category') }} / {{ __('translation.gen') }}</th>
                 <th class="border-separate border border-gray-400">{{ __('translation.file') }}</th>
                 <th class="border-separate border border-gray-400">{{ __('translation.submited') }}</th>
             </tr>
@@ -67,7 +67,7 @@
                 </td>
                 <td class="align-middle text-center">
                     <div class="flex items-center justify-center space-x-2">
-                        @if ($media->Multivides_tips === 'Image' && $media->kategorijas && $media->kategorijas->isNotEmpty())
+                        @if ($media->Multivides_tips == 'Image' && $media->kategorijas && $media->kategorijas->isNotEmpty())
                             <img class="h-7 w-7" src="{{ asset('images/image.svg') }}" alt="{{ __('translation.pic') }}">
                             <span>
                                 @foreach($media->kategorijas as $category)
@@ -75,7 +75,7 @@
                                 @endforeach
                             </span>
                         
-                        @elseif ($media->Multivides_tips === 'Sound' && $media->skana && $media->skana->skanaKategorija && $media->skana->skanaKategorija->isNotEmpty())
+                        @elseif ($media->Multivides_tips == 'Sound' && $media->skana && $media->skana->skanaKategorija && $media->skana->skanaKategorija->isNotEmpty())
                             <img class="h-7 w-7" src="{{ asset('images/sound.svg') }}" alt="{{ __('translation.sfx') }}">
                             <span>
                                 @foreach($media->skana->skanaKategorija as $category)
@@ -83,7 +83,7 @@
                                 @endforeach
                             </span>
                 
-                        @elseif ($media->Multivides_tips === 'Music' && $media->music && $media->music->zanrs && $media->music->zanrs->isNotEmpty())
+                        @elseif ($media->Multivides_tips == 'Music' && $media->music && $media->music->zanrs && $media->music->zanrs->isNotEmpty())
                             <img class="h-7 w-7" src="{{ asset('images/music.svg') }}" alt="{{ __('translation.music') }}">
                             <span>
                                 @foreach($media->music->zanrs as $genre)
@@ -96,7 +96,7 @@
                     </div>
                 </td>                
                 
-                @if ($media->Multivides_tips === 'Image')
+                @if ($media->Multivides_tips == 'Image')
                 <td class="text-center col-span-2">
                     <div class="flex items-center flex-col">
                     <img class="cursor-pointer" src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}" width="100" height="100" onclick="this.classList.toggle('fixed'); this.classList.toggle('inset-0'); this.classList.toggle('w-full'); this.classList.toggle('h-full'); this.classList.toggle('object-contain'); this.classList.toggle('z-50'); this.classList.toggle('bg-black');"/>       
@@ -105,7 +105,7 @@
                     </div>
                     </div>
                 </td>
-                @elseif ($media->Multivides_tips === 'Sound' || $media->Multivides_tips === 'Music')
+                @elseif ($media->Multivides_tips == 'Sound' || $media->Multivides_tips == 'Music')
                 <td>
                     <div class="flex items-center justify-between">
                     <media-controller audio style="--media-background-color: transparent;">

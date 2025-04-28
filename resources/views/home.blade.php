@@ -21,7 +21,7 @@
                         $currentLanguage = Session::get('locale', 'en'); // Get the current locale from the session
                     @endphp
                     @foreach ($languages as $code => $name)
-                        <option value="{{ url('locale/' . $code) }}" {{ $currentLanguage === $code ? 'selected' : '' }}>
+                        <option value="{{ url('locale/' . $code) }}" {{ $currentLanguage == $code ? 'selected' : '' }}>
                             {{ $name }}
                         </option>
                     @endforeach

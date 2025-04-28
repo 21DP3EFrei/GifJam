@@ -57,4 +57,10 @@ public function __construct()
     {
         $this->middleware('auth');
     }
+
+    public function random()
+    {
+        $random = Media::inRandomOrder()->where('Status', 1)->get()->first();
+        return view('random', compact('random'));
+    }
 }

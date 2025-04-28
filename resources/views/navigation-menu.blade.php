@@ -12,6 +12,9 @@
 
         <!-- Navigation Links -->
         <div class="hidden md:flex justify-center space-x-1 w-1/3">
+            <a href="covid.mp4" target="_blank" class="inline-block w-fit mr-14">
+                <h1 class="bg-transparent text-transparent">.</h1>
+            </a>       
             <x-nav-link id="home" href="{{ route('welcome') }}" :active="request()->routeIs('welcome')" class="py-2">
                 <svg class="ml-1 h-5 w-5 mr-2" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" transform="matrix(1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0L0 6V8H1V15H4V10H7V15H15V8H16V6L14 4.5V1H11V2.25L8 0ZM9 10H12V13H9V10Z" fill="#6e6e6e"></path> </g></svg>
             </x-nav-link>
