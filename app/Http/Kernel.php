@@ -42,6 +42,7 @@ class Kernel extends HttpKernel
             'blocked' => \App\Http\Middleware\BlockUser::class,
             'randomExists' => \App\Http\Middleware\RandomMiddleware::class,
             'media' => \App\Http\Middleware\MediaSearch::class,
+            'like' => \App\Http\Middleware\LikeMiddleware::class,
         ],
 
         'api' => [

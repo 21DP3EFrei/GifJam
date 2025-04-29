@@ -22,12 +22,16 @@
         @csrf
         @method('PUT')
         <div class="form-group mb-2">
+            <label>{{ __('translation.email') }}:</label>
+            <div title="{{ __('translation.email') }}" class="input input-md border rounded-sm bg-indigo-100 dark:!bg-cyan-800 dark:text-white w-full cursor-not-allowed">{{ $block->lietotajs->email }}</div>
+        </div>
+        <div class="form-group mb-2">
             <label for="Iemesls">{{ __('translation.reason') }}:</label>
             <textarea title="{{ __('translation.titlereason') }}" class="input input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white w-full" autocomplete="off" id="Iemesls" name="Iemesls" required oninvalid="this.setCustomValidity('{{ __('translation.fillReason') }}')" oninput="this.setCustomValidity('')">{{ $block->Iemesls }}</textarea>
         </div>
         <div class="form-group mb-2">
             <label for="Blokets" class="form-label">{{ __('translation.status') }}:</label>
-            <select title="{{ __('translation.titleblocked') }}" class="select input-sm rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white w-full" name="Blokets" id="Blokets">
+            <select title="{{ __('translation.titleblocked') }}" class="select input-sm rounded-sm bg-gray-200 dark:bg-blue-900 dark:text-white w-full cursor-grab" name="Blokets" id="Blokets">
                 <option value="Block" {{ $block->Blokets == 1 ? 'selected' : '' }}>{{ __('translation.isBlocked') }}</option>
                 <option value="Unblock" {{ $block->Blokets == 0 ? 'selected' : '' }}>{{ __('translation.notBlocked') }}</option>
             </select>
@@ -49,7 +53,6 @@ document.getElementById("myform").addEventListener("submit", function(event) {
             submitButton.disabled = false;
         }, 5000);
     });  
-
 document.addEventListener('DOMContentLoaded', function() {
 const backButton = document.getElementById('back');
 

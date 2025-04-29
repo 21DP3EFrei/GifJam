@@ -19,6 +19,7 @@ use App\Http\Controllers\MuzikaController;
 use App\Http\Controllers\SkanasController;
 use App\Http\Controllers\MusicLibrary;
 use App\Http\Controllers\SoundLibrary;
+use App\Http\Controllers\LikeController;
 
 Route::get('locale/{lang}', [LocalizationController::class, 'selected']);
 Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
@@ -89,7 +90,13 @@ Route::get('/uploadSound', [SkanasController::class, 'upload'])->name('uploadSou
 Route::post('/uploadSound', [SkanasController::class, 'uploadPost'])->name('uploadSound.post');
 
 //Media routes
-Route::middleware(['media'])->group(function () {
+Route::middleware(['media',])->group(function () {
+Route::get('/likedImages', [LikeController::class, 'images'])->name('likesP')->middleware('like');
+Route::get('/likedSounds', [LikeController::class, 'sounds'])->name('likesS')->middleware('like');
+Route::get('/likedMusic', [LikeController::class, 'music'])->name('likesM')->middleware('like');
+Route::post('/media/{media}/like', [LikeController::class, 'like'])->name('media.like');
+Route::post('/media/{media}/unlike', [LikeController::class, 'unlike'])->name('media.unlike');
+
 //gallery
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
 Route::get('/get/subcategories/{category_id}', [PictureController::class, 'getSubcategories'])->name('getSubcategories');

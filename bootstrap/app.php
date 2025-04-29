@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LikeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -10,6 +11,7 @@ use App\Http\Middleware\BlockUser;
 use App\Http\Middleware\Localization;
 use App\Http\Middleware\RandomMiddleware;
 use App\Http\Middleware\MediaSearch;
+use App\Http\Middleware\LikeMiddleware;
 use Illuminate\Support\Facades\App;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -28,6 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'localization' => Localization::class,
             'randomExists' => RandomMiddleware::class,
             'media' => MediaSearch::class,
+            'like' => LikeMiddleware::class,            
         ]);
     })
     ->withMiddleware(function (Middleware $middleware) {

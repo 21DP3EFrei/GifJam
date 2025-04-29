@@ -7,6 +7,7 @@ use App\Http\Controllers\SkanasController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Support\Facades\Storage;
+use App\Models\Model\Favorites;
 
 class Media extends Model
 {
@@ -41,6 +42,11 @@ class Media extends Model
         static::deleted(function ($file) {
             Storage::delete($file->Fails);
         });
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites',  'Multivide', 'Lietotajs');
     }
 }
 
