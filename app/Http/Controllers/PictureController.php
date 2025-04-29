@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Kategorija;
 use App\Models\Media; 
 use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class PictureController extends Controller
 {
@@ -66,7 +68,7 @@ class PictureController extends Controller
                 ->header('Pragma', 'no-cache')
                 ->header('Expires', '0');
         }
-    
+
         // Return the full view for non-AJAX requests
         return view('pictures.index', compact('categories', 'subcategories', 'pictures'));
     }
@@ -121,4 +123,5 @@ class PictureController extends Controller
     {
         $this->middleware('auth');
     }
+    
 }

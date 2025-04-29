@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Media;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -67,5 +68,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function block()
     {
         return $this->hasOne(Noblokets::class, 'L_ID');
+    }
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(Media::class, 'favorites', 'Lietotajs', 'Multivide');
+    }
+    public function likeMedia(Media $media)
+    {
+        return $this->favoritedBy()->where('Multivide', $media->Me_ID)->exists();
     }
 }

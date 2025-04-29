@@ -25,7 +25,7 @@
             <select title="{{ __('translation.titleUser') }}" class="select input-md border rounded-sm bg-gray-200 dark:!bg-blue-900 dark:text-white w-full" id="L_ID" name="L_ID" required oninvalid="this.setCustomValidity('{{ __('translation.fillUser') }}')"oninput="this.setCustomValidity('')">
                 <option value=""></option>
                 @foreach($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }} id:({{ $user->id }})</option>
+                    <option value="{{ $user->id }}">{{ $user->name }} ({{ $user->email }})</option>
                 @endforeach
             </select>
             @if ($errors->has('L_ID'))

@@ -23,10 +23,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([ 
             UserSeeder::class,
-            CategorySeeder::class,
-            MediaSeeder::class,
-            Skana_kategorijaSeeder::class,
-            GenreSeeder::class,
+            // CategorySeeder::class,
+            // MediaSeeder::class,
+            // Skana_kategorijaSeeder::class,
+            // GenreSeeder::class,
         ]);
         
         // Media::factory(1)->has(Kategorija::factory(2))->create();
