@@ -53,7 +53,6 @@ document.getElementById("myform").addEventListener("submit", function(event) {
             submitButton.disabled = false;
         }, 5000);
     });  
-
 document.addEventListener('DOMContentLoaded', function() {
 const backButton = document.getElementById('back');
 
