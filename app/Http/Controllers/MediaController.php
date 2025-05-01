@@ -53,14 +53,25 @@ class MediaController extends Controller
         return back()->with('success', __('translation.fileUploaded'));
     }
     
-public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function random()
     {
         $random = Media::inRandomOrder()->where('Status', 1)->get()->first();
         return view('random', compact('random'));
     }
+
+    public function download(Media $media)
+    {
+
+        $filePath = storage_path('app/public/' . $media->Fails);
+        $newFileName = $media->Nosaukums . '.' . pathinfo($media->Fails, PATHINFO_EXTENSION);
+    
+        return response()->download($filePath, $newFileName);
+    }
+
+    
+
+    public function __construct()
+        {
+            $this->middleware('auth');
+        }
 }

@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import 'tailwindcss' layer(utilities);
+@tailwind utilities;
 
 @plugin '@tailwindcss/typography';
 @plugin 'daisyui';

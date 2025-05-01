@@ -9,7 +9,7 @@
         @endif
         @if ($SoundCategory->isEmpty())
         <div class="col-span-full flex items-center justify-center">
-            <h1 class="text-white text-3xl font-bold text-center">{{ __('translation.noCategories') }}</h1>
+            <h1 class="dark:text-white text-black text-3xl font-bold text-center">{{ __('translation.noCategories') }}</h1>
         </div>
         @else
         <div class="table-responsive overflow-x-auto mx-3">

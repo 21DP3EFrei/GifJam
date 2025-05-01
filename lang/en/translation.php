@@ -198,8 +198,8 @@ return [
     'unverifying'=>'Unverify',
     'googleAuth'=>'Google authentication failed.',
     'fileUploaded'=>'File uploaded successfully and awaiting review.',
-    'uploadImage'=>'Only image and GIF files are allowed.',
-    'uploadSound'=>'Only sound files are allowed.',
+    'uploadImage'=>'Only image and GIF files are allowed. Available extensions: .png .jpeg .webp .gif .jpg',
+    'uploadSound'=>'Only sound files are allowed. Available extensions: .mp3 .aac .aiff .alac .m4a .flac .wav .opus',
     'userBlock'=>'User has been blocked.',
     'userStatus'=>'User status updated successfully.',
     'userBlockDelete'=>'The field has been deleted.',
@@ -230,7 +230,7 @@ return [
     'useRecovery'=>'Use a recovery code',
     'useAuth'=>'Use an authentication code',
     'recoveryCod'=>'Recovery Code',
-    'titlefilename'=>'File name', //tittles
+    'titlefilename'=>'File name',
     'titlefildescr'=>'File description',
     'titlefilauthor'=>'File author',
     'titleSelectCat'=>'Please select a category',
@@ -301,8 +301,6 @@ return [
     'browse' => 'Browse files',
     'pdfnames' => 'Uploads info',
     'gen' => 'Genre',
-    'types1' => 'Available extensions: .png .jpeg .webp .gif .jpg',
-    'types2' => 'Available extensions: .mp3 .aac .aiff .alac .m4a .flac .wav .opus',
     'welcomemsg' => 'Welcome, to get started view media in the',//new
     'welcomemsg2' => '"Media" section or upload something',
     'liek' => 'Must favorite a media to view this page',

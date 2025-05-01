@@ -54,12 +54,10 @@
                       <td class="text-center">{{ $random->Autortiesibas ? __('translation.does') : __('translation.doesnot') }}</td>
                       <td class="justify-center flex">
                         <div class="border rounded-full w-9 h-9 transition ease-in-out duration-300 hover:bg-blue-300">
-                            <a href="{{ asset('storage/' . $random->Fails) }}" 
-                                download="{{ $random->Nosaukums }}{{ \Illuminate\Support\Str::afterLast($random->Fails, '.') ? '.' . \Illuminate\Support\Str::afterLast($random->Fails, '.') : '' }}" 
-                                class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800 tooltip" 
-                                data-tip="{{ __('translation.download') }}">
-                                 ↓
-                             </a>
+                            <form action="{{ route('media.download', $random) }}" method="GET" class="space-y-2">
+                                @csrf
+                                <button type="submit" class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800 tooltip" data-tip="{{ __('translation.download') }}">↓</button>
+                            </form>
                         </div>
                       </td>                
                   </tr>
@@ -113,12 +111,10 @@
                         <td class="text-center">{{ round($random->skana->Bitrate / 1000) }} {{ __('translation.kbps') }}</td>              
                     <td class="justify-center flex">
                     <div class="border rounded-full w-9 h-9 transition ease-in-out duration-300 hover:bg-blue-300">
-                        <a href="{{ asset('storage/' . $random->Fails) }}" 
-                            download="{{ $random->Nosaukums }}{{ \Illuminate\Support\Str::afterLast($random->Fails, '.') ? '.' . \Illuminate\Support\Str::afterLast($random->Fails, '.') : '' }}" 
-                            class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800 tooltip" 
-                            data-tip="{{ __('translation.download') }}">
-                             ↓
-                         </a>
+                        <form action="{{ route('media.download', $random) }}" method="GET" class="space-y-2">
+                            @csrf
+                            <button type="submit" class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800 tooltip" data-tip="{{ __('translation.download') }}">↓</button>
+                        </form>
                     </div>
                     </td>  
                     </tr>
@@ -186,12 +182,10 @@
                     <td class="text-center">{{ $random->music->Izlaists }}</td>                   
                     <td class="justify-center flex">
                     <div class="border rounded-full w-9 h-9 transition ease-in-out duration-300 hover:bg-blue-300">
-                        <a href="{{ asset('storage/' . $random->Fails) }}" 
-                            download="{{ $random->Nosaukums }}{{ \Illuminate\Support\Str::afterLast($random->Fails, '.') ? '.' . \Illuminate\Support\Str::afterLast($random->Fails, '.') : '' }}" 
-                            class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800 tooltip" 
-                            data-tip="{{ __('translation.download') }}">
-                             ↓
-                         </a>
+                        <form action="{{ route('media.download', $random) }}" method="GET" class="space-y-2">
+                            @csrf
+                            <button type="submit" class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800 tooltip" data-tip="{{ __('translation.download') }}">↓</button>
+                        </form>
                     </div>
                     </td>  
                     </tr>

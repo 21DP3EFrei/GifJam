@@ -19,7 +19,7 @@
         @endif
         @if ($block->isEmpty())
         <div class="col-span-full flex items-center justify-center">
-            <h1 class="text-white text-3xl font-bold text-center">{{ __('translation.noBlock') }}</h1>
+            <h1 class="dark:text-white text-black text-3xl font-bold text-center">{{ __('translation.noBlock') }}</h1>
         </div>
         @else
         <table class="table table-zebra overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">

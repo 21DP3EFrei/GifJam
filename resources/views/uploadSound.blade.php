@@ -32,7 +32,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4-4m0 0l-4 4m4-4v12"></path>
                     </svg>
                     <p class="text-gray-400 mb-2">{{ __('translation.dragDrop') }}</p>
-                    <button type="button" id="browseButton" class="btn btn-primary tooltip tooltip-bottom" data-tip="{{ __('translation.types2') }}">{{ __('translation.browse') }}</button>
+                    <button type="button" id="browseButton" class="btn btn-primary">{{ __('translation.browse') }}</button>
                     <input type="file" id="uploadFile" name="uploadFile" class="hidden" accept=".aac, .aiff, .alac, .m4a, .flac, .mp3, .wav, .opus" oninvalid="this.setCustomValidity('{{__('translation.fillFile')}}')"oninput="this.setCustomValidity('')">
                 </div>
                 <div id="file-preview" class="mt-0.5 dark:text-blue-200 text-blue-600 bg-violet-200 dark:bg-violet-800 rounded-lg"></div>
@@ -74,7 +74,7 @@ document.getElementById("myForm").addEventListener("submit", function(event) {
         // Re-enable the button after 5 seconds
         setTimeout(function() {
             submitButton.disabled = false;
-        }, 5000);
+        }, 30000);
     });
 
     const dropArea = document.getElementById('drop-area');

@@ -17,11 +17,11 @@
     @endif  
     @if ($approvedMedia->isEmpty() && request()->has('search'))
     <div class="col-span-full flex items-center justify-center">
-        <h1 class="text-white text-3xl font-bold text-center">{{ __('translation.emptyVerifySearch') }}</h1>
+        <h1 class="dark:text-white text-black text-3xl font-bold text-center">{{ __('translation.emptyVerifySearch') }}</h1>
     </div>
     @elseif ($approvedMedia->isEmpty())
     <div class="col-span-full flex items-center justify-center">
-        <h1 class="text-white text-3xl font-bold text-center">{{ __('translation.emptyVerify') }}</h1>
+        <h1 class="dark:text-white text-black text-3xl font-bold text-center">{{ __('translation.emptyVerify') }}</h1>
     </div>
     @else
     <form action="{{ route('unverification.index') }}" method="GET" id="filterForm">

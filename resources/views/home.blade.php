@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GifJam - {{ __('translation.home') }}</title>
+    <link href="/css/app.css" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.15.1/dist/full.css" rel="stylesheet">
 </head>
-<body class="bg-gray-800 text-gray-100">
+<body class="dark:!bg-gray-800 bg-neutral-200 text-gray-100">
     <!-- Navbar -->
-    <nav class="bg-gray-900 shadow-lg">
+    <nav class="dark:!bg-gray-900 bg-slate-500 shadow-lg">
         <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between px-4 py-2">
-            <a href="" class="flex items-center space-x-3 text-primary">
+            <a id="home" href="" class="flex items-center space-x-3 text-primary">
                 <img class="h-10 w-14" src="{{ asset('images/gifjam.png') }}" alt="{{ __('translation.logo') }}" class="h-12">
             </a>            
             <div class="flex flex-row">
-                <select class="w-50 rounded-md border-gray-300 shadow-sm focus:ring-opacity-50 border p-3 py-1 mr-2" style="background-color: #051d2c" onchange="window.location.href = this.value">
+                <select class="w-20 rounded-md border-gray-300 shadow-sm focus:ring-opacity-50 border p-3 py-1 mr-2 dark:!bg-gray-900 bg-slate-500" onchange="window.location.href = this.value">
                     @php
                         $languages = ['en' =>  'En', 'lv' => 'Lv', 'ru' =>  'Ru'];
                         $currentLanguage = Session::get('locale', 'en'); // Get the current locale from the session
@@ -27,10 +29,10 @@
                     @endforeach
                 </select>
             @if (auth()->check()) 
-                <a href="/welcome" class="btn btn-primary mr-2">{{ __('translation.navigation_welcome') }}</a>
+                <a id="welcome" href="/welcome" class="btn btn-primary mr-2">{{ __('translation.navigation_welcome') }}</a>
             @else
                 <a id="login" href="/login" class="btn btn-primary mr-2">{{ __('translation.login') }}</a>
-                <a id="register" href="/register" class="btn btn-outline">{{ __('translation.register') }}</a>
+                <a id="register" href="/register" class="btn btn-outline !text-white dark:!text-blue-600">{{ __('translation.register') }}</a>
             @endif
             </div>
         </div>
@@ -38,13 +40,13 @@
 
     <!-- Main Content Area -->
     <div class="container mx-auto text-center mt-16">
-        <h1 class="text-5xl font-bold flex items-center justify-center">
+        <h1 class="text-5xl text-gray-900 dark:!text-white flex items-center justify-center">
             {{ __('translation.welcomeTo') }}
             <a href="Click.mp4" target="_blank">
                 <img src="{{ asset('Coin.gif') }}" alt="Coin" class="w-12 h-12 lg:ml-2 cursor-pointer">
             </a>
         </h1>
-        <p class="text-lg mt-4">{{ __('translation.welcomeExplain') }}</p>
+        <p class="text-lg mt-4 text-gray-700 dark:!text-white">{{ __('translation.welcomeExplain') }}</p>
         @if (auth()->check()) 
         <a href="mark.mp4" target="_blank" class="inline-block w-fit mx-auto">
             <img src="{{ asset('images/portugal.png') }}" alt="Coin" class="w-13 h-10 cursor-pointer">
@@ -53,21 +55,21 @@
         <!-- Info Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-1 mt-12">
             <!-- Memes + Gifs Card -->
-            <div class="card bg-gray-700 shadow-xl p-6 mx-4">
+            <div class="card bg-gray-400 dark:!bg-gray-600 shadow-xl p-6 mx-4">
                 <img src="{{ asset('lol.png') }}" class="w-12 h-12 mx-auto mb-4" alt="{{ __('translation.Meicon') }}">
                 <h2 class="text-xl font-semibold">{{ __('translation.MG') }}</h2>
                 <p class="mt-2">{{ __('translation.MGdescription') }}</p>
             </div>
 
             <!-- Sounds Card -->
-            <div class="card bg-gray-700 shadow-xl p-6 mx-4">
+            <div class="card bg-gray-400 dark:!bg-gray-600 shadow-xl p-6 mx-4">
                 <img src="{{ asset('Note.png') }}" class="w-12 h-12 mx-auto mb-4" alt="{{ __('translation.Sicon') }}">
                 <h2 class="text-xl font-semibold">{{ __('translation.sound') }}</h2>
                 <p class="mt-2">{{ __('translation.soundDescription') }}</p>
             </div>
 
             <!-- Music Card -->
-            <div class="card bg-gray-700 shadow-xl p-6 mx-4">
+            <div class="card bg-gray-400 dark:!bg-gray-600 shadow-xl p-6 mx-4">
                 <img src="{{ asset('CD.png') }}" class="w-12 h-12 mx-auto mb-4" alt="{{ __('translation.Micon') }}">
                 <h2 class="text-xl font-semibold">{{ __('translation.music') }}</h2>
                 <p class="mt-2">{{ __('translation.musicDescription') }}</p>
@@ -75,22 +77,22 @@
         </div>
 
         <!-- Join Now Section -->
-        <div class="card bg-base-200 shadow-lg mt-12 p-8 text-center">
-            <h2 class="text-2xl text-primary font-semibold">{{ __('translation.what') }}</h2>
-            <p class="mt-2">{{ __('translation.joinGifjam') }}</p>
+        <div class="card bg-gray-300 dark:!bg-gray-700 shadow-lg mt-12 p-8 text-center">
+            <h2 class="text-2xl dark:text-violet-400 text-violet-700 font-semibold">{{ __('translation.what') }}</h2>
+            <p class="mt-2 text-black dark:!text-white">{{ __('translation.joinGifjam') }}</p>
             <img src="{{ asset('banan.gif') }}" class="w-12 h-12 mx-auto" alt="{{ __('translation.banana') }}">
             <a href="/register" class="btn btn-lg btn-success">{{ __('translation.join') }}</a>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 mt-16 py-4 text-gray-400 flex items-center justify-between">
+    <footer class="dark:!bg-gray-900 bg-gray-600 mt-16 py-4 text-gray-400 flex items-center justify-between">
         <div class="flex items-center">
             <a href="https://github.com/21DP3EFrei/GifJam" target="_blank" class="max-w-10 tooltip tooltip-right" data-tip="{{ __('translation.gtihub') }}">
                 <img class="max-h-10 max-w-10 bg-white p-1 rounded-full" src="{{ asset('images/gh.png') }}" alt="{{ __('translation.gtihub') }}" />
             </a>
         </div>
-        <div class="flex-grow text-center">
+        <div class="flex-grow text-center dark:!text-gray-400 text-gray-100">
             © {{ date("Y") }} GifJam
         </div>
     </footer>
@@ -107,64 +109,69 @@
 </style>
 </html>
 <script>
-const loginLink = document.getElementById('login');
-const registerLink = document.getElementById('register');
+    const loginLink = document.getElementById('login');
+    const registerLink = document.getElementById('register');
+    const home = document.getElementById('home');
+    const welcomeLink = document.getElementById('welcome'); // May not exist
 
-// Add a click event listener
-loginLink.addEventListener('click', function(event) {
-    // Prevent default action if either button is already disabled
-    if (loginLink.disabled || registerLink.disabled) {
-        event.preventDefault(); 
-        return;
+    function disableTemporarily(element, seconds = 5) {
+        if (!element) return;
+
+        element.style.pointerEvents = 'none';
+        element.style.opacity = '0.5';
+
+        setTimeout(() => {
+            element.style.pointerEvents = 'auto';
+            element.style.opacity = '1';
+        }, seconds * 1000);
     }
 
-    // Disable both links for 5 seconds
-    loginLink.disabled = true;
-    loginLink.style.pointerEvents = 'none'; // Disable hover/click effects
-    loginLink.style.opacity = '0.5'; // Visually indicate it's disabled
-
-    registerLink.disabled = true; // Disable the register button
-    registerLink.style.pointerEvents = 'none';
-    registerLink.style.opacity = '0.5';
-
-    // Re-enable both links after 5 seconds
-    setTimeout(() => {
-        loginLink.disabled = false;
-        loginLink.style.pointerEvents = 'auto';
-        loginLink.style.opacity = '1';
-        
-        registerLink.disabled = false; // Re-enable the register button
-        registerLink.style.pointerEvents = 'auto';
-        registerLink.style.opacity = '1';
-    }, 5000);
-});
-
-// Add a click event listener for the register button
-registerLink.addEventListener('click', function(event) {
-    // Prevent default action if either button is already disabled
-    if (loginLink.disabled || registerLink.disabled) {
-        event.preventDefault(); 
-        return;
+    function isDisabled(element) {
+        return element?.style.pointerEvents === 'none';
     }
 
-    // Disable both links for 5 seconds
-    loginLink.disabled = true; // Disable the login button
-    loginLink.style.pointerEvents = 'none'; // Disable hover/click effects
-    loginLink.style.opacity = '0.5'; // Visually indicate it's disabled
+    if (loginLink) {
+        loginLink.addEventListener('click', function (event) {
+            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink)) {
+                event.preventDefault();
+                return;
+            }
 
-    registerLink.disabled = true; // Disable the register button
-    registerLink.style.pointerEvents = 'none';
-    registerLink.style.opacity = '0.5';
+            disableTemporarily(loginLink);
+            disableTemporarily(registerLink);
+        });
+    }
 
-    // Re-enable both links after 5 seconds
-    setTimeout(() => {
-        loginLink.disabled = false;
-        loginLink.style.pointerEvents = 'auto';
-        loginLink.style.opacity = '1';
-        
-        registerLink.disabled = false; // Re-enable the register button
-        registerLink.style.pointerEvents = 'auto';
-        registerLink.style.opacity = '1';
-    }, 5000);
-});
+    if (registerLink) {
+        registerLink.addEventListener('click', function (event) {
+            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink)) {
+                event.preventDefault();
+                return;
+            }
+
+            disableTemporarily(registerLink);
+        });
+    }
+
+    if (home) {
+        home.addEventListener('click', function (event) {
+            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink)) {
+                event.preventDefault();
+                return;
+            }
+
+            disableTemporarily(home);
+        });
+    }
+
+    if (welcomeLink) {
+        welcomeLink.addEventListener('click', function (event) {
+            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink)) {
+                event.preventDefault();
+                return;
+            }
+
+            disableTemporarily(welcomeLink);
+        });
+    }
 </script>

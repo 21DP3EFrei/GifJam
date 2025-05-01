@@ -116,14 +116,6 @@ class MusicLibrary extends Controller
         return view('music.show', compact('media', 'music'));
     }
 
-    public function download(Media $media)
-    {
-
-        $filePath = storage_path('app/public/' . $media->Fails);
-        $newFileName = $media->Nosaukums . '.' . pathinfo($media->Fails, PATHINFO_EXTENSION);
-    
-        return response()->download($filePath, $newFileName);
-    }
     public function __construct()
     {
         $this->middleware('auth');

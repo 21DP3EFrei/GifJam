@@ -15,7 +15,7 @@
             </h2>
         </a>
         <div href="{{ route('likesM') }}">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-white hover:text-blue-300 leading-tight ml-2 dark:hover:text-blue-400 transition ease-in-out duration-150 border-b-2 border-cyan-500">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-white hover:text-blue-300 leading-tight ml-2 dark:hover:text-blue-400 transition ease-in-out duration-150 border-b-2 border-cyan-500 cursor-wait">
                 {{ __('translation.music') }}      
             </h2>
         </div>
@@ -110,7 +110,7 @@
 </div>
 @else
 <div>
-    <h1 colspan="5" class="text-center text-4xl font-bold text-gray-500 dark:text-gray-300 py-4">
+    <h1 colspan="5" class="text-center text-4xl font-bold dark:text-white text-black py-4">
         {{ __('translation.likeMusic') }}
     </h1>
 </div>

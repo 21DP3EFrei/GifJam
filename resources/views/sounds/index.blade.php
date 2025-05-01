@@ -57,7 +57,7 @@
     <div class="overflow-x-auto" id="soundTableContainer">
         @if ($sound->isEmpty())
             <div>
-                <h1 class="text-center text-4xl font-bold text-gray-500 dark:text-gray-300 py-4">
+                <h1 class="text-center text-4xl font-bold dark:text-white text-black py-4">
                     {{ __('translation.noMedia') }}
                 </h1>
             </div>

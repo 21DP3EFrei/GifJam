@@ -101,22 +101,22 @@ Route::post('/media/{media}/unlike', [LikeController::class, 'unlike'])->name('m
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
 Route::get('/get/subcategories/{category_id}', [PictureController::class, 'getSubcategories'])->name('getSubcategories');
 Route::get('/pictures/{media}', [PictureController::class, 'show'])->name('pictures.show');
-Route::get('/pictures/download/{media}', [PictureController::class, 'download'])->name('pictures.download');
 Route::get('/pictures/search', [PictureController::class, 'search'])->name('pictures.search');
 
 //sound library
 Route::get('/sounds', [SoundLibrary::class, 'index'])->name('sounds.index');
 Route::get('/get/soundSubCategories/{sound_category_id}', [SoundLibrary::class, 'getSubcategories'])->name('getSoundSubCategories');
 Route::get('/sounds/{media}', [SoundLibrary::class, 'show'])->name('sounds.show');
-Route::get('/sounds/download/{media}', [SoundLibrary::class, 'download'])->name('sounds.download');
 Route::get('/sounds/search', [SoundLibrary::class, 'search'])->name('sounds.search');
 
 //music library
 Route::get('/music', [MusicLibrary::class, 'index'])->name('music.index');
 Route::get('/get/genre/{genre_id}', [MusicLibrary::class, 'getSubgenres'])->name('getSubgenre');
 Route::get('/music/{media}', [MusicLibrary::class, 'show'])->name('music.show');
-Route::get('/music/download/{media}', [MusicLibrary::class, 'download'])->name('music.download');
 Route::get('/music/search', [MusicLibrary::class, 'search'])->name('music.search');
+
+//download route
+Route::get('/media/download/{media}', [MediaController::class, 'download'])->name('media.download');
 });
 
 //Welcome page

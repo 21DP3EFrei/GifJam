@@ -73,7 +73,7 @@
 
             @if ($hasMedia)
             <x-section-border />
-            <div class="relative items-center flex justify-between mb-10 mt-6">
+            <div class="relative items-center flex justify-between mb-10 mt-6 px-1 sm:px-2">
                 <div>
                     <h1 name="title" class="flex items-center whitespace-nowrap text-lg font-semibold text-gray-700 dark:text-white">
                         {{__('translation.export')}}

@@ -47,7 +47,7 @@
             
             </form>
             <!-- Download Button -->
-            <form action="{{ route('sounds.download', $media) }}" method="GET" class="space-y-2">
+            <form action="{{ route('media.download', $media) }}" method="GET" class="space-y-2">
                 @csrf
                 <button type="submit" class="btn btn-primary w-40 mt-3">{{ __('translation.download') }}</button>
             </form>

@@ -5,7 +5,7 @@
 <x-custom-header name="custom-header">
     <div id="custom-header" class="flex flex-row space-x-4 justify-around">
     <div>
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-white hover:text-blue-300 leading-tight ml-2 dark:hover:text-blue-400 transition ease-in-out duration-150 border-b-2 border-cyan-500">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-white hover:text-blue-300 leading-tight ml-2 dark:hover:text-blue-400 transition ease-in-out duration-150 border-b-2 border-cyan-500 cursor-wait">
             {{ __('translation.images') }}      
         </h2>
     </div>
@@ -25,7 +25,7 @@
 @if ($picture->isNotEmpty())
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3 row mx-1 my-1">
             @foreach ($picture as $pictures)
-                <div class="rounded-2xl bg-white dark:bg-gray-400 shadow-lg overflow-hidden">
+                <div class="rounded-2xl bg-gray-200 dark:bg-gray-400 shadow-lg overflow-hidden">
                     <label class="swap swap-rotate">
                         <input 
                             type="checkbox" 
@@ -68,7 +68,7 @@
                         <img src="{{ asset('storage/' . $pictures->Fails) }}"  class="card-img-top object-contain w-full h-60" alt="{{ $pictures->Nosaukums }}"> {{-- class="w-full h-60 object-cover rounded-t-2xl" fill card--}}
                     </a>
                     <!-- Card Body -->
-                    <div class="p-4 border-t-2 border-black dark:bg-blue-400 bg-gray-300">
+                    <div class="p-4 border-t-2 border-black dark:bg-blue-400 bg-blue-300">
                         <h5 class="font-bold text-lg truncate">{{ $pictures->Nosaukums }}</h5>
                         <p class="text-sm text-gray-700 dark:text-gray-200 truncate">{{ $pictures->Apraksts }}</p>
                     </div>
@@ -77,7 +77,7 @@
     </div>
 @else
 <div>
-    <h1 colspan="5" class="text-center text-4xl font-bold text-gray-500 dark:text-gray-300 py-4">
+    <h1 colspan="5" class="text-center text-4xl font-bold dark:text-white text-black py-4">
         {{ __('translation.likePic') }}
     </h1>
 </div>
