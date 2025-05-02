@@ -182,8 +182,8 @@ class MediaController extends Controller
     //Random media page
     public function random()
     {
-        $random = Media::inRandomOrder()->where('Status', 1)->get()->first();
-        return view('random', compact('random'));
+        $media = Media::inRandomOrder()->where('Status', 1)->get()->first();
+        return view('random', compact('media'));
     }
 
     //Function to download media

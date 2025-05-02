@@ -4,7 +4,7 @@
 @section('content')
 <x-custom-header name="custom-header">
     <h2 class="font-semibold text-xl text-gray-800 dark:text-white dark:bg-blue-900 leading-tight">
-        <button id="back" class="hover:border rounded-sm w-24 h-10 text-lg transition ease-in hover:bg-blue-500 cursor-pointer" onclick="history.back()">{{ __('translation.back') }}</button>
+        <x-back-button />
     </h2>
 </x-custom-header>
 @php

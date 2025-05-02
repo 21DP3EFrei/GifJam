@@ -99,10 +99,8 @@
                 @if ($media->Multivides_tips == 'Image')
                 <td class="text-center col-span-2">
                     <div class="flex items-center flex-col">
-                    <img class="cursor-pointer" src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}" width="100" height="100" onclick="this.classList.toggle('fixed'); this.classList.toggle('inset-0'); this.classList.toggle('w-full'); this.classList.toggle('h-full'); this.classList.toggle('object-contain'); this.classList.toggle('z-50'); this.classList.toggle('bg-black');"/>       
-                    <div class="border rounded-full w-9 h-9 flex justify-center items-center transition ease-in-out duration-300 hover:bg-blue-300 text-end mt-2 border-black dark:border-white">
-                        <a href="{{ asset('storage/' . $media->Fails) }}" download="{{ $media->Fails }}" class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800 tooltip" data-tip="{{ __('translation.download') }}">↓</a>
-                    </div>
+                    <img class="cursor-pointer mb-2" src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}" width="100" height="100" onclick="this.classList.toggle('fixed'); this.classList.toggle('inset-0'); this.classList.toggle('w-full'); this.classList.toggle('h-full'); this.classList.toggle('object-contain'); this.classList.toggle('z-50'); this.classList.toggle('bg-black');"/>       
+                    <x-download-button :media="$media" />
                     </div>
                 </td>
                 @elseif ($media->Multivides_tips == 'Sound' || $media->Multivides_tips == 'Music')
@@ -126,9 +124,7 @@
                         </div>
                     </media-control-bar>
                     </media-controller>
-                    <div class="border rounded-full w-9 h-9 flex justify-center items-center transition ease-in-out duration-300 hover:bg-blue-300 text-end border-black dark:border-white">
-                        <a href="{{ asset('storage/' . $media->Fails) }}" download="{{ $media->Fails }}" class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800 tooltip" data-tip="{{ __('translation.download') }}">↓</a>
-                    </div>
+                    <x-download-button class="mt-2" :media="$media" />
                     </div>
                 </td>
                 @else
