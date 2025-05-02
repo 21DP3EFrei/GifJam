@@ -64,7 +64,7 @@
                 </h1>
             </div>
         @else
-            <table class="table table-zebra overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">        
+        <table class="table table-zebra overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">        
             <thead>
                 <tr class="text-center align-middle bg-rose-200 dark:bg-rose-950 text-black dark:text-white border border-gray-300">
                     <th>{{ __('translation.name') }}</th>

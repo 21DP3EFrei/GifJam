@@ -129,9 +129,4 @@ class UnverificationController extends Controller
     
         return redirect()->route('unverification.index')->with('success', __('translation.verifyUpdate'));
     }
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 }

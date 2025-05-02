@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 class LikeController extends Controller
 {
 
+    // Function to display liked images
     public function images(Request $request)
     {    
         $user = Auth::user();
@@ -29,6 +30,8 @@ class LikeController extends Controller
         // Return the full view for non-AJAX requests
         return view('like.images', compact('picture'));
     }
+
+     // Function to display liked sounds
     public function sounds(Request $request)
     {    
         $user = Auth::user();
@@ -42,6 +45,8 @@ class LikeController extends Controller
         // Return the full view for non-AJAX requests
         return view('like.sounds', compact('sound'));
     }
+
+     // Function to display liked music
     public function music(Request $request)
     {    
         $user = Auth::user();
@@ -53,6 +58,8 @@ class LikeController extends Controller
         // Return the full view for non-AJAX requests
         return view('like.music', compact('music'));
     }
+
+     // Function to add to like table
     public function like(Media $media)
     {
         
@@ -64,6 +71,7 @@ class LikeController extends Controller
         return response()->json(['success' => true, 'message' => 'Media liked successfully.']);
     }
 
+     // Function to remove liked content
     public function unlike(Media $media)
     {
         $user = auth()->user(); // Fix: Use parentheses to call the method

@@ -20,11 +20,12 @@ class BlockUser
             // Check if the user is in the Noblokets table and has Blokets set to true
             $isBlocked = Noblokets::where('L_ID', $userId)->where('Blokets', 1)->exists();
 
-            // Allow access to the 'block' route even if the user is blocked
+           
+            // Redirect blocked users to the block page
             if ($isBlocked && !$request->routeIs('block')) {
-                // Redirect blocked users to the 'block' route with an error message
                 return redirect()->route('block')->with('error', 'You are blocked from accessing this site.');
             }
+            // If the user ins't blocked redirect him back
             if (!$isBlocked && $request->routeIs('block')) {
                 return back();
             }

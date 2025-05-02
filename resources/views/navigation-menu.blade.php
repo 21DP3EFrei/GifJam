@@ -195,7 +195,7 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                     <span class="inline-flex rounded-md">
-                                        @if (request()->routeIs('upload') || request()->routeIs('uploadMusic') || request()->routeIs('uploadSound'))  
+                                        @if (request()->routeIs('Image.upload', 'Music.upload', 'Sound.upload'))  
                                         <button type="button" class="inline-flex items-center px-2 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-blue-300 dark:bg-blue-400 hover:text-gray-700 focus:outline-none dark:focus:bg-blue-700 dark:active:bg-blue-700 transition ease-in-out duration-150">
                                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 15L12 2M12 2L15 5.5M12 2L9 5.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8 22.0002H16C18.8284 22.0002 20.2426 22.0002 21.1213 21.1215C22 20.2429 22 18.8286 22 16.0002V15.0002C22 12.1718 22 10.7576 21.1213 9.8789C20.3529 9.11051 19.175 9.01406 17 9.00195M7 9.00195C4.82497 9.01406 3.64706 9.11051 2.87868 9.87889C2 10.7576 2 12.1718 2 15.0002L2 16.0002C2 18.8286 2 20.2429 2.87868 21.1215C3.17848 21.4213 3.54062 21.6188 4 21.749" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
                                         </button>
@@ -207,15 +207,15 @@
                                     </span>
                             </x-slot>
                             <x-slot name="content">
-                                <x-dropdown-link href="{{ route('upload') }}" :active="request()->routeIs('upload')">
+                                <x-dropdown-link href="{{ route('Image.upload') }}" :active="request()->routeIs('Image.upload')">
                                     <img class="h-7 w-7 mr-1 bg-white rounded-full p-0.5" src="{{ asset('images/picture.svg') }}" alt="{{ __('translation.Pupload') }}">
                                     {{ __('translation.Pupload') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link href="{{ route('uploadSound') }}" :active="request()->routeIs('uploadSound')">
+                                <x-dropdown-link href="{{ route('Sound.upload') }}" :active="request()->routeIs('Sound.upload')">
                                     <img class="h-7 w-7 mr-1 bg-white rounded-full p-0.5" src="{{ asset('images/sound.svg') }}" alt="{{ __('translation.Supload') }}">
                                     {{ __('translation.Supload') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link href="{{ route('uploadMusic') }}" :active="request()->routeIs('uploadMusic')">
+                                <x-dropdown-link href="{{ route('Music.upload') }}" :active="request()->routeIs('Music.upload')">
                                     <img class="h-7 w-7 mr-1 bg-white rounded-full p-0.5" src="{{ asset('images/music.svg') }}" alt="{{ __('translation.Mupload') }}">
                                     {{ __('translation.Mupload') }}
                                 </x-dropdown-link>
@@ -281,19 +281,19 @@
                 </x-responsive-nav-link>
             </div>
             <div class="py-2 pb-3 space-y-1">
-                <x-responsive-nav-link href="{{ route('upload') }}" :active="request()->routeIs('upload')" class="nav-link">
+                <x-responsive-nav-link href="{{ route('Image.upload') }}" :active="request()->routeIs('Image.upload')" class="nav-link">
                     <img class="h-7 w-7" src="{{ asset('images/picture.svg') }}" alt="{{ __('translation.Pupload') }}">
                     {{ __('translation.Pupload') }}
                 </x-responsive-nav-link>
             </div>
             <div class="py-2 pb-3 space-y-1">
-                <x-responsive-nav-link href="{{ route('uploadSound') }}" :active="request()->routeIs('uploadSound')" class="nav-link">
+                <x-responsive-nav-link href="{{ route('Sound.upload') }}" :active="request()->routeIs('Sound.upload')" class="nav-link">
                     <img class="h-7 w-7 mr-1" src="{{ asset('images/sound.svg') }}" alt="{{ __('translation.Supload') }}">
                     {{ __('translation.Supload') }}
                 </x-responsive-nav-link>
             </div>
             <div class="py-2 pb-3 space-y-1">
-                <x-responsive-nav-link href="{{ route('uploadMusic') }}" :active="request()->routeIs('uploadMusic')" class="nav-link">
+                <x-responsive-nav-link href="{{ route('Music.upload') }}" :active="request()->routeIs('Music.upload')" class="nav-link">
                     <img class="h-7 w-7 mr-1" src="{{ asset('images/music.svg') }}" alt="{{ __('translation.Mupload') }}">
                     {{ __('translation.Mupload') }}
                 </x-responsive-nav-link>

@@ -29,15 +29,15 @@
                         @unless (empty($category->Apraksts))
                         <td>{{ Str::limit($category->Apraksts, 25) }}</td>
                         @else
-                        <td>-</td>
+                        <td class="items-center text-center">-</td>
                         @endunless
                         @if ($category->parent)
                         <td>{{ Str::limit($category->parent->Nosaukums, 25) }}</td>
                         @else
-                        <td>-</td>
+                        <td class="items-center text-center">-</td>
                         @endif
                         <td>
-                            <a  href="{{ route('categories.edit', $category->K_ID) }}" class="btn btn-sm btn-primary edit">{{ __('translation.edit') }}</a>
+                            <a href="{{ route('categories.edit', $category->K_ID) }}" class="btn btn-sm btn-primary edit">{{ __('translation.edit') }}</a>
                             <form action="{{ route('categories.destroy', $category->K_ID) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')

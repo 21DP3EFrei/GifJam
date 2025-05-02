@@ -42,7 +42,7 @@ class GoogleAuthController extends Controller
             ]);
             Auth::login($newUser);
 
-        // Redirect the user to the dashboard or any other secure page
+        // Redirect the user to the welcome page
         return redirect('/welcome', 301);
     }
 }

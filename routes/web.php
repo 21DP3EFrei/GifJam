@@ -13,8 +13,6 @@ use App\Http\Controllers\SoundCategoryController;
 use App\Http\Controllers\NobloketsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocalizationController;
-use App\Http\Controllers\MuzikaController;
-use App\Http\Controllers\SkanasController;
 use App\Http\Controllers\MusicLibrary;
 use App\Http\Controllers\SoundLibrary;
 use App\Http\Controllers\LikeController;
@@ -23,7 +21,7 @@ Route::get('locale/{lang}', [LocalizationController::class, 'selected']);
 Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->name('auth.google.redirect');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
 
-Route::middleware(['auth', 'verified', 'blocked', 'realCategory', 'randomExists'])->group(function () {
+Route::middleware(['auth', 'verified', 'blocked'])->group(function () {
 
 //Admin routes
 Route::middleware(['admin'])->group(function () {
@@ -81,15 +79,16 @@ Route::post('users/download/pdf', [ProfileController::class, 'downloadPDF'])->na
 Route::delete('/user/{user}', [ProfileController::class, 'destroyNoPassword'])->name('user.destroy');
 
 // Upload routes
-Route::get('/upload', [MediaController::class, 'upload'])->name('upload');
-Route::post('/upload', [MediaController::class, 'uploadPost'])->name('upload.post');
-Route::get('/uploadMusic', [MuzikaController::class, 'upload'])->name('uploadMusic');
-Route::post('/uploadMusic', [MuzikaController::class, 'uploadPost'])->name('uploadMusic.post');
-Route::get('/uploadSound', [SkanasController::class, 'upload'])->name('uploadSound');
-Route::post('/uploadSound', [SkanasController::class, 'uploadPost'])->name('uploadSound.post');
+Route::middleware(['realCategory'])->group(function () {
+Route::get('/upload/Image', [MediaController::class, 'ImageUpload'])->name('Image.upload');
+Route::post('/upload/Image', [MediaController::class, 'uploadImage'])->name('upload.Image');
+Route::get('/upload/Music', [MediaController::class, 'MusicUpload'])->name('Music.upload');
+Route::post('/upload/Music', [MediaController::class, 'uploadMusic'])->name('upload.Music');
+Route::get('/upload/Sound', [MediaController::class, 'SoundUpload'])->name('Sound.upload');
+Route::post('/upload/Sound', [MediaController::class, 'uploadSound'])->name('upload.Sound');
+});
 
 //Media routes
-Route::middleware(['media',])->group(function () {
 Route::get('/likedImages', [LikeController::class, 'images'])->name('likesP')->middleware('like');
 Route::get('/likedSounds', [LikeController::class, 'sounds'])->name('likesS')->middleware('like');
 Route::get('/likedMusic', [LikeController::class, 'music'])->name('likesM')->middleware('like');
@@ -114,23 +113,18 @@ Route::get('/music/search', [MusicLibrary::class, 'search'])->name('music.search
 //download route
 Route::get('/media/download/{media}', [MediaController::class, 'download'])->name('media.download');
 
-//display route
-Route::get('/media/{media}', [MediaController::class, 'show'])->name('media.show');
 //show media
-
-});
-
-//Welcome page
-Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/media/{media}', [MediaController::class, 'show'])->name('media.show')->middleware('media');
 
 //error pages
 Route::get('/blocked', function () {return view('block');})->name('block');
 
 //random media
-Route::get('/random', [MediaController::class, 'random'])->name('random');
+Route::get('/random', [MediaController::class, 'random'])->name('random')->middleware('randomExists');
 
+//Welcome page
+Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 }); //end of auth and blocked
-
 
 // Home route
 Route::get('/', function () {

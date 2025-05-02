@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Random')
+@section('title', __('translation.navigation_random'))
 
 @section('content')
 <div class="flex flex-col">

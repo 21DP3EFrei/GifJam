@@ -29,12 +29,12 @@
                         @unless (empty($genres->Apraksts))
                         <td>{{ Str::limit($genres->Apraksts, 25) }}</td>
                         @else
-                        <td>-</td>
+                        <td class="items-center text-center">-</td>
                         @endunless
                         @if ($genres->parent)
                         <td>{{ Str::limit($genres->parent->Nosaukums, 25) }}</td>
                         @else
-                        <td>-</td>
+                        <td class="items-center text-center">-</td>
                         @endif
                         <td>
                             <a href="{{ route('genre.edit', $genres->Z_ID) }}" class="btn btn-sm btn-primary edit">{{ __('translation.edit') }}</a>

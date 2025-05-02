@@ -44,7 +44,6 @@
                     {{ __('translation.noaccount') }}
                 </a>
 
-                <!-- Login button aligned to the right -->
                 <x-button id="loginButton" class="ms-auto">
                     {{ __('translation.login') }}
                 </x-button>

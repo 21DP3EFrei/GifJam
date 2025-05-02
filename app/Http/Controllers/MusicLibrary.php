@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Music;
+use App\Models\Media;
 use App\Models\Zanrs;
-use App\Models\Media; 
 
 class MusicLibrary extends Controller
 {
+    //Display music library
     public function index(Request $request)
     {
         // Fetch genres and subgenres
@@ -76,7 +77,7 @@ class MusicLibrary extends Controller
         // Return the full view for non-AJAX requests
         return view('music.index', compact('genres', 'subgenres', 'music'));
     }
-    // Recursive method to get all subgenre IDs, including nested subgenres
+    // Recursive function to get all subgenre IDs, including nested subgenres
     public function getSubgenreIds($genreId)
     {
         // Get the direct subgenres of the selected genre
@@ -108,10 +109,5 @@ class MusicLibrary extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'msg' => __('translation.noData')]);
         }
-    }
-    
-    public function __construct()
-    {
-        $this->middleware('auth');
     }
 }

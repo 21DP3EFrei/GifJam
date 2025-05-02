@@ -105,10 +105,4 @@ class PictureController extends Controller
             return response()->json(['success' => false, 'msg' => __('translation.noData')]);
         }
     }
-    
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
 }

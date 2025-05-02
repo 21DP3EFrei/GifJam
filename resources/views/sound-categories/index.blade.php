@@ -29,12 +29,12 @@
                         @unless (empty($soundCategory->Apraksts))
                         <td>{{ Str::limit($soundCategory->Apraksts, 25) }}</td>
                         @else
-                        <td>-</td>
+                        <td class="items-center text-center">-</td>
                         @endunless
                         @if ($soundCategory->parent)
                         <td>{{ Str::limit($soundCategory->parent->Nosaukums, 25) }}</td>
                         @else
-                        <td>-</td>
+                        <td class="items-center text-center">-</td>
                         @endif
                         <td>
                             <a href="{{ route('sound-categories.edit', $soundCategory->SKat_ID) }}" class="btn btn-sm btn-primary edit">{{ __('translation.edit') }}</a>

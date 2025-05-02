@@ -6,21 +6,21 @@ use App\Models\Kategorija;
 
 class KategorijaController extends Controller
 {
-        // Method to list all categories MAIN DISPLAY
-        public function index()
-        {
-            $categories = Kategorija::all();
-            $categories = Kategorija::with('parent')->get();
-            return view('categories.index', compact('categories'));
-        }
-    // Method to display the form for creating a new category
+    //Page that displays all categories
+    public function index()
+    {
+        $categories = Kategorija::all();
+        $categories = Kategorija::with('parent')->get();
+        return view('categories.index', compact('categories'));
+    }
+    // Function to display the form for creating a new category
     public function create()
     {
         $categories = Kategorija::all();
         return view('categories.create', compact('categories'));
     }
 
-    // Method to store the newly created category
+    // Function to store the newly created category
     public function store(Request $request)
     {
         $request->validate([
@@ -38,7 +38,7 @@ class KategorijaController extends Controller
         return redirect()->route('categories.index')->with('success', __('translation.categoryCreate'));
     }
 
-    // Method to display a form for editing a category
+    // Function to display a form for editing a category
     public function edit(Kategorija $categories)
     {
         $allCategories = Kategorija::all(); 
@@ -49,7 +49,7 @@ class KategorijaController extends Controller
     }
     
 
-    // Method to update the edited category
+    // Function to update the edited category
     public function update(Request $request, Kategorija $categories)
     {
         $request->validate([
@@ -67,16 +67,11 @@ class KategorijaController extends Controller
         return redirect()->route('categories.index')->with('success', __('translation.categoryUpdate'));
     }
 
-    // Method to delete a category
+    // Function to delete a category
     public function destroy(Kategorija $categories)
     {
         $categories->delete();
 
         return redirect()->route('categories.index')->with('success', __('translation.categoryDelete'));
-    }
-
-    public function __construct()
-    {
-        $this->middleware('auth');
     }
 }

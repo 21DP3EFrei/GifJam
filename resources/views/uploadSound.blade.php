@@ -22,7 +22,7 @@
         </ul>
     </div>
     @endif
-    <form id="myForm" method="POST" action="{{ route('uploadSound.post') }}" enctype="multipart/form-data" class="mt-2 px-8 rounded-xl flex justify-between">
+    <form id="myForm" method="POST" action="{{ route('upload.Sound') }}" enctype="multipart/form-data" class="mt-2 px-8 rounded-xl flex justify-between">
         @csrf
         <div class="flex w-full">
             <!-- File Upload Area -->
