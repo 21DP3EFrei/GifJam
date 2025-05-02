@@ -9,7 +9,7 @@
     </div>
         {{-- image --}}
         @if($random->Multivides_tips == 'Image')
-        <div class="table-responsive overflow-x-auto mx-3 mt-2 mx-1">
+        <div class="table-responsive overflow-x-auto mx-3 mt-2">
           <table class="table overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">
               <thead>
                   <tr class="text-center align-middle bg-slate-100 dark:bg-cyan-700 text-black dark:text-white border border-gray-300">
@@ -72,7 +72,7 @@
 
         {{-- sound --}}
         @if($random->Multivides_tips == 'Sound')
-        <div class="table-responsive overflow-x-auto mx-3 mt-2 mx-1">
+        <div class="table-responsive overflow-x-auto mx-3 mt-2">
             <table class="table overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">
                 <thead>
                     <tr class="text-center align-middle bg-slate-100 dark:bg-cyan-700 text-black dark:text-white border border-gray-300">
@@ -135,7 +135,7 @@
 
         {{-- music --}}
         @if($random->Multivides_tips == 'Music')
-        <div class="table-responsive overflow-x-auto mx-3 mt-2 mx-1">
+        <div class="table-responsive overflow-x-auto mx-3 mt-2">
             <table class="table overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">
                 <thead>
                     <tr class="text-center align-middle bg-slate-100 dark:bg-cyan-700 text-black dark:text-white border border-gray-300">

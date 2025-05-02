@@ -12,8 +12,6 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SoundCategoryController;
 use App\Http\Controllers\NobloketsController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\MuzikaController;
 use App\Http\Controllers\SkanasController;
@@ -26,8 +24,9 @@ Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
 
 Route::middleware(['auth', 'verified', 'blocked', 'realCategory', 'randomExists'])->group(function () {
-Route::middleware(['admin'])->group(function () {
+
 //Admin routes
+Route::middleware(['admin'])->group(function () {
 
 // Category routes
 Route::get('/categories', [KategorijaController::class, 'index'])->name('categories.index');
@@ -100,23 +99,25 @@ Route::post('/media/{media}/unlike', [LikeController::class, 'unlike'])->name('m
 //gallery
 Route::get('/pictures', [PictureController::class, 'index'])->name('pictures.index');
 Route::get('/get/subcategories/{category_id}', [PictureController::class, 'getSubcategories'])->name('getSubcategories');
-Route::get('/pictures/{media}', [PictureController::class, 'show'])->name('pictures.show');
 Route::get('/pictures/search', [PictureController::class, 'search'])->name('pictures.search');
 
 //sound library
 Route::get('/sounds', [SoundLibrary::class, 'index'])->name('sounds.index');
 Route::get('/get/soundSubCategories/{sound_category_id}', [SoundLibrary::class, 'getSubcategories'])->name('getSoundSubCategories');
-Route::get('/sounds/{media}', [SoundLibrary::class, 'show'])->name('sounds.show');
 Route::get('/sounds/search', [SoundLibrary::class, 'search'])->name('sounds.search');
 
 //music library
 Route::get('/music', [MusicLibrary::class, 'index'])->name('music.index');
 Route::get('/get/genre/{genre_id}', [MusicLibrary::class, 'getSubgenres'])->name('getSubgenre');
-Route::get('/music/{media}', [MusicLibrary::class, 'show'])->name('music.show');
 Route::get('/music/search', [MusicLibrary::class, 'search'])->name('music.search');
 
 //download route
 Route::get('/media/download/{media}', [MediaController::class, 'download'])->name('media.download');
+
+//display route
+Route::get('/media/{media}', [MediaController::class, 'show'])->name('media.show');
+//show media
+
 });
 
 //Welcome page

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Kategorija;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Skana;
+use App\Models\Music;
 
 class MediaController extends Controller
 {
@@ -68,7 +70,12 @@ class MediaController extends Controller
         return response()->download($filePath, $newFileName);
     }
 
-    
+    public function show(Media $media)
+    {
+        $sound = Skana::where('Medija', $media->Me_ID)->first();
+        $music = Music::where('Medija', $media->Me_ID)->first();
+        return view('show', compact('media', 'sound', 'music'));
+    }
 
     public function __construct()
         {

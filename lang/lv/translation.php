@@ -289,7 +289,7 @@ return [
     'welcome18' => 'Neejat',
     'welcome19' => 'Ziņa mainīsies kad atgriezīsies',
     'welcome20' => 'Interesants fakts: cilvēks, kas veidoja šo vietni, bieži vēlējās nedzīvot...',
-    'welcome21' => 'Atrodi mēmes',
+    'welcome21' => 'Atrodi mēmus',
     'welcome22' => '',
     'welcome23' => 'Tas tiešām bija epic',
     'welcomeDefault' => 'Lai labi pavadat laiku!',
@@ -324,6 +324,7 @@ return [
     'navigation_admin'=> 'Administratora panelis',    
     'navigation_unverify'=> 'Apsiprināti faili',
     'navigation_likes' => 'Patīk',
+    'navigation_random' => 'Nejaušs',
     
     'remember' => 'Atcerēties mani',
     'noaccount' => 'Nav konts?',

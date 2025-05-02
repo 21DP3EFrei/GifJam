@@ -110,12 +110,6 @@ class MusicLibrary extends Controller
         }
     }
     
-    public function show(Media $media)
-    {
-        $music = Music::where('Medija', $media->Me_ID)->first();
-        return view('music.show', compact('media', 'music'));
-    }
-
     public function __construct()
     {
         $this->middleware('auth');

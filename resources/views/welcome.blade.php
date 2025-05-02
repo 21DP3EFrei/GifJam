@@ -60,7 +60,7 @@ switch($random) {
         echo '<p>' . __('translation.welcome11') . '</p>';
         break;
       case 13:
-        echo '<p>' . __('translation.welcome12') . '</p>';
+        echo '<p class="break-words overflow-wrap">' . __('translation.welcome12') . '</p>';
         break;
       case 14:
         echo '<p>' . __('translation.welcome13') . '</p>';
@@ -75,16 +75,16 @@ switch($random) {
         echo '<p>' . __('translation.welcome16') . '</p>';
         break;  
       case 18:
-        echo '<p>' . __('translation.welcome17') . '</p>';
+        echo '<p class="break-words overflow-wrap">' . __('translation.welcome17') . '</p>';
         break;  
       case 19:
         echo '<p>' . __('translation.welcome18') . '</p>';
         break;  
       case 20:
-        echo '<p>' . __('translation.welcome19') . '</p>';
+        echo '<p class="break-words overflow-wrap">' . __('translation.welcome19') . '</p>';
         break;  
       case 21:
-        echo '<p>' . __('translation.welcome20') . '</p>';
+        echo '<p class="break-words overflow-wrap">' . __('translation.welcome20') . '</p>';
         break;  
        case 22:
         echo '<p>' . __('translation.welcome21') . '</p>';
@@ -123,31 +123,5 @@ switch($random) {
   </div>
 </div>
 @endif
-<h1 class="h1">Time left:</h1>
-<h2 class="h2" id="demo"></h2>
 </div>
-<script>
-  // Set the date we're counting down to
-  var countDownDate = new Date("May 25, 2025 23:59:99").getTime();
-  // Update the count down every 1 second
-  var x = setInterval(function() {
-    // Get today's date and time
-    var now = new Date().getTime();
-    // Find the distance between now and the count down date
-    var distance = countDownDate - now;
-    // Time calculations for days, hours, minutes and seconds
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    // Display the result in the element with id="demo"
-    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
-    // If the count down is finished, write some text
-    if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("demo").innerHTML = "EXPIRED";
-    }
-  }, 1000);
-  </script>
 @endsection

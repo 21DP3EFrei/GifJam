@@ -106,11 +106,6 @@ class PictureController extends Controller
         }
     }
     
-    public function show(Media $media)
-    {
-        return view('pictures.show', compact('media'));
-    }
-
     public function __construct()
     {
         $this->middleware('auth');

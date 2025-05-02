@@ -324,6 +324,7 @@ return [
     'navigation_admin'=> 'Админ',    
     'navigation_unverify'=> 'Непроверено',
     'navigation_likes' => 'Понравившееся',
+    'navigation_random' => 'Случайный',
 
     'remember' => 'Запомнить меня',
     'noaccount' => 'Нет аккаунта?',

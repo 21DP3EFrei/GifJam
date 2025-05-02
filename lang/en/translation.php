@@ -324,6 +324,7 @@ return [
     'navigation_admin'=> 'Dashboard',    
     'navigation_unverify'=> 'Verified',
     'navigation_likes'=> 'Liked',
+    'navigation_random' => 'Random',
 
     'remember'=> 'Remember me',
     'noaccount'=> "Don't have an account?",

@@ -107,12 +107,6 @@ class SoundLibrary extends Controller
         }
     }
     
-    public function show(Media $media)
-    {
-        $sound = Skana::where('Medija', $media->Me_ID)->first();
-        return view('sounds.show', compact('media', 'sound'));
-    }
-
     public function __construct()
     {
         $this->middleware('auth');
