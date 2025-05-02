@@ -18,7 +18,7 @@ class RandomMiddleware
     {
 
     // If no categories, always redirect to error page
-    if (!Media::where('status', 1)->exists() && $request->routeIs('random')) {
+    if (!Media::where('status', 1)->exists()) {
         return redirect()->route('welcome')->with('error', __('translation.errorRand'));
     }    
     else{

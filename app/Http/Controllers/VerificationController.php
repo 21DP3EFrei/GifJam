@@ -124,8 +124,4 @@ class VerificationController extends Controller
     
         return redirect()->route('verification.index')->with('success', __('translation.verifyUpdate'));
     }
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 }

@@ -25,7 +25,7 @@ class CategoryExists
             Skana_kategorija::exists();
     
         // If no categories, always redirect to error page
-        if (!$hasCategories && $request->routeIs('upload', 'uploadMusic', 'uploadSound')) {
+        if (!$hasCategories) {
             return redirect()->route('welcome')->with('error', __('translation.errorMessage'));
         }
         else{

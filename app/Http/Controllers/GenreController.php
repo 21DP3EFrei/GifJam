@@ -7,22 +7,22 @@ use App\Models\Zanrs;
 
 class GenreController extends Controller
 {
-        // Method to list all categories MAIN DISPLAY
-        public function index()
-        {
-            $genre = Zanrs::all();
-            $genre = Zanrs::with('parent')->get();
-        
-            return view('genre.index', compact('genre'));
-        }
-    // Method to display the form for creating a new category
+    // Page that displays all genres
+    public function index()
+    {
+        $genre = Zanrs::all();
+        $genre = Zanrs::with('parent')->get();
+    
+        return view('genre.index', compact('genre'));
+    }
+    // Function to display the form for creating a new genre
     public function create()
     {
         $genre = Zanrs::all();
         return view('genre.create', compact('genre'));
     }
 
-    // Method to store the newly created category
+    // Function to store the newly created genre
     public function store(Request $request)
     {
         $request->validate([
@@ -40,15 +40,14 @@ class GenreController extends Controller
         return redirect()->route('genre.index')->with('success', __('translation.genreCreate'));
     }
 
-    // Method to display a form for editing a category
+    // Function to display a form for editing a genre
     public function edit(Zanrs $genre)
     {
         $allGenre = Zanrs::all(); 
         return view('genre.edit', compact('genre', 'allGenre'));
     }
-    
 
-    // Method to update the edited category
+    // Function to update the edited genre
     public function update(Request $request, Zanrs $genre)
     {
         $request->validate([
@@ -66,16 +65,11 @@ class GenreController extends Controller
         return redirect()->route('genre.index')->with('success', __('translation.genreUpdate'));
     }
 
-    // Method to delete a category
+    // Function to delete a genre
     public function destroy(Zanrs $genre)
     {
         $genre->delete();
 
         return redirect()->route('genre.index')->with('success', __('translation.genreDelete'));
-    }
-
-    public function __construct()
-    {
-        $this->middleware('auth');
     }
 }

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container ml-8 flex flex-col w-auto pb-3">
-  <h1 class="h1 break-words overflow-wrap" >{{ __('translation.welcome') }}</h1>
+  <h1 class="h1 break-words overflow-wrap">{{ __('translation.welcome') }}</h1>
   @if (session('error'))
     <div class="alert alert-error mb-2">
         {{ session('error') }}
@@ -20,8 +20,7 @@
 </div>
   @endif
 <?php 
-$random = rand(1, 30);
-
+$random = rand(1, 35);
 
 switch($random) {
       case 1:
@@ -61,7 +60,7 @@ switch($random) {
         echo '<p>' . __('translation.welcome11') . '</p>';
         break;
       case 13:
-        echo '<p>' . __('translation.welcome12') . '</p>';
+        echo '<p class="break-words overflow-wrap">' . __('translation.welcome12') . '</p>';
         break;
       case 14:
         echo '<p>' . __('translation.welcome13') . '</p>';
@@ -76,16 +75,16 @@ switch($random) {
         echo '<p>' . __('translation.welcome16') . '</p>';
         break;  
       case 18:
-        echo '<p>' . __('translation.welcome17') . '</p>';
+        echo '<p class="break-words overflow-wrap">' . __('translation.welcome17') . '</p>';
         break;  
       case 19:
         echo '<p>' . __('translation.welcome18') . '</p>';
         break;  
       case 20:
-        echo '<p>' . __('translation.welcome19') . '</p>';
+        echo '<p class="break-words overflow-wrap">' . __('translation.welcome19') . '</p>';
         break;  
       case 21:
-        echo '<p>' . __('translation.welcome20') . '</p>';
+        echo '<p class="break-words overflow-wrap">' . __('translation.welcome20') . '</p>';
         break;  
        case 22:
         echo '<p>' . __('translation.welcome21') . '</p>';
@@ -96,6 +95,21 @@ switch($random) {
       case 24:
         echo '<p>' . __('translation.welcome23') . '</p>';
         break;  
+      case 25:
+        echo '<p>' . __('translation.welcome24') . '</p>';
+        break;  
+      case 26:
+        echo '<p>' . __('translation.welcome25') . '</p>';
+        break;  
+      case 27:
+        echo '<p>' . __('translation.welcome26') . '</p>';
+        break;  
+      case 28:
+        echo '<p class="break-words overflow-wrap">' . __('translation.welcome27') . '</p>';
+        break;  
+      case 29:
+        echo '<p>' . __('translation.welcome28') . '</p>';
+        break;
       default:
         echo '<p>' . __('translation.welcomeDefault') . '</p>';
     }

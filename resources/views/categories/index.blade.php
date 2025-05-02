@@ -9,7 +9,7 @@
         @endif
         @if ($categories->isEmpty())
         <div class="col-span-full flex items-center justify-center">
-            <h1 class="text-white text-3xl font-bold text-center">{{ __('translation.noCategories') }}</h1>
+            <h1 class="dark:text-white text-black text-3xl font-bold text-center">{{ __('translation.noCategories') }}</h1>
         </div>
         @else
         <div class="table-responsive overflow-x-auto mx-3">
@@ -29,15 +29,15 @@
                         @unless (empty($category->Apraksts))
                         <td>{{ Str::limit($category->Apraksts, 25) }}</td>
                         @else
-                        <td>-</td>
+                        <td class="items-center text-center">-</td>
                         @endunless
                         @if ($category->parent)
                         <td>{{ Str::limit($category->parent->Nosaukums, 25) }}</td>
                         @else
-                        <td>-</td>
+                        <td class="items-center text-center">-</td>
                         @endif
                         <td>
-                            <a  href="{{ route('categories.edit', $category->K_ID) }}" class="btn btn-sm btn-primary edit">{{ __('translation.edit') }}</a>
+                            <a href="{{ route('categories.edit', $category->K_ID) }}" class="btn btn-sm btn-primary edit">{{ __('translation.edit') }}</a>
                             <form action="{{ route('categories.destroy', $category->K_ID) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')

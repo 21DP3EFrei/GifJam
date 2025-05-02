@@ -10,7 +10,7 @@
             </h2>
         </a>
         <div href="{{ route('likesS') }}">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-white hover:text-blue-300 leading-tight ml-2 dark:hover:text-blue-400 transition ease-in-out duration-150 border-b-2 border-cyan-500">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-white hover:text-blue-300 leading-tight ml-2 dark:hover:text-blue-400 transition ease-in-out duration-150 border-b-2 border-cyan-500 cursor-wait">
                 {{ __('translation.sound') }}  
             </h2>
         </div>
@@ -37,7 +37,7 @@
     <tbody>
         @foreach ($sound as $sounds)
                 <tr class="hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300">
-                    <td><a class="hover:text-blue-400 hover:underline" href="{{ route('sounds.show', $sounds) }}">{{ Str::limit($sounds->Nosaukums, 25) }}</a></td>
+                    <td><a class="hover:text-blue-400 hover:underline" href="{{ route('media.show', $sounds) }}">{{ Str::limit($sounds->Nosaukums, 25) }}</a></td>
                 <td class="text-center">{{ Str::limit($sounds->Apraksts, 25) }}</td>
                     <td>
                 @if ($sounds->skana && $sounds->skana->skanaKategorija->isNotEmpty())
@@ -62,40 +62,14 @@
                     </td> 
                     <td>
                         <label class="swap swap-rotate bg-cyan-200 rounded-full border-amber-600 items-center">
-                            <input 
-                                type="checkbox" 
-                                id="like-checkbox-{{ $sounds->Me_ID }}" 
-                                onchange="toggleLike({{ $sounds->Me_ID }}, this.checked)" 
-                                {{ Auth::user()->likeMedia($sounds) ? 'checked' : '' }} 
-                            />
+                            <input type="checkbox" id="like-checkbox-{{ $sounds->Me_ID }}" onchange="toggleLike({{ $sounds->Me_ID }}, this.checked)" {{ Auth::user()->likeMedia($sounds) ? 'checked' : '' }} />
                             <!-- On -->
-                            <svg 
-                                id="like-icon-{{ $sounds->Me_ID }}" 
-                                class="swap-on fill-current w-8 h-8 text-black mt-0.5 p-1 {{ Auth::user()->likeMedia($sounds) ? '' : 'hidden' }}" 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                viewBox="0 0 24 24"
-                            >
+                            <svg id="like-icon-{{ $sounds->Me_ID }}" class="swap-on fill-current w-8 h-8 text-black mt-0.5 p-1 {{ Auth::user()->likeMedia($sounds) ? '' : 'hidden' }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <path d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z" fill="#ff0000"/>
                             </svg>
                             <!-- Off -->
-                            <svg 
-                                id="unlike-icon-{{ $sounds->Me_ID }}" 
-                                class="swap-off fill-current w-8 h-8 text-black bg-transparent mt-0.5 p-1 {{ Auth::user()->likeMedia($sounds) ? 'hidden' : '' }}" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path 
-                                    fill="none" 
-                                    fill-rule="evenodd" 
-                                    clip-rule="evenodd" 
-                                    d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z" 
-                                    fill="#ff0000" 
-                                    stroke="#000000" 
-                                    stroke-width="2" 
-                                    stroke-linecap="round" 
-                                    stroke-linejoin="round"
-                                />
+                            <svg id="unlike-icon-{{ $sounds->Me_ID }}" class="swap-off fill-current w-8 h-8 text-black bg-transparent mt-0.5 p-1 {{ Auth::user()->likeMedia($sounds) ? 'hidden' : '' }}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" fill-rule="evenodd" clip-rule="evenodd" d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z" fill="#ff0000" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </label>
                     </td>                                                
@@ -106,7 +80,7 @@
 </div>
 @else
 <div>
-    <h1 colspan="5" class="text-center text-4xl font-bold text-gray-500 dark:text-gray-300 py-4">
+    <h1 colspan="5" class="text-center text-4xl font-bold dark:text-white text-black py-4">
         {{ __('translation.likeSound') }}
     </h1>
 </div>

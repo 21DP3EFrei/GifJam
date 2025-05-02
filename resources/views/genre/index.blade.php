@@ -9,7 +9,7 @@
         @endif
         @if ($genre->isEmpty())
         <div class="col-span-full flex items-center justify-center">
-            <h1 class="text-white text-3xl font-bold text-center">{{ __('translation.noGenre') }}</h1>
+            <h1 class="dark:text-white text-black text-3xl font-bold text-center">{{ __('translation.noGenre') }}</h1>
         </div>
         @else
         <div class="table-responsive overflow-x-auto mx-3">
@@ -29,12 +29,12 @@
                         @unless (empty($genres->Apraksts))
                         <td>{{ Str::limit($genres->Apraksts, 25) }}</td>
                         @else
-                        <td>-</td>
+                        <td class="items-center text-center">-</td>
                         @endunless
                         @if ($genres->parent)
                         <td>{{ Str::limit($genres->parent->Nosaukums, 25) }}</td>
                         @else
-                        <td>-</td>
+                        <td class="items-center text-center">-</td>
                         @endif
                         <td>
                             <a href="{{ route('genre.edit', $genres->Z_ID) }}" class="btn btn-sm btn-primary edit">{{ __('translation.edit') }}</a>

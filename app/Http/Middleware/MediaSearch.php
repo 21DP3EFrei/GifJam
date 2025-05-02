@@ -20,7 +20,7 @@ class MediaSearch
         $media = $request->route('media');
     
         // Make sure it's a single model, not a collection
-        if ($request->routeIs('pictures.show', 'sounds.show', 'music.show') && (!$media || $media->Status !== 1)) {
+        if (!$media || $media->Status !== 1) {
             return redirect()->route('welcome')->with('error', __('translation.errorMedia'));
         }
     

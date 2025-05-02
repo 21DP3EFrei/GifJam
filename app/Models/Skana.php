@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Controllers\MediaController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Skana extends Model
 {

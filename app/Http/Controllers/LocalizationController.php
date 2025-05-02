@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
 class LocalizationController extends Controller
 {
+    //Function to replace system language
     public function selected($lang)
     {
         if (in_array($lang,['en', 'lv', 'ru']))

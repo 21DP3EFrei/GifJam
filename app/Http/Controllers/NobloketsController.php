@@ -87,9 +87,4 @@ class NobloketsController extends Controller
     
         return redirect()->route('block.index')->with('success', __('translation.userBlock'));
     }
-
-public function __construct()
-{
-    $this->middleware('auth');
-}
 }

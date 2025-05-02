@@ -15,8 +15,4 @@ class WelcomeController extends Controller
         return view('welcome', compact('media', 'check'));
 
     }
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 }
