@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Barryvdh\DomPDF\Facade\PDF;;
+use Barryvdh\DomPDF\Facade\PDF;
 use App\Models\User;
 use App\Models\Media;
 use Illuminate\Foundation\Auth\User as AuthUser;

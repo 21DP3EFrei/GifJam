@@ -171,7 +171,7 @@
             @if (request()->routeIs('random'))  
             <div class="hidden md:flex items-center md:mr-7">
                 <div>
-                    <a id="random" href="{{ route('random') }}"  class="inline-flex bg-blue-300 dark:bg-blue-400 items-center px-2 ml-1 mr-2 py-1 border border-transparent text-base font-medium rounded-md hover:text-gray-700 text-black focus:outline-none focus:bg-blue-500 active:bg-blue-500 dark:focus:bg-blue-700 dark:active:bg-blue-700 transition ease-in-out duration-150">
+                    <a id="random" href="{{ route('random') }}"  class="btn inline-flex bg-blue-300 dark:bg-blue-400 items-center px-2 ml-1 mr-2 py-1 border border-transparent text-base font-medium rounded-md hover:text-gray-700 text-black focus:outline-none focus:bg-blue-500 active:bg-blue-500 dark:focus:bg-blue-700 dark:active:bg-blue-700 transition ease-in-out duration-150">
                             ?
                     </a>
                 </div>
@@ -179,7 +179,7 @@
             @else
             <div class="hidden md:flex items-center md:mr-7">
                 <div>
-                    <a id="random" href="{{ route('random') }}"  class="btn inline-flex bg-gray-300 dark:bg-gray-100 items-center px-2 ml-1 mr-2 py-1 border border-transparent text-base font-medium rounded-md hover:text-gray-700 text-black focus:outline-none focus:bg-gray-400 active:bg-gray-400 transition ease-in-out duration-150">
+                    <a id="random" href="{{ route('random') }}"  class="btn inline-flex bg-gray-300 dark:bg-gray-100 items-center px-2 ml-1 mr-2 py-1 border border-transparent text-base font-medium rounded-md hover:text-gray-700 text-black focus:outline-none focus:bg-gray-400 active:bg-gray-400 dark:focus:bg-gray-600 dark:active:bg-gray-600 transition ease-in-out duration-150">
                             ?
                     </a>
                 </div>
