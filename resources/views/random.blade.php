@@ -8,7 +8,7 @@
         <a href="{{ route( 'random') }}" id="randomButton" class="btn btn-primary w-full text-white border border-black">🔁</a>
     </div>
         {{-- image --}}
-        @if($random->Multivides_tips == 'Image')
+        @if($media->Multivides_tips == 'Image')
         <div class="table-responsive overflow-x-auto mx-3 mt-2">
           <table class="table overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">
               <thead>
@@ -26,19 +26,19 @@
                       <td>
                           <div class="flex items-center space-x-4">
                               <div class="text-left">
-                                  {{ Str::limit($random->Nosaukums, 20) }}
+                                  {{ Str::limit($media->Nosaukums, 20) }}
                               </div>
                           </div>
                       </td>
-                      @unless (empty($random->Apraksts))
-                      <td>{{ Str::limit($random->Apraksts, 25) }}</td>
+                      @unless (empty($media->Apraksts))
+                      <td>{{ Str::limit($media->Apraksts, 25) }}</td>
                       @else
                       <td class="text-center">-</td>
                       @endunless
                       <td class="align-middle text-center">
                           <div class="flex items-center justify-center space-x-2">
-                              @if ($random->kategorijas && $random->kategorijas->isNotEmpty())
-                                      @foreach($random->kategorijas as $category)
+                              @if ($media->kategorijas && $media->kategorijas->isNotEmpty())
+                                      @foreach($media->kategorijas as $category)
                                           {{ Str::limit($category->Nosaukums, 20) }}{{ !$loop->last ? ', ' : '' }}
                                       @endforeach
                               @else
@@ -48,30 +48,25 @@
                       </td>
                       <td>
                       <div class="text-left">
-                          {{ Str::limit($random->Autors, 20) }}
+                          {{ Str::limit($media->Autors, 20) }}
                       </div>
                       </td>
-                      <td class="text-center">{{ $random->Autortiesibas ? __('translation.does') : __('translation.doesnot') }}</td>
+                      <td class="text-center">{{ $media->Autortiesibas ? __('translation.does') : __('translation.doesnot') }}</td>
                       <td class="justify-center flex">
-                        <div class="border rounded-full w-9 h-9 transition ease-in-out duration-300 hover:bg-blue-300">
-                            <form action="{{ route('media.download', $random) }}" method="GET" class="space-y-2">
-                                @csrf
-                                <button type="submit" class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800 tooltip" data-tip="{{ __('translation.download') }}">↓</button>
-                            </form>
-                        </div>
+                        <x-download-button :media="$media" />
                       </td>                
                   </tr>
               </tbody>
           </table>
           </div>
         <div class="w-full md:w-1/2 flex justify-center items-center mt-1 mx-auto">
-                <img src="{{ asset('storage/' . $random->Fails) }}" alt="{{ $random->Nosaukums }}"  class="cursor-pointer rounded-lg shadow-lg" onclick="this.classList.toggle('fixed'); this.classList.toggle('inset-0'); this.classList.toggle('w-full'); this.classList.toggle('h-full'); this.classList.toggle('object-contain'); this.classList.toggle('z-50'); this.classList.toggle('bg-black');"/>
+                <img src="{{ asset('storage/' . $media->Fails) }}" alt="{{ $media->Nosaukums }}"  class="cursor-pointer rounded-lg shadow-lg" onclick="this.classList.toggle('fixed'); this.classList.toggle('inset-0'); this.classList.toggle('w-full'); this.classList.toggle('h-full'); this.classList.toggle('object-contain'); this.classList.toggle('z-50'); this.classList.toggle('bg-black');"/>
         </div>
 
         @endif
 
         {{-- sound --}}
-        @if($random->Multivides_tips == 'Sound')
+        @if($media->Multivides_tips == 'Sound')
         <div class="table-responsive overflow-x-auto mx-3 mt-2">
             <table class="table overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">
                 <thead>
@@ -88,19 +83,19 @@
                         <td>
                             <div class="flex items-center space-x-4">
                                 <div class="text-left">
-                                    {{ Str::limit($random->Nosaukums, 20) }}
+                                    {{ Str::limit($media->Nosaukums, 20) }}
                                 </div>
                             </div>
                         </td>
-                        @unless (empty($random->Apraksts))
-                        <td>{{ Str::limit($random->Apraksts, 25) }}</td>
+                        @unless (empty($media->Apraksts))
+                        <td>{{ Str::limit($media->Apraksts, 25) }}</td>
                         @else
                         <td class="text-center">-</td>
                         @endunless
                         <td class="align-middle text-center">
                             <div class="flex items-center justify-center space-x-2">
-                                @if ($random->skana && $random->skana->skanaKategorija->isNotEmpty())
-                                    @foreach($random->skana->skanaKategorija as $category)
+                                @if ($media->skana && $media->skana->skanaKategorija->isNotEmpty())
+                                    @foreach($media->skana->skanaKategorija as $category)
                                         {{ Str::limit($category->Nosaukums, 20) }}{{ !$loop->last ? ', ' : '' }}
                                     @endforeach
                                 @else
@@ -108,21 +103,16 @@
                                 @endif
                             </div>
                         </td>
-                        <td class="text-center">{{ round($random->skana->Bitrate / 1000) }} {{ __('translation.kbps') }}</td>              
+                        <td class="text-center">{{ round($media->skana->Bitrate / 1000) }} {{ __('translation.kbps') }}</td>              
                     <td class="justify-center flex">
-                    <div class="border rounded-full w-9 h-9 transition ease-in-out duration-300 hover:bg-blue-300">
-                        <form action="{{ route('media.download', $random) }}" method="GET" class="space-y-2">
-                            @csrf
-                            <button type="submit" class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800 tooltip" data-tip="{{ __('translation.download') }}">↓</button>
-                        </form>
-                    </div>
+                        <x-download-button :media="$media" />
                     </td>  
                     </tr>
                 </tbody>
             </table>
             </div>
         <media-controller audio id="mc" style="--media-background-color: transparent;" class="flex-col mx-auto mt-2">
-                <audio slot="media" src="{{ asset('storage/' . $random->Fails) }}"></audio>
+                <audio slot="media" src="{{ asset('storage/' . $media->Fails) }}"></audio>
                 <media-control-bar>
                   <media-play-button class="p-2"></media-play-button>
                   <media-time-display class="px-3" showduration=""></media-time-display>
@@ -134,7 +124,7 @@
         @endif
 
         {{-- music --}}
-        @if($random->Multivides_tips == 'Music')
+        @if($media->Multivides_tips == 'Music')
         <div class="table-responsive overflow-x-auto mx-3 mt-2">
             <table class="table overflow-x-auto rounded-box border border-base-content/5 bg-base-100 border-collapse">
                 <thead>
@@ -153,24 +143,24 @@
                         <td>
                             <div class="flex items-center space-x-4">
                                 <div class="text-left">
-                                    {{ Str::limit($random->Nosaukums, 20) }}
+                                    {{ Str::limit($media->Nosaukums, 20) }}
                                 </div>
                             </div>
                         </td>
                         <td>
                         <div class="text-left">
-                            {{ Str::limit($random->Autors, 20) }}
+                            {{ Str::limit($media->Autors, 20) }}
                         </div>
                         </td>
-                        @unless (empty($random->Apraksts))
-                        <td>{{ Str::limit($random->Apraksts, 25) }}</td>
+                        @unless (empty($media->Apraksts))
+                        <td>{{ Str::limit($media->Apraksts, 25) }}</td>
                         @else
                         <td class="text-center">-</td>
                         @endunless
                         <td class="align-middle text-center">
                             <div class="flex items-center justify-center space-x-2">
-                                @if ($random->music && $random->music->zanrs->isNotEmpty())
-                                    @foreach($random->music->zanrs as $category)
+                                @if ($media->music && $media->music->zanrs->isNotEmpty())
+                                    @foreach($media->music->zanrs as $category)
                                         {{ Str::limit($category->Nosaukums, 20) }}{{ !$loop->last ? ', ' : '' }}
                                     @endforeach
                                 @else
@@ -178,22 +168,17 @@
                                 @endif
                             </div>
                         </td>
-                    <td class="text-center">{{ round($random->music->Bitrate / 1000) }} {{ __('translation.kbps') }}</td>         
-                    <td class="text-center">{{ $random->music->Izlaists }}</td>                   
+                    <td class="text-center">{{ round($media->music->Bitrate / 1000) }} {{ __('translation.kbps') }}</td>         
+                    <td class="text-center">{{ $media->music->Izlaists }}</td>                   
                     <td class="justify-center flex">
-                    <div class="border rounded-full w-9 h-9 transition ease-in-out duration-300 hover:bg-blue-300">
-                        <form action="{{ route('media.download', $random) }}" method="GET" class="space-y-2">
-                            @csrf
-                            <button type="submit" class="w-full h-full text-xl text-center text-blue-600 underline hover:text-blue-800 tooltip" data-tip="{{ __('translation.download') }}">↓</button>
-                        </form>
-                    </div>
+                        <x-download-button :media="$media" />
                     </td>  
                     </tr>
                 </tbody>
             </table>
             </div>
         <media-controller audio id="mc" style="--media-background-color: transparent;" class="flex-col mx-auto mt-2">
-                <audio slot="media" src="{{ asset('storage/' . $random->Fails) }}"></audio>
+                <audio slot="media" src="{{ asset('storage/' . $media->Fails) }}"></audio>
                 <media-control-bar>
                   <media-play-button class="p-2"></media-play-button>
                   <media-time-display class="px-3" showduration=""></media-time-display>
