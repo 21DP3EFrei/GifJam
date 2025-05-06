@@ -17,7 +17,7 @@ RUN apk add --no-cache \
     libzip-dev \
     mysql-client \
     && docker-php-ext-install \
-    pdo pdo_mysql mbstring
+    pdo pdo_mysql mbstring gd
 
 COPY . .
 

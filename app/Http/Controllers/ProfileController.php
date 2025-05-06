@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\User;
 use App\Models\Media;
 use Illuminate\Foundation\Auth\User as AuthUser;
@@ -78,7 +78,7 @@ class ProfileController extends Controller
     {
         $data = Media::where('Lietotajs', Auth::id())->get();
 
-        $pdf = PDF::loadview('pdf.user', array('data' => $data));
+        $pdf = Pdf::loadview('pdf.user', array('data' => $data));
         
         return $pdf->stream();
     }
@@ -86,7 +86,7 @@ class ProfileController extends Controller
     {
         $data = Media::where('Lietotajs', Auth::id())->get();
 
-        $pdf = PDF::loadview('pdf.user', array('data' => $data));
+        $pdf = Pdf::loadview('pdf.user', array('data' => $data));
         
         return $pdf->download(__('translation.pdfname'));
     }

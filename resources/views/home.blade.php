@@ -31,7 +31,7 @@
                 <a id="welcome" href="/welcome" class="btn btn-primary mr-2">{{ __('translation.navigation_welcome') }}</a>
             @else
                 <a id="login" href="/login" class="btn btn-primary mr-2">{{ __('translation.login') }}</a>
-                <a id="register" href="/register" class="btn btn-outline !text-white dark:!text-blue-600">{{ __('translation.register') }}</a>
+                <a id="register" href="/register" class="btn btn-outline dark:!text-white !text-blue-400">{{ __('translation.register') }}</a>
             @endif
             </div>
         </div>

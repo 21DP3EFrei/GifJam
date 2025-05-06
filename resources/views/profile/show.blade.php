@@ -65,7 +65,7 @@
                 </div>
             @endif 
             @if ($isBlocked)
-            <form id="myform" method="POST" class="w-fit mx-auto"> {{-- action="{{ route('logout') }}" --}}
+            <form id="myform" method="POST" class="w-fit mx-auto" action="{{ route('logout') }}">
                 @csrf
                 <button id="logout" type="submit" class="btn btn-error hover:underline">{{__('translation.navigation_logOut')}}</button>
             </form>
