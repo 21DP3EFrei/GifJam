@@ -32,6 +32,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'media' => MediaSearch::class,
             'like' => LikeMiddleware::class,            
         ]);
+        $middleware->trustProxies(at:'*',
+        headers: \Illuminate\Http\Request::HEADER_X_FORWARDED_ALL
+        )
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [

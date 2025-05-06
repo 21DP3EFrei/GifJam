@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Foundation\Http\Middleware;
+use Illuminate\Support\Facades\URL;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -28,6 +30,9 @@ class AppServiceProvider extends ServiceProvider
                 ->line( __('translation.explainEmail'))
                 ->action(__('translation.navigation_verify'), $url)
                 ->salutation(''); // Removes "Best Regards, {{app_name}}"
+                if (config('app.env') === 'production') {
+                    URL::forceScheme('https');
+                }
         });
 
         Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
