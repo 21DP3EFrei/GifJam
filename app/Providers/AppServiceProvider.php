@@ -30,14 +30,14 @@ class AppServiceProvider extends ServiceProvider
                 ->line( __('translation.explainEmail'))
                 ->action(__('translation.navigation_verify'), $url)
                 ->salutation(''); // Removes "Best Regards, {{app_name}}"
-                if (config('app.env') === 'production') {
-                    URL::forceScheme('https');
-                }
         });
 
         Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
             $event->extendSocialite('google', \SocialiteProviders\Google\Provider::class);
         });
     $this->app['router']->aliasMiddleware('localization', \App\Http\Middleware\Localization::class);    
+    if (config('app.debug') === false) {
+        URL::forceScheme('https');
+    }
     }
 }
