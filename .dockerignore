@@ -17,3 +17,5 @@ devenv.nix
 devenv.yaml
 tests/
 README.md
+public/storage
+storage/app/public/uploads/**

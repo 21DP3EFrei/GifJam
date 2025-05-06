@@ -48,7 +48,7 @@ COPY .env.encrypted /var/www/.env.encrypted
 # Setup environment
 #RUN if [ ! -f /var/www/.env ]; then cp /var/www/.env.example /var/www/.env; fi
 #RUN php artisan key:generate
-
+RUN php artisan storage:link
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 EXPOSE 8000
