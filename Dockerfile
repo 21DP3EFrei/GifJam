@@ -61,7 +61,7 @@ RUN { \
 RUN php artisan storage:link
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
-EXPOSE 8000
+EXPOSE 8000 465
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD [ "curl", "--fail", "http://localhost:8000/up"]
 
