@@ -35,7 +35,7 @@ class MediaController extends Controller
 
         // Store the uploaded image file
         $image = $request->file('uploadFile');
-        $fileName = $image->getClientOriginalName(); // Get the original filename
+        $fileName = uniqid() . '_' . $image->getClientOriginalName(); // Get the original filename
         $filePath = $request->file('uploadFile')->storeAs('uploads', $fileName, 'public');
     
         // Create a new media instance and save it to the database
@@ -89,7 +89,7 @@ class MediaController extends Controller
         $bitrate = $fileInfo['audio']['bitrate'] ?? null;
     
         // Store the uploaded sound file
-        $fileName = $musicFile->getClientOriginalName(); // Get the original filename
+        $fileName = uniqid() . '_' . $musicFile->getClientOriginalName(); // Get the original filename
         $filePath = $musicFile->storeAs('uploads', $fileName, 'public'); // Store the file in the public disk
     
         // Create a new Media instance and save it to the database
@@ -150,7 +150,7 @@ class MediaController extends Controller
         $bitrate = $fileInfo['audio']['bitrate'] ?? null;
 
         // Store the uploaded sound file
-        $fileName = $sound->getClientOriginalName(); // Get the original filename
+        $fileName = uniqid() . '_' . $sound->getClientOriginalName(); // Get the original filename
         $filePath = $sound->storeAs('uploads', $fileName, 'public'); // Store the file in the public disk
 
         // Create a new Media instance and save it to the database

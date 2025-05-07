@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.15.1/dist/full.css" rel="stylesheet">
 </head>
-<body class="dark:!bg-gray-800 bg-neutral-200 text-gray-100">
+<body class="dark:!bg-gray-800 bg-neutral-200 text-gray-100 min-h-screen flex flex-col">
     <!-- Navbar -->
     <nav class="dark:!bg-gray-900 bg-slate-500 shadow-lg">
         <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between px-4 py-2">
@@ -38,7 +38,7 @@
     </nav>
 
     <!-- Main Content Area -->
-    <div class="container mx-auto text-center mt-16">
+    <main class="flex-grow container mx-auto text-center mt-16">
         <h1 class="text-5xl text-gray-900 dark:!text-white flex items-center justify-center">
             {{ __('translation.welcomeTo') }}
             <a href="Click.mp4" target="_blank">
@@ -80,9 +80,10 @@
             <h2 class="text-2xl dark:text-violet-400 text-violet-700 font-semibold">{{ __('translation.what') }}</h2>
             <p class="mt-2 text-black dark:!text-white">{{ __('translation.joinGifjam') }}</p>
             <img src="{{ asset('banan.gif') }}" class="w-12 h-12 mx-auto" alt="{{ __('translation.banana') }}">
-            <a href="/register" class="btn btn-lg btn-success">{{ __('translation.join') }}</a>
+            <a id="join" href="/register" class="btn btn-lg btn-success">{{ __('translation.join') }}</a>
         </div>
-    </div>
+    </main>
+    
 
     <!-- Footer -->
     <footer class="dark:!bg-gray-900 bg-gray-600 mt-16 py-4 text-gray-400 flex items-center justify-between">
@@ -112,6 +113,7 @@
     const registerLink = document.getElementById('register');
     const home = document.getElementById('home');
     const welcomeLink = document.getElementById('welcome'); // May not exist
+    const join = document.getElementById('join');
 
     function disableTemporarily(element, seconds = 5) {
         if (!element) return;
@@ -131,7 +133,7 @@
 
     if (loginLink) {
         loginLink.addEventListener('click', function (event) {
-            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink)) {
+            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink) || isDisabled(join)) {
                 event.preventDefault();
                 return;
             }
@@ -143,18 +145,19 @@
 
     if (registerLink) {
         registerLink.addEventListener('click', function (event) {
-            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink)) {
+            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink) || isDisabled(join)) {
                 event.preventDefault();
                 return;
             }
 
+            disableTemporarily(loginLink);
             disableTemporarily(registerLink);
         });
     }
 
     if (home) {
         home.addEventListener('click', function (event) {
-            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink)) {
+            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink) || isDisabled(join)) {
                 event.preventDefault();
                 return;
             }
@@ -165,12 +168,22 @@
 
     if (welcomeLink) {
         welcomeLink.addEventListener('click', function (event) {
-            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink)) {
+            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink) || isDisabled(join)) {
                 event.preventDefault();
                 return;
             }
 
             disableTemporarily(welcomeLink);
+        });
+    }
+    if (join) {
+        join.addEventListener('click', function (event) {
+            if (isDisabled(loginLink) || isDisabled(registerLink) || isDisabled(home) || isDisabled(welcomeLink) || isDisabled(join)) {
+                event.preventDefault();
+                return;
+            }
+
+            disableTemporarily(join);
         });
     }
 </script>

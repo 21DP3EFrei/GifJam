@@ -58,7 +58,7 @@
                     @elseif ($media->Multivides_tips == "Sound")
                     <td>{{__('translation.sounds')}}</td>
                     @endif
-                    <td>{{ str_replace('uploads/', '', $media->Fails) }}</td>
+                    <td>{{ implode('_', array_slice(explode('_', str_replace('uploads/', '', $media->Fails)), 1)) }}</td>
                     <td class="text-center">{{ $media->created_at->format('d.m.Y')}}</td>
                 </tr>
                 <?php $no++; ?>

@@ -104,7 +104,6 @@
                 <media-control-bar>
                   <media-play-button class="p-2"></media-play-button>
                   <media-time-display showduration=""></media-time-display>
-                  <media-time-range></media-time-range>
                   <media-mute-button></media-mute-button>
                   <media-volume-range></media-volume-range>
                   <media-playback-rate-button rates="0.5 1 1.5 2 8"></media-playback-rate-button>
