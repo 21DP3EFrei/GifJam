@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->app['router']->aliasMiddleware('localization', \App\Http\Middleware\Localization::class);    
+        if (config('app.debug') === false) {
+            URL::forceScheme('https');
+        }
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
             return (new MailMessage)
                 ->greeting('') // Removes "Hello!"
@@ -35,9 +39,5 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
             $event->extendSocialite('google', \SocialiteProviders\Google\Provider::class);
         });
-    $this->app['router']->aliasMiddleware('localization', \App\Http\Middleware\Localization::class);    
-    if (config('app.debug') === false) {
-        URL::forceScheme('https');
-    }
     }
 }
