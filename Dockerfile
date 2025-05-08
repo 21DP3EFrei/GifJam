@@ -2,7 +2,7 @@ FROM php:8.3-alpine AS production
 
 WORKDIR /var/www/
 
-# Not Ubuntu
+# Install necessary packages
 RUN apk add --no-cache \
     npm \
     icu-dev \
@@ -19,6 +19,7 @@ RUN apk add --no-cache \
     && docker-php-ext-install \
     pdo pdo_mysql mbstring gd
 
+# Copy the application files first
 COPY . .
 
 # Install Composer
@@ -52,7 +53,7 @@ COPY .env.encrypted /var/www/.env.encrypted
 ENV PHP_UPLOAD_MAX_FILESIZE=20M
 ENV PHP_POST_MAX_SIZE=20M
 
-# Alternatively, you can modify the php.ini settings directly
+# Modify php.ini settings directly
 RUN { \
     echo 'upload_max_filesize = '"$PHP_UPLOAD_MAX_FILESIZE"; \
     echo 'post_max_size = '"$PHP_POST_MAX_SIZE"; \
