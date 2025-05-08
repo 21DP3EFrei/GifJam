@@ -13,7 +13,7 @@
         $isMusic = $media->Multivides_tips == 'Music';
     }
 @endphp
-<nav x-data="{ open: false }" class="dark:border border-gray-300 dark:border-gray-600 outline-black dark:bg-gray-800" aria-label="Main Navigation">
+<nav wire:cloak x-data="{ open: false }" class="dark:border border-gray-300 dark:border-gray-600 outline-black dark:bg-gray-800" aria-label="Main Navigation">
     <div class="max-w-7xl mx-auto px-1 md:px-3 lg:px-8 flex justify-between items-center py-4 relative">
         <!-- Logo -->
         <div class="flex items-center w-1/3">

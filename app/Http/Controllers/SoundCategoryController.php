@@ -28,7 +28,7 @@ class SoundCategoryController extends Controller
         $request->validate([
             'Kat_Nosaukums' => 'required|string|max:100',
             'Apraksts' => 'nullable|string|max:300',
-            'Apakskategorija' => 'nullable|exists:skanas_kategorija,SKat_ID'
+            'Apakskategorija' => 'nullable|exists:skana_kategorija,SKat_ID'
         ]);
 
         Skana_kategorija::create([
@@ -54,7 +54,7 @@ class SoundCategoryController extends Controller
         $request->validate([
             'Kat_Nosaukums' => 'required|string|max:100',
             'Apraksts' => 'nullable|string|max:300',
-            'Apakskategorija' => 'nullable|exists:skanas_kategorija,SKat_ID'
+            'Apakskategorija' => 'nullable|exists:skana_kategorija,SKat_ID'
         ]);
 
         $SoundCategory->update([

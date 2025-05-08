@@ -12,6 +12,7 @@ use App\Http\Middleware\Localization;
 use App\Http\Middleware\RandomMiddleware;
 use App\Http\Middleware\MediaSearch;
 use App\Http\Middleware\LikeMiddleware;
+use App\Http\Middleware\TrustProxies;
 use Illuminate\Support\Facades\App;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -38,6 +39,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             AddLinkHeadersForPreloadedAssets::class,
             Localization::class,
+            TrustProxies::class,
         ]);
         $middleware->redirectTo('/');
     })

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Skana_kategorija extends Model
 {
-    protected $table = 'skanas_kategorija';
+    protected $table = 'skana_kategorija';
     protected $primaryKey = 'SKat_ID';
     protected $fillable = ['Nosaukums', 'Apraksts', 'Apakskategorija'];
     public function subcategory()

@@ -20,7 +20,7 @@
 </div>
   @endif
 <?php 
-$random = rand(1, 35);
+$random = rand(1, 40);
 
 switch($random) {
       case 1:
@@ -109,6 +109,21 @@ switch($random) {
         break;  
       case 29:
         echo '<p>' . __('translation.welcome28') . '</p>';
+        break;
+      case 30:
+        echo '<a style="word-break: break-word; overflow-wrap: break-word;" href="' . asset('clean.mp4') . '" target="_blank">🤣</a>';
+      break;
+      case 31:
+        echo '<a style="word-break: break-word; overflow-wrap: break-word;" href="' . asset('okidoki.mp4') . '" target="_blank">okidoki</a>';
+      break;
+      case 32:
+        echo '<p>' . __('translation.welcome29') . '</p>';
+        break;
+      case 33:
+        echo '<p>' . __('translation.welcome30') . '</p>';
+        break;
+      case 34:
+        echo '<p class="break-words overflow-wrap">' . __('translation.welcome31') . '</p>';
         break;
       default:
         echo '<p>' . __('translation.welcomeDefault') . '</p>';

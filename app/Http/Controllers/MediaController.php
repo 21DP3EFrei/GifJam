@@ -133,7 +133,7 @@ class MediaController extends Controller
         $request->validate([
             'fileName' => 'required|string|max:100',
             'fileDescription' => 'nullable|string|max:200',
-            'category_id' => 'required|exists:skanas_kategorija,SKat_ID', // Ensure the selected category exists
+            'category_id' => 'required|exists:skana_kategorija,SKat_ID', // Ensure the selected category exists
             'uploadFile' => 'required|mimes:aac,aiff,alac,m4a,flac,mp3,wav,opus|max:20000',
             'author' => 'nullable|string|max:100',
         ], [
@@ -189,12 +189,22 @@ class MediaController extends Controller
     //Function to download media
     public function download(Media $media)
     {
-
+        // Define the file path
         $filePath = storage_path('app/public/' . $media->Fails);
-        $newFileName = $media->Nosaukums . '.' . pathinfo($media->Fails, PATHINFO_EXTENSION);
     
+        // Get the file extension
+        $extension = pathinfo($media->Fails, PATHINFO_EXTENSION);
+    
+        // Sanitize the file name (remove slashes and dangerous characters)
+        $sanitizedFileName = preg_replace('/[^\w\- ]+/', '', $media->Nosaukums);
+    
+        // Build the final filename
+        $newFileName = $sanitizedFileName . '.' . $extension;
+    
+        // Return the download response
         return response()->download($filePath, $newFileName);
     }
+    
 
     //Function to show media info
     public function show(Media $media)

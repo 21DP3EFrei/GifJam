@@ -79,10 +79,10 @@
                 </div>
                 @endif
                 <div class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-sm h-auto">
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">{{ __('translation.description') }}</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">{{ __('translation.author') }}</h3>
                     <div class="flex flex-col"> 
                         <p class="text-gray-600 dark:text-gray-300 break-words overflow-wrap" >
-                            {{ $media->Apraksts }}
+                            {{ $media->Autors }}
                         </p>
                     </div>
                 </div>

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skanas_kategorija', function (Blueprint $table) {
+        Schema::create('skana_kategorija', function (Blueprint $table) {
             $table->id('SKat_ID');
             $table->string('Nosaukums', 100);
             $table->string('Apraksts', 300)->nullable();
             $table->unsignedBigInteger('Apakskategorija')->nullable();
-            $table->foreign('Apakskategorija')->references('SKat_ID')->on('skanas_kategorija')->onDelete('cascade');
+            $table->foreign('Apakskategorija')->references('SKat_ID')->on('skana_kategorija')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skanas_kategorija');
+        Schema::dropIfExists('skana_kategorija');
     }
 };
