@@ -316,6 +316,7 @@ return [
     'likeMusic' => 'Neesi atzīmējis nevienu mūziku',
     'likeSound' => 'Neesi atzīmējis nevienu skaņu',
     'likePic' => 'Neesi atzīmējis nevienu attēlu',
+    'noReason' => "Nav sniegts iemesls",
 
     'navigation_welcome'=> 'Sākums',
     'navigation_upload'=> 'Augšupielādē',

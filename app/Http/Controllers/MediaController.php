@@ -180,12 +180,16 @@ class MediaController extends Controller
     }
     
     //Random media page
-    public function random()
+    public function random(Request $request)
     {
-        $media = Media::inRandomOrder()->where('Status', 1)->get()->first();
+        $media = Media::inRandomOrder()->where('Status', 1)->first();
+
+        if ($request->ajax()) {
+            return view('load.media', compact('media'))->render(); // Make sure this view contains only the dynamic part
+        }
+
         return view('random', compact('media'));
     }
-
     //Function to download media
     public function download(Media $media)
     {
@@ -205,7 +209,6 @@ class MediaController extends Controller
         return response()->download($filePath, $newFileName);
     }
     
-
     //Function to show media info
     public function show(Media $media)
     {

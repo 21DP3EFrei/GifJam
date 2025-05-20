@@ -7,12 +7,6 @@ use App\Models\Media;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\Media;
-use Illuminate\Support\Facades\Auth;
-
 class LikeController extends Controller
 {
 
@@ -82,4 +76,3 @@ class LikeController extends Controller
         return response()->json(['success' => true, 'message' => 'Media unliked successfully.']);
     }
 }
-

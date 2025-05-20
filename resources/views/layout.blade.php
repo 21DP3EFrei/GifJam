@@ -18,7 +18,7 @@
 
 
         <!-- Content -->
-        <div class="py-12 background grow display-block min-h-screen dynamic-background" >
+        <div class="py-12 background grow display-block min-h-screen h-full">
             <div class="max-w-7xl mx-auto sm:px-6 md:px-20 lg:px-4">
                 <div class="header overflow-hidden shadow-xl sm:rounded-lg dark:text-white dark:bg-blue-950">
                     @yield('content')
@@ -38,13 +38,4 @@ body {
     display: flex;
     flex-direction: column;
 }
-
-        @media (prefers-color-scheme: dark) {
-            .dynamic-background {
-                background-color: #001729 !important; /* Dark mode background */
-            }
-        }
-            .dynamic-background {
-                background-color: rgb(222, 221, 221); /* Light mode background */
-        }
 </style>
