@@ -17,11 +17,19 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body>
+    <body data-cloak>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
 
         @livewireScripts
+        <script>
+        document.body.removeAttribute('data-cloak');
+    </script>
     </body>
+<style>
+    [data-cloak] {
+        display: none !important;
+    }
+</style>
 </html>

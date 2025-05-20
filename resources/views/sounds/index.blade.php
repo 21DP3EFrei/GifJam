@@ -205,10 +205,6 @@ $(document).ready(function () {
 
                 history.pushState(null, '', '?' + urlParams);
             },
-            error: function () {
-                alert('Error loading media.');
-            }
-
         });
     }
 });

@@ -24,7 +24,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app['router']->aliasMiddleware('localization', \App\Http\Middleware\Localization::class);    
+        if (config('app.env') === 'production') {
             URL::forceScheme('https');
+        }
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
             return (new MailMessage)
                 ->greeting('') // Removes "Hello!"

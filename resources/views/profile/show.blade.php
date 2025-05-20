@@ -5,7 +5,7 @@
 </html>
 <x-app-layout>
     <div class="bg-gray-200  max-w-6xl mx-auto dark:bg-sky-900">
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 rounded border">
             <div class="relative items-center flex justify-between mb-10 sm:mt-0">
                 <div>
                     <h1 name="title" class="flex items-center whitespace-nowrap text-lg font-semibold text-gray-700 dark:text-white">

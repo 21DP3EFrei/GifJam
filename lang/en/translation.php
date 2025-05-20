@@ -53,7 +53,7 @@ return [
     'deleteAccountAbout'=> 'Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.',
     'deleteAccountConfirm'=> 'Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.',
     'deleteAccountConfirmSocial'=> 'Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please confirm if you would like to permanently delete your account.',
-    'Pupload'=> 'Image Upload',
+    'Pupload'=> 'Image upload',
     'description'=> 'Description',
     'author'=> 'Author',
     'authors'=> 'Author',
@@ -316,6 +316,7 @@ return [
     'likeMusic' => "You haven't liked any music",
     'likeSound' => "You haven't liked any sounds",
     'likePic' => "You haven't liked any images",
+    'noReason' => "No reason provided",
         
     'navigation_welcome'=> 'Welcome',
     'navigation_upload'=> 'Upload',
