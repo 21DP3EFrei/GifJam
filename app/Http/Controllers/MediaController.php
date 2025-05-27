@@ -23,7 +23,7 @@ class MediaController extends Controller
     {
         $request->validate([
             'fileName' => 'required|string|max:100',
-            'fileDescription' => 'nullable|string|max:200',
+            'fileDescription' => 'nullable|string|max:500',
             'author' => 'required|string|max:100',
             'copyright' => 'integer',
             'copyright.*' => 'boolean',
@@ -67,7 +67,7 @@ class MediaController extends Controller
         // Validate the request
         $request->validate([
             'fileName' => 'required|string|max:100',
-            'fileDescription' => 'nullable|string|max:200',
+            'fileDescription' => 'nullable|string|max:500',
             'author' => 'required|string|max:100',
             'copyright' => 'integer',
             'copyright.*' => 'boolean',
@@ -132,7 +132,7 @@ class MediaController extends Controller
         // Validate the request
         $request->validate([
             'fileName' => 'required|string|max:100',
-            'fileDescription' => 'nullable|string|max:200',
+            'fileDescription' => 'nullable|string|max:500',
             'category_id' => 'required|exists:skana_kategorija,SKat_ID', // Ensure the selected category exists
             'uploadFile' => 'required|mimes:aac,aiff,alac,m4a,flac,mp3,wav,opus|max:20000',
             'author' => 'nullable|string|max:100',

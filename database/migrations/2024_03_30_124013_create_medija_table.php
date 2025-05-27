@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('medija', function (Blueprint $table) {
             $table->id('Me_ID');
             $table->string('Nosaukums', 100);
-            $table->string('Apraksts', 200)->nullable();
+            $table->string('Apraksts', 500)->nullable();
             $table->boolean('Status')->default(0);
             $table->string('Fails', 300)->nullable();
             $table->enum('Multivides_tips', array_column(MultividesTips::cases(), 'value'));

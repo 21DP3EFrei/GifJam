@@ -63,7 +63,7 @@ class VerificationController extends Controller
         // Base validation rules
         $rules = [
             'Nosaukums' => 'required|string|max:100',
-            'Apraksts' => 'nullable|string|max:200',
+            'Apraksts' => 'nullable|string|max:500',
             'Autortiesibas' => 'integer',
             'Autortiesibas.*' => 'boolean',
         ];
